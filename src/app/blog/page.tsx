@@ -5,6 +5,9 @@ import { posts } from "@/data/posts";
 export const metadata: Metadata = {
   title: "Blog",
   description: "AI Builder Hub 教程文章，覆盖 AI 项目上线、部署、SEO 和工具站搭建。",
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 export default function BlogPage() {

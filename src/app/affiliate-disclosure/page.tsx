@@ -4,6 +4,9 @@ export const metadata: Metadata = {
   title: "Affiliate Disclosure",
   description:
     "AI Builder Hub affiliate disclosure and editorial independence policy.",
+  alternates: {
+    canonical: "/affiliate-disclosure",
+  },
 };
 
 export default function AffiliateDisclosurePage() {

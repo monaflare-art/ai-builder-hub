@@ -5,6 +5,9 @@ import { tools } from "@/data/tools";
 export const metadata: Metadata = {
   title: "Tools",
   description: "AI Builder Hub 精选 VPS、域名、电商建站、托管建站和 SEO 工具。",
+  alternates: {
+    canonical: "/tools",
+  },
 };
 
 export default function ToolsPage() {
