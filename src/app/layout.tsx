@@ -45,6 +45,9 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} - AI 工具与建站教程导航`,
     description: siteConfig.description,
   },
+  verification: {
+    google: "6hJz0SerCcUIgbLqf3lc3y_wWXaurNZVrfYblU5fKwQ",
+  },
 };
 
 export default function RootLayout({
