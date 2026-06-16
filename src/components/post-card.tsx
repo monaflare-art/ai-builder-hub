@@ -7,7 +7,7 @@ export function PostCard({ post }: { post: Post }) {
       <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500">
         <span>{post.category}</span>
         <span aria-hidden="true">/</span>
-        <time dateTime={post.publishedAt}>{post.publishedAt}</time>
+        <time dateTime={post.date}>{post.date}</time>
         <span aria-hidden="true">/</span>
         <span>{post.readingTime}</span>
       </div>
@@ -16,7 +16,17 @@ export function PostCard({ post }: { post: Post }) {
           {post.title}
         </Link>
       </h3>
-      <p className="mt-3 text-sm leading-6 text-slate-600">{post.description}</p>
+      <p className="mt-3 text-sm leading-6 text-slate-600">{post.excerpt}</p>
+      <div className="mt-4 flex flex-wrap gap-2">
+        {post.tags.map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-500"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
     </article>
   );
 }

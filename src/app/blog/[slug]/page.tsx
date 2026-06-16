@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostBySlug, posts } from "@/data/posts";
@@ -7,6 +8,36 @@ import { tools } from "@/data/tools";
 type PostPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+function renderParagraphWithLinks(text: string) {
+  const linkPattern = /\[([^\]]+)\]\((\/tools\/[a-z0-9-]+)\)/g;
+  const parts: ReactNode[] = [];
+  let lastIndex = 0;
+
+  for (const match of text.matchAll(linkPattern)) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+
+    parts.push(
+      <Link
+        key={`${match[2]}-${match.index}`}
+        href={match[2]}
+        className="font-medium text-sky-700 underline decoration-sky-200 underline-offset-4 hover:text-sky-900"
+      >
+        {match[1]}
+      </Link>,
+    );
+
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts;
+}
 
 export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
@@ -22,7 +53,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
   return {
     title: post.title,
-    description: post.description,
+    description: post.excerpt,
     alternates: {
       canonical: `/blog/${post.slug}`,
     },
@@ -51,14 +82,24 @@ export default async function BlogPostPage({ params }: PostPageProps) {
           <div className="flex flex-wrap items-center gap-2 text-sm font-medium text-slate-500">
             <span>{post.category}</span>
             <span aria-hidden="true">/</span>
-            <time dateTime={post.publishedAt}>{post.publishedAt}</time>
+            <time dateTime={post.date}>{post.date}</time>
             <span aria-hidden="true">/</span>
             <span>{post.readingTime}</span>
           </div>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
             {post.title}
           </h1>
-          <p className="mt-5 text-lg leading-8 text-slate-600">{post.description}</p>
+          <p className="mt-5 text-lg leading-8 text-slate-600">{post.excerpt}</p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-medium text-slate-500"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </header>
         <div className="mt-10 space-y-10">
           {post.sections.map((section) => (
@@ -68,7 +109,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
               </h2>
               <div className="mt-4 space-y-4 text-base leading-8 text-slate-600">
                 {section.body.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+                  <p key={paragraph}>{renderParagraphWithLinks(paragraph)}</p>
                 ))}
               </div>
             </section>

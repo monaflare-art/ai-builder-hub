@@ -8,6 +8,8 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const categories = Array.from(new Set(posts.map((post) => post.category)));
+
   return (
     <section className="bg-slate-50">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">
@@ -18,6 +20,16 @@ export default function BlogPage() {
           <p className="mt-5 text-lg leading-8 text-slate-600">
             面向新手的实践教程：如何选工具、如何部署、如何让 AI 辅助开发的项目真正上线。
           </p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <span
+                key={category}
+                className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600"
+              >
+                {category}
+              </span>
+            ))}
+          </div>
         </div>
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
           {posts.map((post) => (

@@ -53,5 +53,5 @@ npm run start
 
 - 替换 affiliateUrl：在 `src/data/tools.ts` 找到对应工具，把 `affiliateUrl: null` 改成你的 affiliate 链接，并把 `affiliateStatus` 从 `pending` 改成 `active`。工具详情页主按钮会优先使用 `affiliateUrl`；如果为空，会自动使用 `officialUrl`。
 - 新增工具：在 `src/data/tools.ts` 添加一条工具记录。需要填写 `slug`、`name`、`category`、`summary`、`audience`、`pricing`、`bestFor`、`pros`、`cons`、`officialUrl`、`affiliateUrl`、`affiliateStatus`。
-- 新增文章：在 `src/data/posts.ts` 添加一条文章记录。需要填写 `slug`、`title`、`description`、`publishedAt`、`readingTime`、`category`、`recommendedToolSlugs` 和 `sections`。`recommendedToolSlugs` 会控制文章底部的 Recommended Tools 区块。
+- 新增文章：在 `src/data/posts.ts` 添加一条文章记录。需要填写 `slug`、`title`、`excerpt`、`date`、`readingTime`、`category`、`tags`、`recommendedToolSlugs` 和 `sections`。`recommendedToolSlugs` 会控制文章底部的 Recommended Tools 区块，正文可以使用 `[Tool Name](/tools/tool-slug)` 插入内部工具链接。
 - 修改站点名称、描述和站点 URL：编辑 `src/lib/site.ts`。
