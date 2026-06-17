@@ -4,10 +4,47 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostBySlug, posts } from "@/data/posts";
 import { tools } from "@/data/tools";
+import { siteConfig } from "@/lib/site";
 
 type PostPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+function getHeadingId(heading: string) {
+  return heading
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function getRelatedPosts(slug: string) {
+  const currentPost = getPostBySlug(slug);
+
+  if (!currentPost) {
+    return [];
+  }
+
+  return posts
+    .filter((post) => post.slug !== currentPost.slug)
+    .map((post) => {
+      const categoryScore = post.category === currentPost.category ? 4 : 0;
+      const tagScore = post.tags.filter((tag) => currentPost.tags.includes(tag)).length;
+
+      return {
+        post,
+        score: categoryScore + tagScore,
+      };
+    })
+    .sort((a, b) => {
+      if (b.score !== a.score) {
+        return b.score - a.score;
+      }
+
+      return new Date(b.post.date).getTime() - new Date(a.post.date).getTime();
+    })
+    .slice(0, 3)
+    .map(({ post }) => post);
+}
 
 function renderParagraphWithLinks(text: string) {
   const linkPattern = /\[([^\]]+)\]\((\/(?:tools|blog)\/[a-z0-9-]+)\)/g;
@@ -71,13 +108,80 @@ export default async function BlogPostPage({ params }: PostPageProps) {
   const recommendedTools = post.recommendedToolSlugs
     .map((toolSlug) => tools.find((tool) => tool.slug === toolSlug))
     .filter((tool) => tool !== undefined);
+  const relatedPosts = getRelatedPosts(post.slug);
+  const postUrl = `${siteConfig.url}/blog/${post.slug}`;
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    dateModified: post.date,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": postUrl,
+    },
+    author: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    articleSection: post.category,
+    keywords: post.tags.join(", "),
+    timeRequired: post.readingTime,
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${siteConfig.url}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: postUrl,
+      },
+    ],
+  };
 
   return (
     <article className="bg-white">
+      <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <div className="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:px-8">
-        <Link href="/blog" className="text-sm font-semibold text-sky-700 hover:text-sky-900">
-          Back to blog
-        </Link>
+        <nav aria-label="Breadcrumb" className="text-sm font-medium text-slate-500">
+          <ol className="flex flex-wrap items-center gap-2">
+            <li>
+              <Link href="/" className="hover:text-sky-700">
+                Home
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li>
+              <Link href="/blog" className="hover:text-sky-700">
+                Blog
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li className="text-slate-950">{post.title}</li>
+          </ol>
+        </nav>
         <header className="mt-8 border-b border-slate-200 pb-10">
           <div className="flex flex-wrap items-center gap-2 text-sm font-medium text-slate-500">
             <span>{post.category}</span>
@@ -101,9 +205,23 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             ))}
           </div>
         </header>
+        <aside className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+            Table of contents
+          </h2>
+          <ol className="mt-4 space-y-2 text-sm font-medium text-slate-700">
+            {post.sections.map((section) => (
+              <li key={section.heading}>
+                <a href={`#${getHeadingId(section.heading)}`} className="hover:text-sky-700">
+                  {section.heading}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </aside>
         <div className="mt-10 space-y-10">
           {post.sections.map((section) => (
-            <section key={section.heading}>
+            <section key={section.heading} id={getHeadingId(section.heading)} className="scroll-mt-24">
               <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
                 {section.heading}
               </h2>
@@ -145,6 +263,32 @@ export default async function BlogPostPage({ params }: PostPageProps) {
                   </Link>
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
+            Related Articles
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-slate-600">
+            Continue with closely related guides from the same builder workflow.
+          </p>
+          <div className="mt-6 grid gap-4">
+            {relatedPosts.map((relatedPost) => (
+              <article key={relatedPost.slug} className="rounded-2xl border border-slate-200 p-5">
+                <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500">
+                  <span>{relatedPost.category}</span>
+                  <span aria-hidden="true">/</span>
+                  <span>{relatedPost.readingTime}</span>
+                </div>
+                <h3 className="mt-3 text-lg font-semibold text-slate-950">
+                  <Link href={`/blog/${relatedPost.slug}`} className="hover:text-sky-700">
+                    {relatedPost.title}
+                  </Link>
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{relatedPost.excerpt}</p>
+              </article>
             ))}
           </div>
         </section>

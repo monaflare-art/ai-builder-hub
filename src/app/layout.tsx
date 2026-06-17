@@ -49,7 +49,10 @@ export const metadata: Metadata = {
     description: siteConfig.description,
   },
   verification: {
-    google: "6hJz0SerCcUIgbLqf3lc3y_wWXaurNZVrfYblU5fKwQ",
+    google: [
+      "6hJz0SerCcUIgbLqf3lc3y_wWXaurNZVrfYblU5fKwQ",
+      "WG6PGTlp7psk_mynzAuC0mM1a7A0DmwHKq7MV1Mz9AI",
+    ],
   },
   other: {
     "impact-site-verification": "87c7ab99-a363-4c0b-90bb-da1318e93aa9",
