@@ -1,0 +1,15 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" rx="36" fill="#F8FAFC"/>
+  <rect x="78" y="72" width="1124" height="576" rx="34" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="130" y="154" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">SaaS MVP</text>
+  <text x="132" y="204" fill="#64748B" font-family="Arial, Helvetica, sans-serif" font-size="24">Small product, real workflow</text>
+  <rect x="150" y="264" width="444" height="286" rx="34" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="2"/>
+  <rect x="198" y="326" width="236" height="24" rx="12" fill="#2563EB"/>
+  <rect x="198" y="386" width="324" height="18" rx="9" fill="#93C5FD"/>
+  <rect x="198" y="434" width="260" height="18" rx="9" fill="#BFDBFE"/>
+  <rect x="700" y="286" width="384" height="238" rx="34" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="2"/>
+  <rect x="748" y="344" width="112" height="112" rx="28" fill="#7C3AED"/>
+  <rect x="910" y="346" width="116" height="18" rx="9" fill="#7C3AED"/>
+  <rect x="910" y="392" width="128" height="18" rx="9" fill="#C4B5FD"/>
+  <path d="M594 408H700" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+</svg>

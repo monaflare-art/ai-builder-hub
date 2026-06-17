@@ -1,0 +1,18 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" rx="36" fill="#F8FAFC"/>
+  <rect x="78" y="72" width="1124" height="576" rx="34" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="130" y="154" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">Affiliate Website</text>
+  <text x="132" y="204" fill="#64748B" font-family="Arial, Helvetica, sans-serif" font-size="24">Helpful content to trusted tools</text>
+  <rect x="136" y="284" width="300" height="206" rx="30" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="2"/>
+  <rect x="490" y="284" width="300" height="206" rx="30" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="2"/>
+  <rect x="844" y="284" width="300" height="206" rx="30" fill="#ECFDF5" stroke="#BBF7D0" stroke-width="2"/>
+  <rect x="184" y="332" width="166" height="18" rx="9" fill="#2563EB"/>
+  <rect x="184" y="378" width="206" height="18" rx="9" fill="#93C5FD"/>
+  <path d="M436 386H490" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/>
+  <path d="M790 386H844" stroke="#7C3AED" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="640" cy="386" r="52" fill="#7C3AED"/>
+  <path d="M616 386H664M640 362V410" stroke="white" stroke-width="10" stroke-linecap="round"/>
+  <rect x="910" y="342" width="162" height="58" rx="18" fill="#16A34A"/>
+  <rect x="910" y="420" width="112" height="18" rx="9" fill="#86EFAC"/>
+  <rect x="132" y="558" width="424" height="22" rx="11" fill="#CBD5E1"/>
+</svg>

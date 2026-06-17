@@ -1,0 +1,14 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" rx="36" fill="#F8FAFC"/>
+  <rect x="78" y="72" width="1124" height="576" rx="34" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="130" y="154" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">SEO</text>
+  <text x="132" y="204" fill="#64748B" font-family="Arial, Helvetica, sans-serif" font-size="24">Research, publish, improve</text>
+  <rect x="150" y="286" width="356" height="216" rx="30" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="196" y="338" width="198" height="18" rx="9" fill="#0F172A"/>
+  <rect x="196" y="382" width="250" height="18" rx="9" fill="#CBD5E1"/>
+  <rect x="196" y="426" width="168" height="18" rx="9" fill="#E2E8F0"/>
+  <path d="M602 468V356M714 468V306M826 468V388M938 468V258" stroke="#2563EB" stroke-width="30" stroke-linecap="round"/>
+  <path d="M588 286L706 232L820 276L962 196" stroke="#7C3AED" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="962" cy="196" r="18" fill="#7C3AED"/>
+  <rect x="132" y="558" width="420" height="22" rx="11" fill="#CBD5E1"/>
+</svg>

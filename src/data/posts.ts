@@ -28,22 +28,147 @@ export type Post = PostContent & {
 const defaultBlogCover = "/images/blog/default-cover.svg";
 const defaultBlogInlineImage = "/images/blog/default-inline.svg";
 
+const blogImageThemes = {
+  "ai-builder": {
+    src: "/images/blog/ai-builder.svg",
+    label: "AI Builder",
+    alt: "Minimal AI builder workflow illustration",
+  },
+  "affiliate-website": {
+    src: "/images/blog/affiliate-website.svg",
+    label: "Affiliate Website",
+    alt: "Minimal affiliate website funnel illustration",
+  },
+  hosting: {
+    src: "/images/blog/hosting.svg",
+    label: "Hosting",
+    alt: "Minimal website hosting dashboard illustration",
+  },
+  vps: {
+    src: "/images/blog/vps.svg",
+    label: "VPS",
+    alt: "Minimal VPS server workflow illustration",
+  },
+  domain: {
+    src: "/images/blog/domain.svg",
+    label: "Domain",
+    alt: "Minimal domain and DNS illustration",
+  },
+  seo: {
+    src: "/images/blog/seo.svg",
+    label: "SEO",
+    alt: "Minimal SEO analytics illustration",
+  },
+  saas: {
+    src: "/images/blog/saas.svg",
+    label: "SaaS MVP",
+    alt: "Minimal SaaS MVP product illustration",
+  },
+  startup: {
+    src: "/images/blog/startup.svg",
+    label: "Startup",
+    alt: "Minimal startup launch illustration",
+  },
+  traffic: {
+    src: "/images/blog/traffic.svg",
+    label: "Traffic",
+    alt: "Minimal website traffic growth illustration",
+  },
+  "coding-tools": {
+    src: "/images/blog/coding-tools.svg",
+    label: "Coding Tools",
+    alt: "Minimal AI coding tools illustration",
+  },
+} as const;
+
+type BlogImageTheme = keyof typeof blogImageThemes;
+
+function getBlogImageTheme(post: PostContent): BlogImageTheme | null {
+  const signal = `${post.title} ${post.category} ${post.tags.join(" ")} ${post.slug}`.toLowerCase();
+
+  if (
+    /best-ai-website-builders|how-to-use-ai-to-build-a-website|how-to-create-a-business-website-with-ai|ai-workflow-automation|how-to-build-your-first-website/.test(
+      signal,
+    )
+  ) {
+    return "ai-builder";
+  }
+
+  if (/affiliate/.test(signal)) {
+    return "affiliate-website";
+  }
+
+  if (/vps|server|vultr|digitalocean/.test(signal)) {
+    return "vps";
+  }
+
+  if (/deploy.*vercel|vercel-vs-netlify|hosting|hostinger|wordpress|deploy-nextjs/.test(signal)) {
+    return "hosting";
+  }
+
+  if (/domain|dns|registrar|namecheap|godaddy/.test(signal)) {
+    return "domain";
+  }
+
+  if (/saas|mvp/.test(signal)) {
+    return "saas";
+  }
+
+  if (/coding|codex|cursor|claude|chatgpt/.test(signal)) {
+    return "coding-tools";
+  }
+
+  if (/traffic|visitor|launch|checklist/.test(signal)) {
+    return "traffic";
+  }
+
+  if (/seo|semrush|keyword|search/.test(signal)) {
+    return "seo";
+  }
+
+  if (/startup|founder|solopreneur|business|shopify|ecommerce|online store/.test(signal)) {
+    return "startup";
+  }
+
+  if (/ai|website|automation|workflow|tool/.test(signal)) {
+    return "ai-builder";
+  }
+
+  return null;
+}
+
 function withDefaultImages(post: PostContent): Post {
-  return {
-    ...post,
-    coverImage: {
-      src: defaultBlogCover,
-      alt: `${post.title} cover image`,
-      caption: `${post.category} guide for AI builders`,
-    },
-    inlineImages: [
-      {
+  const themeKey = getBlogImageTheme(post);
+  const theme = themeKey ? blogImageThemes[themeKey] : null;
+  const coverImage = theme
+    ? {
+        src: theme.src,
+        alt: `${post.title}: ${theme.alt}`,
+        caption: `${theme.label} guide for AI builders`,
+      }
+    : {
+        src: defaultBlogCover,
+        alt: `${post.title} cover image`,
+        caption: `${post.category} guide for AI builders`,
+      };
+  const inlineImage = theme
+    ? {
+        src: theme.src,
+        alt: `${post.title}: ${theme.alt}`,
+        caption: `A ${theme.label.toLowerCase()} workflow checkpoint for this guide.`,
+        afterSection: 1,
+      }
+    : {
         src: defaultBlogInlineImage,
         alt: `${post.title} workflow illustration`,
         caption: "A practical workflow checkpoint for this guide.",
         afterSection: 1,
-      },
-    ],
+      };
+
+  return {
+    ...post,
+    coverImage,
+    inlineImages: [inlineImage],
   };
 }
 
