@@ -1,10 +1,24 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Post } from "@/data/posts";
 
 export function PostCard({ post }: { post: Post }) {
   return (
     <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/50">
-      <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500">
+      <Link
+        href={`/blog/${post.slug}`}
+        className="relative block aspect-[16/9] overflow-hidden rounded-xl border border-slate-100 bg-slate-50"
+      >
+        <Image
+          src={post.coverImage.src}
+          alt={post.coverImage.alt}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="object-cover transition duration-300 hover:scale-[1.02]"
+          unoptimized
+        />
+      </Link>
+      <div className="mt-5 flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500">
         <span>{post.category}</span>
         <span aria-hidden="true">/</span>
         <time dateTime={post.date}>{post.date}</time>

@@ -1,4 +1,11 @@
-export type Post = {
+export type BlogImage = {
+  src: string;
+  alt: string;
+  caption?: string;
+  afterSection?: number;
+};
+
+type PostContent = {
   slug: string;
   title: string;
   excerpt: string;
@@ -13,7 +20,34 @@ export type Post = {
   }[];
 };
 
-const initialPosts: Post[] = [
+export type Post = PostContent & {
+  coverImage: BlogImage;
+  inlineImages: BlogImage[];
+};
+
+const defaultBlogCover = "/images/blog/default-cover.svg";
+const defaultBlogInlineImage = "/images/blog/default-inline.svg";
+
+function withDefaultImages(post: PostContent): Post {
+  return {
+    ...post,
+    coverImage: {
+      src: defaultBlogCover,
+      alt: `${post.title} cover image`,
+      caption: `${post.category} guide for AI builders`,
+    },
+    inlineImages: [
+      {
+        src: defaultBlogInlineImage,
+        alt: `${post.title} workflow illustration`,
+        caption: "A practical workflow checkpoint for this guide.",
+        afterSection: 1,
+      },
+    ],
+  };
+}
+
+const initialPosts: PostContent[] = [
   {
     slug: "how-to-build-your-first-website-with-codex",
     title: "How to Build Your First Website with Codex",
@@ -503,7 +537,7 @@ function toolLink(slug: string) {
   return `[${toolNames[slug]}](/tools/${slug})`;
 }
 
-function makeExpansionPost(input: ExpansionPostInput): Post {
+function makeExpansionPost(input: ExpansionPostInput): PostContent {
   const [firstTool, secondTool, thirdTool] = input.recommendedToolSlugs;
 
   return {
@@ -607,7 +641,7 @@ function makeExpansionPost(input: ExpansionPostInput): Post {
   };
 }
 
-const contentExpansionPosts: Post[] = [
+const contentExpansionPosts: PostContent[] = [
   makeExpansionPost({
     slug: "hostinger-review-2026",
     title: "Hostinger Review 2026",
@@ -1504,7 +1538,7 @@ const contentExpansionPosts: Post[] = [
   }),
 ];
 
-export const posts: Post[] = [...initialPosts, ...contentExpansionPosts];
+export const posts: Post[] = [...initialPosts, ...contentExpansionPosts].map(withDefaultImages);
 
 export function getPostBySlug(slug: string) {
   return posts.find((post) => post.slug === slug);

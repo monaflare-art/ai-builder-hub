@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostBySlug, posts } from "@/data/posts";
@@ -15,6 +16,14 @@ function getHeadingId(heading: string) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+}
+
+function getAbsoluteImageUrl(src: string) {
+  if (src.startsWith("http")) {
+    return src;
+  }
+
+  return `${siteConfig.url}${src}`;
 }
 
 function getRelatedPosts(slug: string) {
@@ -94,6 +103,24 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     alternates: {
       canonical: `/blog/${post.slug}`,
     },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      url: `/blog/${post.slug}`,
+      images: [
+        {
+          url: post.coverImage.src,
+          alt: post.coverImage.alt,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.coverImage.src],
+    },
   };
 }
 
@@ -110,6 +137,9 @@ export default async function BlogPostPage({ params }: PostPageProps) {
     .filter((tool) => tool !== undefined);
   const relatedPosts = getRelatedPosts(post.slug);
   const postUrl = `${siteConfig.url}/blog/${post.slug}`;
+  const inlineImagesBySection = new Map(
+    post.inlineImages.map((image) => [image.afterSection ?? 0, image]),
+  );
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -131,6 +161,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
       name: siteConfig.name,
       url: siteConfig.url,
     },
+    image: getAbsoluteImageUrl(post.coverImage.src),
     articleSection: post.category,
     keywords: post.tags.join(", "),
     timeRequired: post.readingTime,
@@ -205,6 +236,24 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             ))}
           </div>
         </header>
+        <figure className="mt-8">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 shadow-sm shadow-slate-200/60">
+            <Image
+              src={post.coverImage.src}
+              alt={post.coverImage.alt}
+              fill
+              priority
+              sizes="(min-width: 1024px) 768px, 100vw"
+              className="object-cover"
+              unoptimized
+            />
+          </div>
+          {post.coverImage.caption ? (
+            <figcaption className="mt-3 text-center text-sm text-slate-500">
+              {post.coverImage.caption}
+            </figcaption>
+          ) : null}
+        </figure>
         <aside className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5">
           <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
             Table of contents
@@ -220,18 +269,41 @@ export default async function BlogPostPage({ params }: PostPageProps) {
           </ol>
         </aside>
         <div className="mt-10 space-y-10">
-          {post.sections.map((section) => (
-            <section key={section.heading} id={getHeadingId(section.heading)} className="scroll-mt-24">
-              <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
-                {section.heading}
-              </h2>
-              <div className="mt-4 space-y-4 text-base leading-8 text-slate-600">
-                {section.body.map((paragraph) => (
-                  <p key={paragraph}>{renderParagraphWithLinks(paragraph)}</p>
-                ))}
-              </div>
-            </section>
-          ))}
+          {post.sections.map((section, index) => {
+            const inlineImage = inlineImagesBySection.get(index);
+
+            return (
+              <section key={section.heading} id={getHeadingId(section.heading)} className="scroll-mt-24">
+                <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
+                  {section.heading}
+                </h2>
+                <div className="mt-4 space-y-4 text-base leading-8 text-slate-600">
+                  {section.body.map((paragraph) => (
+                    <p key={paragraph}>{renderParagraphWithLinks(paragraph)}</p>
+                  ))}
+                </div>
+                {inlineImage ? (
+                  <figure className="mt-8">
+                    <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+                      <Image
+                        src={inlineImage.src}
+                        alt={inlineImage.alt}
+                        fill
+                        sizes="(min-width: 1024px) 768px, 100vw"
+                        className="object-cover"
+                        unoptimized
+                      />
+                    </div>
+                    {inlineImage.caption ? (
+                      <figcaption className="mt-3 text-center text-sm text-slate-500">
+                        {inlineImage.caption}
+                      </figcaption>
+                    ) : null}
+                  </figure>
+                ) : null}
+              </section>
+            );
+          })}
         </div>
 
         <section className="mt-14 rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
