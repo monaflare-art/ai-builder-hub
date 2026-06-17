@@ -1040,6 +1040,116 @@ const contentExpansionPosts: Post[] = [
     launchAction:
       "Pick one audience, publish three helpful pages for that audience, share them in one relevant place, collect feedback, and update the pages before chasing another channel.",
   }),
+  makeExpansionPost({
+    slug: "how-to-choose-a-vps",
+    title: "How to Choose a VPS",
+    excerpt:
+      "A beginner-friendly tutorial for choosing a VPS based on workload, budget, region, backups, security, and future AI project needs.",
+    category: "Tutorials",
+    tags: ["VPS", "Server", "Vultr", "Beginner"],
+    recommendedToolSlugs: ["vultr", "namecheap", "semrush"],
+    audience: "beginners who know they may need a server but are not sure how to compare CPU, memory, region, bandwidth, backups, and management responsibility",
+    decision:
+      "choosing a VPS only after you know what the server must run, how much maintenance you can handle, and whether managed hosting would be simpler",
+    setup:
+      "Start by writing the exact workload: a Next.js app, background worker, bot, API, scraper, database, or self-hosted dashboard. Then estimate memory, storage, region, and uptime needs.",
+    workflow:
+      "Compare VPS plans by workload fit, not by the cheapest headline price. Create a small test instance, deploy one service, monitor resource usage, and document the setup before upgrading.",
+    toolNotes:
+      "A VPS gives flexibility, but it also makes you responsible for security, updates, backups, process management, logs, and recovery. Choose it when that control is genuinely useful.",
+    mistakes:
+      "The biggest VPS mistake is buying a server before understanding the workload. Another mistake is ignoring backups and firewall setup because the test project feels small.",
+    launchAction:
+      "Choose the smallest VPS that can run the first real workload, add basic security, test a restore path, and upgrade only when monitoring shows the project needs more resources.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-buy-your-first-server",
+    title: "How to Buy Your First Server",
+    excerpt:
+      "A practical beginner tutorial for buying your first server, setting expectations, avoiding overspending, and preparing for a safe launch.",
+    category: "Tutorials",
+    tags: ["Server", "VPS", "Deployment", "Beginner"],
+    recommendedToolSlugs: ["vultr", "namecheap", "hostinger"],
+    audience: "first-time builders who are ready to buy a cloud server but need a clear checklist before entering billing details",
+    decision:
+      "buying a first server only when the project requires server control, and choosing a small plan that can be tested safely before production traffic arrives",
+    setup:
+      "Start with a provider account, SSH key, billing alert, target region, and a written reason for the server. Avoid large instances until you have measured real usage.",
+    workflow:
+      "Create the server, connect with SSH, update packages, configure a firewall, deploy a tiny test app, point a subdomain, and write down how to restart and delete the machine.",
+    toolNotes:
+      "Buying a server is not the same as launching a product. The server is only useful if you can operate it, secure it, back it up, and explain what runs there.",
+    mistakes:
+      "The biggest first-server mistake is leaving unused instances online. Another mistake is using password login, skipping firewall rules, or forgetting which domain points to the server.",
+    launchAction:
+      "Buy one small server, test it with a disposable project, record the monthly cost, and destroy it if you do not have a clear workload within a few days.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-get-traffic-to-a-new-website",
+    title: "How to Get Traffic to a New Website",
+    excerpt:
+      "A beginner tutorial for getting early traffic through SEO foundations, helpful content, internal links, communities, and consistent updates.",
+    category: "Tutorials",
+    tags: ["Traffic", "SEO", "Content", "Distribution"],
+    recommendedToolSlugs: ["semrush", "namecheap", "shopify"],
+    audience: "new website owners who have launched a site and need first visitors without relying on paid ads or random social posting",
+    decision:
+      "building a traffic plan around one audience, useful search-focused pages, internal links, community distribution, and a weekly improvement habit",
+    setup:
+      "Start by checking indexability, sitemap, robots, canonical domain, titles, descriptions, and the usefulness of the first five pages. Traffic work fails when the site is unclear.",
+    workflow:
+      "Publish a focused content cluster, link related pages together, share the most useful guide in one relevant community, answer questions, and update pages based on feedback.",
+    toolNotes:
+      "Traffic tools are helpful after you have useful content. Before that, the most valuable work is improving page clarity, matching search intent, and creating specific tutorials.",
+    mistakes:
+      "The biggest traffic mistake is chasing every channel at once. Another mistake is publishing generic content that does not answer a real beginner question.",
+    launchAction:
+      "Pick one topic cluster, publish three connected pages, share one of them carefully, measure impressions and clicks, then improve the page that shows early signs of demand.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-use-ai-to-build-a-website",
+    title: "How to Use AI to Build a Website",
+    excerpt:
+      "A practical tutorial for using AI to plan, write, code, review, and launch a website while keeping quality and ownership under control.",
+    category: "Tutorials",
+    tags: ["AI Website", "Codex", "Website Builder", "Beginner"],
+    recommendedToolSlugs: ["hostinger", "namecheap", "semrush"],
+    audience: "beginners who want AI help building a real website but do not want to publish generic copy, broken links, or code they cannot maintain",
+    decision:
+      "using AI for planning, first drafts, code generation, content structure, and QA while keeping human judgment in charge of positioning and final review",
+    setup:
+      "Start with a one-page brief: audience, pages, offer, style, required tools, domain plan, and what not to build. Good AI output depends on clear constraints.",
+    workflow:
+      "Ask AI to create one slice at a time: sitemap, homepage copy, data structure, page component, article draft, link checklist, and final launch review.",
+    toolNotes:
+      "AI can speed up website creation, but it should not replace checking facts, tool links, pricing, affiliate disclosures, accessibility, and mobile layout.",
+    mistakes:
+      "The biggest AI website mistake is accepting polished but vague output. Another mistake is asking for a full platform when a clear static site would launch faster.",
+    launchAction:
+      "Use AI to build a small first version, inspect every page manually, run lint and build, deploy, and update the site based on real visitor questions.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-build-an-online-business-with-ai",
+    title: "How to Build an Online Business with AI",
+    excerpt:
+      "A beginner-friendly tutorial for using AI to choose an offer, build a website, publish content, test tools, and create a practical online business foundation.",
+    category: "Tutorials",
+    tags: ["Online Business", "AI", "Affiliate", "SaaS"],
+    recommendedToolSlugs: ["shopify", "semrush", "namecheap"],
+    audience: "solo founders and beginners who want to use AI to build a real online business instead of collecting tools without a clear offer",
+    decision:
+      "choosing one business model, one audience, one offer, and one launch channel before adding automation, paid tools, or complex infrastructure",
+    setup:
+      "Start by choosing the business type: affiliate content, service business, ecommerce store, SaaS MVP, or educational product. Then write the first customer problem in plain language.",
+    workflow:
+      "Use AI to research questions, draft content, build pages, outline offers, compare tools, and create launch checklists. Validate each output with real evidence.",
+    toolNotes:
+      "AI is useful for leverage, but the business still needs trust, distribution, a working website, clear pricing, and a reason customers or readers should care.",
+    mistakes:
+      "The biggest AI business mistake is starting with automation before understanding the buyer. Another mistake is buying tools before publishing the first useful page.",
+    launchAction:
+      "Build a simple website, publish three useful pieces of content, add one conversion path, share it with a focused audience, and improve based on real replies.",
+  }),
 ];
 
 export const posts: Post[] = [...initialPosts, ...contentExpansionPosts];
