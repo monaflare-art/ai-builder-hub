@@ -559,6 +559,20 @@ function makeExpansionPost(input: ExpansionPostInput): Post {
               ]),
         ],
       },
+      ...(input.category === "Tutorials"
+        ? [
+            {
+              heading: "Beginner checklist before you publish",
+              body: [
+                `Before you call the tutorial finished, turn the process into a checklist that another beginner could follow. Write the starting point, required accounts, expected output, and the exact page or dashboard where each step happens. Then run the checklist from a clean browser or a new account where possible. This catches missing assumptions, especially around DNS, hosting settings, deployment URLs, and tool limits. If the tutorial creates a public website, compare it with the [Website Launch Checklist for Indie Hackers](/blog/website-launch-checklist-for-indie-hackers) before sharing it widely.`,
+                `The second pass should focus on validation. Open the finished result on desktop and mobile, click every important link, confirm that the recommended tools section still matches the topic, and make sure the internal links support the reader's next step. If the tutorial involves building a product, review [How to Build Your First Website with Codex](/blog/how-to-build-your-first-website-with-codex) for a tighter AI-assisted build loop. If it involves deployment, compare your final steps with [How to Deploy a Next.js App to Vercel](/blog/how-to-deploy-a-nextjs-app-to-vercel) so production checks are not skipped.`,
+                `The final beginner mistake is stopping at a successful screenshot. A tutorial should explain what to do when something goes wrong. Add notes for common failures: domain propagation delays, wrong environment variables, expired trials, missing build commands, unsupported hosting features, broken affiliate links, and unclear ownership between registrar and deployment platform. These troubleshooting notes are often more valuable than the happy path because beginners rarely fail in original ways. The more specific the recovery step, the more trustworthy the article becomes.`,
+                `After publishing, schedule one follow-up review instead of immediately starting another project. Reopen the tutorial after a few days, follow the steps again, and update anything that changed in the tool interface, pricing page, deployment flow, or DNS instructions. Check whether readers would know what to do next after completing the guide. A strong beginner tutorial should end with a working result, a short maintenance habit, and one clear next action. This keeps the content useful after launch and makes the article more durable for search traffic.`,
+                `If the tutorial supports a business goal, add a small success metric. That might be a published page, a connected domain, one email signup, one working checkout test, one indexed article, or one useful visitor conversation. A metric turns the guide from passive reading into a practical launch exercise.`,
+              ],
+            },
+          ]
+        : []),
     ],
   };
 }
@@ -893,6 +907,138 @@ const contentExpansionPosts: Post[] = [
       "The biggest AI SaaS mistake is building impressive screens around a weak workflow. Another mistake is letting AI generate features that look complete but do not actually work.",
     launchAction:
       "Ship the smallest real workflow, invite ten targeted users, watch them use it, and improve the part that blocks value before adding another feature.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-register-a-domain-name",
+    title: "How to Register a Domain Name",
+    excerpt:
+      "A beginner-friendly tutorial for registering a domain name, checking renewal pricing, securing the account, and preparing DNS for launch.",
+    category: "Tutorials",
+    tags: ["Domain Registration", "DNS", "Namecheap", "Beginner"],
+    recommendedToolSlugs: ["namecheap", "hostinger", "semrush"],
+    audience: "beginners who have a project idea and need to turn it into a real web address that can later connect to Vercel, hosting, ecommerce, or a VPS",
+    decision:
+      "registering one clear domain, understanding the registrar workflow, avoiding renewal surprises, and preparing the domain for a real website launch",
+    setup:
+      "Start by writing five possible names, removing hard-to-spell options, checking whether the name fits the project in a sentence, and comparing first-year and renewal pricing before checkout.",
+    workflow:
+      "Register the domain, enable account security, keep privacy settings on where available, and write down the registrar, renewal date, and intended canonical domain before changing DNS records.",
+    toolNotes:
+      "Domain registration is simple when you treat it as the start of the project infrastructure. It becomes messy when you buy names impulsively and forget which one points to production.",
+    mistakes:
+      "The biggest registration mistake is buying a domain only because the first-year price is low. Another mistake is registering several similar names and never committing to a canonical brand.",
+    launchAction:
+      "After registering the domain, connect it to a test deployment, verify root and www behavior, and do not submit the sitemap until the canonical domain is stable.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-deploy-nextjs-on-hostinger",
+    title: "How to Deploy Next.js on Hostinger",
+    excerpt:
+      "A practical beginner tutorial for deciding whether Hostinger fits a Next.js project and how to prepare deployment without overcomplicating the stack.",
+    category: "Tutorials",
+    tags: ["Next.js", "Hostinger", "Deployment", "Hosting"],
+    recommendedToolSlugs: ["hostinger", "namecheap", "vultr"],
+    audience: "builders who have a Next.js project and want to understand whether managed hosting can support their deployment needs",
+    decision:
+      "deciding whether to deploy a static or simple Next.js site through Hostinger, or whether the project needs Vercel, VPS control, or another app-focused platform",
+    setup:
+      "Start by checking whether the Next.js app can be exported or deployed in the mode your hosting plan supports. Run lint and build locally before touching hosting settings.",
+    workflow:
+      "Use Hostinger for beginner-friendly site hosting when the app is simple, keep environment variables documented, and connect the domain only after the build output is understood.",
+    toolNotes:
+      "Hostinger can be a good fit for content-heavy or simpler website projects, but a dynamic Next.js app with server features may need a platform designed for that runtime.",
+    mistakes:
+      "The biggest mistake is assuming every hosting plan runs every Next.js feature. Another mistake is debugging hosting before confirming the app builds cleanly on your machine.",
+    launchAction:
+      "Deploy the smallest working version first, verify the public URL, test navigation, then connect the domain and document whether future server features require a different deployment target.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-deploy-nextjs-on-vps",
+    title: "How to Deploy Next.js on VPS",
+    excerpt:
+      "A beginner-focused tutorial for deploying a Next.js app on a VPS with a clear server checklist, domain setup, and common failure points.",
+    category: "Tutorials",
+    tags: ["Next.js", "VPS", "Vultr", "Deployment"],
+    recommendedToolSlugs: ["vultr", "namecheap", "semrush"],
+    audience: "developers who want more control than managed deployment platforms provide and are ready to operate a Linux server responsibly",
+    decision:
+      "deploying Next.js on a VPS only when the app needs custom runtime control, long-running services, private networking, or server-level flexibility",
+    setup:
+      "Start with a small VPS, SSH keys, a non-root user, firewall rules, Node or Docker, a reverse proxy, and a clean production build that already passes locally.",
+    workflow:
+      "Deploy the app behind a process manager or container, point a subdomain to the server, configure HTTPS, and document restart, logs, backups, and rollback steps.",
+    toolNotes:
+      "A VPS is powerful for custom deployment, but it moves responsibility from the platform to you. Security, updates, uptime, and backups are now part of the project.",
+    mistakes:
+      "The biggest VPS deployment mistake is exposing a production app before configuring security basics. Another mistake is treating manual SSH commands as a long-term deployment system.",
+    launchAction:
+      "Launch a test app first, monitor it for a day, then move the real project only after you know how to restart, rebuild, restore, and inspect logs.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-create-a-business-website-with-ai",
+    title: "How to Create a Business Website with AI",
+    excerpt:
+      "A practical guide for using AI to plan, write, build, and publish a small business website without losing clarity or trust.",
+    category: "Tutorials",
+    tags: ["AI Website", "Business Website", "Codex", "Beginner"],
+    recommendedToolSlugs: ["hostinger", "namecheap", "semrush"],
+    audience: "small business owners, solo founders, and operators who want a clear website but do not want to start with a complex custom application",
+    decision:
+      "using AI to speed up structure, copy, and implementation while still making human decisions about positioning, services, proof, and conversion goals",
+    setup:
+      "Start with a simple sitemap: home, services, about, contact, and one proof or FAQ page. Ask AI for drafts, but rewrite anything that sounds generic.",
+    workflow:
+      "Use AI to produce page outlines, service descriptions, local SEO ideas, and first-pass code. Then test whether a real customer can understand the offer quickly.",
+    toolNotes:
+      "Business websites need trust more than novelty. A fast host, clear domain, readable copy, and practical SEO basics usually matter more than advanced animation.",
+    mistakes:
+      "The biggest AI website mistake is publishing polished but vague copy. Another mistake is adding too many sections before the business offer is clear.",
+    launchAction:
+      "Publish a focused first version, connect the domain, check forms and links, ask three customers for feedback, and improve the pages that affect inquiries first.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-choose-the-right-hosting-provider",
+    title: "How to Choose the Right Hosting Provider",
+    excerpt:
+      "A beginner tutorial for choosing between managed hosting, VPS, ecommerce hosting, and deployment platforms based on the project you are building.",
+    category: "Tutorials",
+    tags: ["Hosting", "VPS", "Managed Hosting", "Beginner"],
+    recommendedToolSlugs: ["hostinger", "vultr", "shopify"],
+    audience: "beginners comparing hosting options for a blog, AI tool, affiliate website, ecommerce store, or SaaS MVP",
+    decision:
+      "choosing hosting based on workload, maintenance comfort, budget, traffic expectations, and whether the project needs server control or managed simplicity",
+    setup:
+      "Start by writing what the website must do: serve static pages, run WordPress, sell products, execute background jobs, host APIs, or deploy a Next.js app.",
+    workflow:
+      "Map the workload to the platform. Use managed hosting for simple sites, VPS for custom services, ecommerce platforms for stores, and app platforms for framework deployments.",
+    toolNotes:
+      "The right hosting provider is the one that matches the operating model. Cheap hosting can become expensive if it forces you to fight the wrong abstraction.",
+    mistakes:
+      "The biggest hosting mistake is choosing based on popularity instead of requirements. Another mistake is ignoring backups, support, renewal pricing, and migration path.",
+    launchAction:
+      "Choose the simplest provider that can support the next milestone, launch a small version, document the setup, and upgrade only when the project proves it needs more.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-get-your-first-website-visitors",
+    title: "How to Get Your First Website Visitors",
+    excerpt:
+      "A practical beginner guide to getting the first real visitors through content, communities, internal links, SEO basics, and useful distribution habits.",
+    category: "Tutorials",
+    tags: ["Traffic", "SEO", "Distribution", "Indie Hackers"],
+    recommendedToolSlugs: ["semrush", "namecheap", "shopify"],
+    audience: "site owners who have launched a first website and now need real visitors, feedback, and search visibility without relying on paid ads",
+    decision:
+      "choosing a traffic plan that fits the site stage: helpful content, targeted communities, internal links, search indexing, and repeatable updates",
+    setup:
+      "Start by checking that the site is crawlable, the sitemap uses the correct domain, every important page has a clear title, and the first articles answer real questions.",
+    workflow:
+      "Publish content clusters, share the most useful pages in relevant communities, answer questions directly, and turn repeated questions into new tutorials or comparison pages.",
+    toolNotes:
+      "Traffic tools help after the site has useful pages. Before that, the best growth work is improving clarity, publishing specific tutorials, and making internal links easy to follow.",
+    mistakes:
+      "The biggest traffic mistake is posting everywhere without understanding the audience. Another mistake is expecting SEO results before the site has enough useful content to index.",
+    launchAction:
+      "Pick one audience, publish three helpful pages for that audience, share them in one relevant place, collect feedback, and update the pages before chasing another channel.",
   }),
 ];
 
