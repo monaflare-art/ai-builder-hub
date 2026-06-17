@@ -10,7 +10,7 @@ type PostPageProps = {
 };
 
 function renderParagraphWithLinks(text: string) {
-  const linkPattern = /\[([^\]]+)\]\((\/tools\/[a-z0-9-]+)\)/g;
+  const linkPattern = /\[([^\]]+)\]\((\/(?:tools|blog)\/[a-z0-9-]+)\)/g;
   const parts: ReactNode[] = [];
   let lastIndex = 0;
 

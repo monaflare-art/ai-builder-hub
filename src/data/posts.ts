@@ -552,6 +552,11 @@ function makeExpansionPost(input: ExpansionPostInput): Post {
         body: [
           `${input.launchAction} A good next step is to run a one-day test with a narrow goal. For a review, build a small project and record every setup step. For a comparison, complete the same task in both tools and compare evidence. For a tutorial, follow the steps from a blank account until the result is live. This approach creates content that is more credible than a feature summary because it reflects the actual beginner experience.`,
           `The final decision should be based on fit. Choose the tool or process if it helps you launch faster, maintain the project with less stress, or create a clearer path to revenue. Skip it if it adds complexity before you have traffic, customers, or a validated workflow. AI Builder Hub is built around that principle: use tools to ship practical projects, not to decorate an unfinished idea. Keep the first version simple, document what you learn, and improve the stack only when the project proves it needs more.`,
+          ...(input.category === "Tutorials"
+            ? []
+            : [
+                `For more context, pair this article with a practical launch workflow instead of reading it in isolation. Start with the [Website Launch Checklist for Indie Hackers](/blog/website-launch-checklist-for-indie-hackers) to verify metadata, links, DNS, disclosure, and deployment basics. If the decision is part of a new product build, also review [How to Build a SaaS MVP with AI](/blog/how-to-build-a-saas-mvp-with-ai) so the tool choice stays connected to a real user workflow. Reviews and comparisons are most useful when they lead to a shipped project, not when they become a substitute for publishing.`,
+              ]),
         ],
       },
     ],
