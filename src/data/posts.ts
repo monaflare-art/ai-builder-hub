@@ -13,7 +13,7 @@ export type Post = {
   }[];
 };
 
-export const posts: Post[] = [
+const initialPosts: Post[] = [
   {
     slug: "how-to-build-your-first-website-with-codex",
     title: "How to Build Your First Website with Codex",
@@ -470,6 +470,428 @@ export const posts: Post[] = [
     ],
   },
 ];
+
+const toolNames: Record<string, string> = {
+  hostinger: "Hostinger",
+  namecheap: "Namecheap",
+  vultr: "Vultr",
+  shopify: "Shopify",
+  semrush: "Semrush",
+};
+
+type ExpansionPostInput = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: "Reviews" | "Comparisons" | "Tutorials";
+  tags: string[];
+  recommendedToolSlugs: string[];
+  audience: string;
+  decision: string;
+  setup: string;
+  workflow: string;
+  toolNotes: string;
+  mistakes: string;
+  launchAction: string;
+};
+
+function toolLink(slug: string) {
+  return `[${toolNames[slug]}](/tools/${slug})`;
+}
+
+function makeExpansionPost(input: ExpansionPostInput): Post {
+  const [firstTool, secondTool, thirdTool] = input.recommendedToolSlugs;
+
+  return {
+    slug: input.slug,
+    title: input.title,
+    excerpt: input.excerpt,
+    date: "2026-06-17",
+    readingTime: "14 min read",
+    category: input.category,
+    tags: input.tags,
+    recommendedToolSlugs: input.recommendedToolSlugs,
+    sections: [
+      {
+        heading: "Who this guide is for",
+        body: [
+          `${input.title} is written for ${input.audience}. The goal is not to collect every possible feature or repeat a vendor landing page. The goal is to help an AI builder, solo founder, or affiliate site owner decide what to do next. Start by writing the job you need the tool or process to perform. Then write the constraint that matters most: price, speed, control, ease of use, SEO growth, ecommerce readiness, or deployment reliability. When you define the job first, the recommendation becomes more practical and less emotional.`,
+          `If you are building a real online project, connect this topic to the rest of your stack. A domain, hosting layer, content workflow, and analytics plan all affect the result. For many beginner projects, ${toolLink(firstTool)} is one of the first tools worth reviewing because it has a clear role in the launch path. Do not choose it because it appears in a list. Choose it only after you can explain how it supports the page, product, store, or server you are trying to publish this week.`,
+        ],
+      },
+      {
+        heading: "Step-by-step evaluation process",
+        body: [
+          `Step one is to define the minimum useful outcome. For this topic, that means ${input.decision}. Write that outcome as a checklist before opening any dashboard. Step two is to compare the tool against the checklist, not against vague popularity. Step three is to run a small test. Buy a low-risk plan, connect a test domain, deploy a small page, publish one article, or create one sample product. The test should produce evidence you can inspect instead of a feeling that the tool is probably good.`,
+          `Step four is to document the setup. Record the account used, plan selected, domain connected, DNS values, deployment URL, billing renewal date, and any limitations discovered. If the process touches domains or DNS, ${toolLink(secondTool)} is a useful reference point because domain mistakes often break otherwise good projects. Step five is to decide whether the tool belongs in your repeatable stack. A tool that works once but is hard to explain may not be the best choice for tutorials, client work, or affiliate recommendations.`,
+        ],
+      },
+      {
+        heading: "Recommended workflow",
+        body: [
+          `${input.setup} Treat setup like a production rehearsal. Use a real project name, real copy, and a realistic URL structure. If the tool has templates, try one, but do not let the template decide your information architecture. If the tool has AI features, use them to create drafts, not final judgment. Your workflow should end with a page, store, server, article, or MVP that you can open from a clean browser and explain to another person in under one minute.`,
+          `${input.workflow} When content, search, or monetization matters, connect the workflow to a measurement habit. ${toolLink(thirdTool)} can help when you are ready to research topics, compare opportunities, or understand how a page might attract traffic, but it should not replace product thinking. First publish something useful. Then measure which pages get impressions, which links receive clicks, and which questions readers still ask. That loop makes the tool stack stronger over time.`,
+        ],
+      },
+      {
+        heading: "What to look for before paying",
+        body: [
+          `${input.toolNotes} Review the pricing page slowly. Check whether the advertised price is monthly or annual, whether renewal pricing changes, whether important features sit behind higher tiers, and whether usage limits match your project. Beginners often compare headline prices and miss bandwidth, transaction, storage, seat, or add-on fees. If you plan to write an affiliate review, note those details clearly. A useful review helps readers avoid surprises rather than pushing them toward the most expensive plan.`,
+          `Also test support and documentation before you depend on the product. Search for the exact task you need: connecting a domain, restoring a backup, exporting data, adding a collaborator, changing billing, deploying a Node app, or moving content. Good documentation reduces future support work. Weak documentation may be acceptable for a simple experiment, but it is risky for a site that earns revenue or serves customers. The best tool is not always the most powerful one; it is the one you can operate calmly.`,
+        ],
+      },
+      {
+        heading: "Common mistakes",
+        body: [
+          `${input.mistakes} Another common mistake is skipping the exit plan. Before you rely on any provider, ask how you would leave. Can you export the site, move the domain, download product data, migrate a server, or replace the SEO workflow? You do not need to migrate today, but you should understand the path. This is especially important for affiliate and AI builder projects because the first stack is often temporary. A tool that is easy to enter but hard to leave deserves extra caution.`,
+          `Do not confuse a polished dashboard with a finished business. A hosting account, domain registrar, ecommerce platform, SEO suite, or coding assistant is only infrastructure around the real work. You still need clear positioning, useful content, a reliable launch checklist, and a reason for visitors to trust your recommendation. If the tool makes those jobs easier, it belongs in the stack. If it only makes the project feel more serious, delay the purchase and keep building with what you already have.`,
+        ],
+      },
+      {
+        heading: "Final recommendation",
+        body: [
+          `${input.launchAction} A good next step is to run a one-day test with a narrow goal. For a review, build a small project and record every setup step. For a comparison, complete the same task in both tools and compare evidence. For a tutorial, follow the steps from a blank account until the result is live. This approach creates content that is more credible than a feature summary because it reflects the actual beginner experience.`,
+          `The final decision should be based on fit. Choose the tool or process if it helps you launch faster, maintain the project with less stress, or create a clearer path to revenue. Skip it if it adds complexity before you have traffic, customers, or a validated workflow. AI Builder Hub is built around that principle: use tools to ship practical projects, not to decorate an unfinished idea. Keep the first version simple, document what you learn, and improve the stack only when the project proves it needs more.`,
+        ],
+      },
+    ],
+  };
+}
+
+const contentExpansionPosts: Post[] = [
+  makeExpansionPost({
+    slug: "hostinger-review-2026",
+    title: "Hostinger Review 2026",
+    excerpt:
+      "A practical Hostinger review for AI builders, affiliate site owners, and beginners who want managed hosting without running a VPS.",
+    category: "Reviews",
+    tags: ["Hostinger", "Review", "Web Hosting", "Beginner"],
+    recommendedToolSlugs: ["hostinger", "namecheap", "semrush"],
+    audience: "beginners who want to launch a website, WordPress site, landing page, or small affiliate project without managing Linux",
+    decision:
+      "deciding whether managed hosting is enough or whether your project needs a custom VPS, serverless deployment, or ecommerce platform",
+    setup:
+      "For a fair Hostinger test, create a simple site with a home page, one article, one legal page, and a connected domain. Check how quickly you can move from signup to a working website.",
+    workflow:
+      "Use Hostinger for the website layer, keep content in a predictable structure, and document exactly how backups, SSL, email, and domain settings work.",
+    toolNotes:
+      "Hostinger is strongest when the project is mostly pages, content, WordPress, email, or a small business presence. It is less ideal when you need full server control, unusual background jobs, or a highly custom app runtime.",
+    mistakes:
+      "The biggest Hostinger mistake is buying managed hosting for a project that actually needs custom application infrastructure. The second mistake is ignoring renewal pricing and assuming the first promotional price is the long-term cost.",
+    launchAction:
+      "If Hostinger fits, launch a small content site first, connect the domain, publish three useful pages, and verify that backups and SSL are working before adding plugins or paid themes.",
+  }),
+  makeExpansionPost({
+    slug: "namecheap-review-2026",
+    title: "Namecheap Review 2026",
+    excerpt:
+      "A practical Namecheap review for buying domains, managing DNS, and connecting AI projects to Vercel, hosting, or ecommerce platforms.",
+    category: "Reviews",
+    tags: ["Namecheap", "Review", "Domains", "DNS"],
+    recommendedToolSlugs: ["namecheap", "hostinger", "vultr"],
+    audience: "builders buying their first domain or trying to connect a project to Vercel, managed hosting, a VPS, or a Shopify store",
+    decision:
+      "deciding whether Namecheap should be your registrar and DNS home for early-stage AI projects, affiliate sites, and solo founder experiments",
+    setup:
+      "For a fair Namecheap test, search for a domain, compare first-year and renewal pricing, buy one domain, enable security settings, and connect it to a test deployment.",
+    workflow:
+      "Use Namecheap as the domain source of truth, then point DNS records to the platform that hosts the project. Keep a private note with root, www, and any API subdomain records.",
+    toolNotes:
+      "Namecheap is useful because domains, DNS, privacy settings, and renewal management are central to every serious web project. The product is not glamorous, but domain reliability affects trust.",
+    mistakes:
+      "The biggest Namecheap mistake is editing DNS records without knowing which service owns the final website. Another mistake is buying many domains before choosing one canonical brand.",
+    launchAction:
+      "If Namecheap fits, buy one clear domain, connect it to the current deployment, verify root and www behavior, then submit the final sitemap only after the canonical domain is stable.",
+  }),
+  makeExpansionPost({
+    slug: "vultr-review-2026",
+    title: "Vultr Review 2026",
+    excerpt:
+      "A practical Vultr review for developers and AI builders who need VPS hosting, Docker, workers, APIs, or self-hosted tools.",
+    category: "Reviews",
+    tags: ["Vultr", "Review", "VPS", "Infrastructure"],
+    recommendedToolSlugs: ["vultr", "namecheap", "semrush"],
+    audience: "developers who need more control than serverless hosting gives, especially for APIs, background workers, bots, and self-hosted AI utilities",
+    decision:
+      "deciding whether a VPS is justified for your current workload or whether a managed deployment platform is still enough",
+    setup:
+      "For a fair Vultr test, create a small Ubuntu instance, connect with SSH keys, configure a firewall, install Docker, deploy a tiny app, and point a subdomain to it.",
+    workflow:
+      "Use Vultr for processes that need server control, but keep the public marketing site simple. Document deploy commands, restart commands, log locations, and backup behavior.",
+    toolNotes:
+      "Vultr is strongest when you value clear VPS control, multiple regions, and the ability to run custom services. It is less beginner-friendly if you do not want to manage updates and security.",
+    mistakes:
+      "The biggest Vultr mistake is treating a VPS like managed hosting. You are responsible for security, monitoring, backups, patches, and incident response.",
+    launchAction:
+      "If Vultr fits, launch one small service first, add uptime monitoring, test a restore path, and avoid hosting critical customer data until the operating checklist is clear.",
+  }),
+  makeExpansionPost({
+    slug: "shopify-review-2026",
+    title: "Shopify Review 2026",
+    excerpt:
+      "A practical Shopify review for founders who want to sell products, digital downloads, or AI-assisted brand assets without building ecommerce from scratch.",
+    category: "Reviews",
+    tags: ["Shopify", "Review", "Ecommerce", "Online Store"],
+    recommendedToolSlugs: ["shopify", "namecheap", "semrush"],
+    audience: "solo founders, creators, and AI builders who want to launch an online store without maintaining carts, checkout, taxes, and order management themselves",
+    decision:
+      "deciding whether a hosted ecommerce platform is better than custom development, WordPress commerce plugins, or a simple payment link",
+    setup:
+      "For a fair Shopify test, create a store, add one product, configure checkout basics, connect a theme, write a product description, and preview the buying flow end to end.",
+    workflow:
+      "Use Shopify for commerce operations, keep the brand story clear, and document where product data, theme changes, payment settings, and domain records are managed.",
+    toolNotes:
+      "Shopify is strongest when checkout reliability, order management, and app ecosystem matter. It is less attractive when you only need a basic landing page or do not yet know what you will sell.",
+    mistakes:
+      "The biggest Shopify mistake is paying for apps before validating demand. Another mistake is using AI-generated product copy without checking accuracy, policies, and customer expectations.",
+    launchAction:
+      "If Shopify fits, launch one focused product page, connect a domain, test checkout in the correct mode, and create a post-purchase support process before driving traffic.",
+  }),
+  makeExpansionPost({
+    slug: "semrush-review-2026",
+    title: "Semrush Review 2026",
+    excerpt:
+      "A practical Semrush review for affiliate websites, AI builder blogs, and solo founders who want to plan SEO content with more evidence.",
+    category: "Reviews",
+    tags: ["Semrush", "Review", "SEO", "Content Marketing"],
+    recommendedToolSlugs: ["semrush", "namecheap", "hostinger"],
+    audience: "site owners who already have a content strategy and want better keyword, competitor, backlink, and technical SEO data",
+    decision:
+      "deciding whether paid SEO research will improve your next content decisions or whether you should keep publishing manually for now",
+    setup:
+      "For a fair Semrush test, enter your domain, inspect keyword ideas, review competitor pages, run a site audit, and choose five article updates based on evidence.",
+    workflow:
+      "Use Semrush to prioritize content, not to replace editorial judgment. Pair keyword research with real tutorials, specific tool pages, and honest review notes.",
+    toolNotes:
+      "Semrush is strongest when a site already has content and needs direction. It can be expensive too early, especially if you have not published enough pages to analyze.",
+    mistakes:
+      "The biggest Semrush mistake is chasing high-volume keywords that do not match your site authority or reader intent. Another mistake is generating content plans without updating old pages.",
+    launchAction:
+      "If Semrush fits, audit the existing site, pick a narrow cluster, improve internal links, and update the top pages before opening dozens of new article drafts.",
+  }),
+  makeExpansionPost({
+    slug: "hostinger-vs-vultr",
+    title: "Hostinger vs Vultr",
+    excerpt:
+      "A practical comparison of Hostinger and Vultr for beginners choosing between managed hosting and VPS control.",
+    category: "Comparisons",
+    tags: ["Hostinger", "Vultr", "Hosting", "VPS"],
+    recommendedToolSlugs: ["hostinger", "vultr", "namecheap"],
+    audience: "builders deciding whether their first website needs managed hosting simplicity or a VPS with full server responsibility",
+    decision:
+      "choosing Hostinger when the project is mostly content or business pages, and choosing Vultr when custom services, Docker, or long-running processes matter",
+    setup:
+      "For a fair comparison, launch the same simple site on managed hosting and a small VPS, then compare setup time, DNS steps, maintenance burden, and recovery options.",
+    workflow:
+      "Use Hostinger when you want fewer operations tasks. Use Vultr when the application needs server-level flexibility. Keep the domain provider separate and documented.",
+    toolNotes:
+      "Hostinger and Vultr solve different problems. One reduces server work; the other gives control. The right choice depends on the workload, not only price.",
+    mistakes:
+      "The biggest comparison mistake is treating managed hosting and VPS hosting as interchangeable. They can both publish a website, but they create very different maintenance responsibilities.",
+    launchAction:
+      "If you are unsure, start managed for a content site and move custom workers to a VPS later. If the app already needs server control, start with a small VPS and document everything.",
+  }),
+  makeExpansionPost({
+    slug: "namecheap-vs-godaddy",
+    title: "Namecheap vs GoDaddy",
+    excerpt:
+      "A practical comparison of Namecheap and GoDaddy for domain buyers, affiliate site builders, and AI project founders.",
+    category: "Comparisons",
+    tags: ["Namecheap", "GoDaddy", "Domains", "DNS"],
+    recommendedToolSlugs: ["namecheap", "hostinger", "semrush"],
+    audience: "beginners choosing a domain registrar and trying to avoid renewal, DNS, and account-management surprises",
+    decision:
+      "choosing the registrar that makes domain search, checkout, DNS management, privacy, renewal pricing, and support easiest for your workflow",
+    setup:
+      "For a fair comparison, search the same domain, compare first-year and renewal pricing, inspect DNS screens, review privacy settings, and read transfer instructions.",
+    workflow:
+      "Use one registrar as the domain source of truth, then connect the domain to hosting, Vercel, Shopify, or a VPS. Record every DNS value you add.",
+    toolNotes:
+      "Namecheap is often favored by builders who want straightforward domain management. GoDaddy is widely known, but you should compare the exact checkout and renewal experience.",
+    mistakes:
+      "The biggest registrar mistake is buying based only on first-year pricing. Another mistake is scattering domains across accounts until renewal dates and DNS ownership become confusing.",
+    launchAction:
+      "If domain management is the priority, pick the registrar you can operate confidently, buy one canonical domain, enable renewal reminders, and connect it only after verifying DNS instructions.",
+  }),
+  makeExpansionPost({
+    slug: "shopify-vs-wordpress",
+    title: "Shopify vs WordPress",
+    excerpt:
+      "A practical comparison of Shopify and WordPress for ecommerce, content sites, affiliate projects, and AI-assisted online businesses.",
+    category: "Comparisons",
+    tags: ["Shopify", "WordPress", "Ecommerce", "CMS"],
+    recommendedToolSlugs: ["shopify", "hostinger", "semrush"],
+    audience: "founders deciding between a hosted ecommerce system and a flexible content platform with plugins, themes, and more maintenance choices",
+    decision:
+      "choosing Shopify when checkout and store operations are central, and choosing WordPress when publishing, content control, and flexible site structure matter more",
+    setup:
+      "For a fair comparison, create one product page in Shopify and one content-rich landing page in WordPress, then compare editing speed, checkout setup, SEO controls, and maintenance.",
+    workflow:
+      "Use Shopify for selling products with less custom backend work. Use WordPress for content-heavy sites where editorial workflow, plugins, and hosting choices are important.",
+    toolNotes:
+      "Shopify simplifies commerce operations. WordPress can be extremely flexible, especially with managed hosting, but plugins and updates become part of the operating model.",
+    mistakes:
+      "The biggest mistake is choosing Shopify for a pure blog or WordPress for a store that needs reliable checkout quickly. Another mistake is installing too many plugins before launch.",
+    launchAction:
+      "If the project earns revenue through products, test Shopify first. If revenue comes from content, affiliate pages, or SEO, test WordPress on managed hosting and add commerce later only if needed.",
+  }),
+  makeExpansionPost({
+    slug: "vercel-vs-netlify",
+    title: "Vercel vs Netlify",
+    excerpt:
+      "A practical comparison of Vercel and Netlify for Next.js sites, static content projects, AI builder landing pages, and affiliate websites.",
+    category: "Comparisons",
+    tags: ["Vercel", "Netlify", "Deployment", "Next.js"],
+    recommendedToolSlugs: ["namecheap", "vultr", "semrush"],
+    audience: "builders deploying static sites, Next.js apps, landing pages, blogs, or lightweight product frontends",
+    decision:
+      "choosing the deployment platform that best supports your framework, build workflow, preview process, environment variables, redirects, and custom domain setup",
+    setup:
+      "For a fair comparison, deploy the same repository to both platforms, connect a preview branch, add an environment variable, configure a redirect, and attach a test domain.",
+    workflow:
+      "Use the platform that makes routine deploys boring. Keep DNS records documented separately and avoid relying on memory when connecting production domains.",
+    toolNotes:
+      "Vercel is especially common for Next.js. Netlify remains strong for static sites and many frontend workflows. The right choice should reflect the app, not online arguments.",
+    mistakes:
+      "The biggest mistake is switching platforms to fix unclear code or content. Deployment platforms cannot compensate for broken routes, missing metadata, or vague site structure.",
+    launchAction:
+      "If both platforms work, choose the one whose logs, previews, build settings, and custom-domain flow feel easiest to operate. Then publish the sitemap and monitor production pages.",
+  }),
+  makeExpansionPost({
+    slug: "claude-vs-codex",
+    title: "Claude vs Codex",
+    excerpt:
+      "A practical comparison of Claude and Codex for AI-assisted coding, product planning, debugging, writing, and shipping web projects.",
+    category: "Comparisons",
+    tags: ["Claude", "Codex", "AI Coding", "Developer Tools"],
+    recommendedToolSlugs: ["vultr", "namecheap", "semrush"],
+    audience: "builders deciding how to use AI assistants for planning, coding, debugging, content writing, and project maintenance",
+    decision:
+      "using Claude where conversation, analysis, and writing are central, and using Codex where repository-aware implementation and iterative code changes matter",
+    setup:
+      "For a fair comparison, give both tools the same small feature request, the same bug report, and the same article brief. Compare the output, not the brand promise.",
+    workflow:
+      "Use AI assistants as part of a controlled build loop: define the task, inspect the diff, run checks, review the page, and commit only when the result is understandable.",
+    toolNotes:
+      "Claude and Codex can both support builders, but they shine in different moments. The best workflow may use one for thinking and one for code execution.",
+    mistakes:
+      "The biggest mistake is letting either assistant add architecture you cannot maintain. Another mistake is judging quality by confidence instead of tested output.",
+    launchAction:
+      "If you use AI tools daily, create a checklist for every session: task, files changed, commands run, pages checked, and known risks. That checklist matters more than the specific model name.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-buy-a-domain-name",
+    title: "How to Buy a Domain Name",
+    excerpt:
+      "A beginner tutorial for choosing, buying, securing, and documenting a domain name for an AI project or affiliate website.",
+    category: "Tutorials",
+    tags: ["Domains", "Namecheap", "DNS", "Beginner"],
+    recommendedToolSlugs: ["namecheap", "hostinger", "semrush"],
+    audience: "beginners who need a real domain for a website, SaaS MVP, affiliate project, store, or personal AI tool",
+    decision:
+      "buying one clear domain, understanding renewal cost, enabling the right protections, and preparing it for hosting or deployment",
+    setup:
+      "Start with a shortlist of names, check availability, compare renewal pricing, confirm spelling, and avoid names that are too narrow or too close to existing brands.",
+    workflow:
+      "After purchase, record the registrar, renewal date, DNS settings, and intended hosting platform. Do not change DNS randomly until you know where the site will live.",
+    toolNotes:
+      "A domain is a small purchase that becomes a core asset. Treat it like infrastructure, not decoration. The best domain is clear, memorable, and easy to connect.",
+    mistakes:
+      "The biggest domain mistake is buying too many names instead of committing to one project. Another mistake is ignoring renewal pricing and privacy settings.",
+    launchAction:
+      "Buy the domain only after it passes a basic clarity check, then connect it to your deployment, verify root and www behavior, and document the final canonical URL.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-connect-a-domain-to-vercel",
+    title: "How to Connect a Domain to Vercel",
+    excerpt:
+      "A practical tutorial for connecting a custom domain to Vercel, updating DNS, checking redirects, and avoiding common setup mistakes.",
+    category: "Tutorials",
+    tags: ["Vercel", "Domains", "DNS", "Deployment"],
+    recommendedToolSlugs: ["namecheap", "vultr", "hostinger"],
+    audience: "builders who have deployed a site to Vercel and now want the production project to use a real custom domain",
+    decision:
+      "connecting the domain safely, choosing root and www behavior, and making sure sitemap, robots, and canonical URLs match the verified domain",
+    setup:
+      "Open the Vercel project, add the domain, copy the required DNS records, and update them at the registrar. Wait for verification instead of repeatedly changing records.",
+    workflow:
+      "Keep Vercel as the deployment target and the registrar as the DNS control panel unless you intentionally move nameservers. Record each value before editing.",
+    toolNotes:
+      "Domain connection is simple when the source of truth is clear. It becomes confusing when root, www, preview URLs, and old records all compete.",
+    mistakes:
+      "The biggest Vercel domain mistake is submitting a sitemap for one domain while canonical URLs point to another. Another mistake is leaving stale DNS records from older hosts.",
+    launchAction:
+      "After DNS verifies, open the production domain, inspect sitemap.xml and robots.txt, check canonical metadata, and submit the exact verified sitemap URL to Search Console.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-launch-a-website-in-one-day",
+    title: "How to Launch a Website in One Day",
+    excerpt:
+      "A realistic one-day website launch plan for indie hackers, AI builders, affiliate beginners, and solo founders.",
+    category: "Tutorials",
+    tags: ["Launch", "Indie Hackers", "Website", "Checklist"],
+    recommendedToolSlugs: ["namecheap", "hostinger", "semrush"],
+    audience: "builders who need to publish a useful first version quickly without building a database, login system, or custom backend",
+    decision:
+      "choosing the smallest publishable scope, writing enough content to be useful, connecting a domain, and verifying the site before sharing it",
+    setup:
+      "Start the day by choosing the site goal, pages, audience, and primary action. Use a simple stack and avoid any feature that does not help the first visitor.",
+    workflow:
+      "Spend the morning on structure, the afternoon on content and links, and the evening on deployment, DNS, sitemap, robots, and manual page checks.",
+    toolNotes:
+      "A one-day launch works when the site is focused. It fails when you try to build a complete product, newsletter, CMS, store, and analytics system at once.",
+    mistakes:
+      "The biggest one-day launch mistake is confusing speed with sloppiness. Fast sites still need clear copy, working links, metadata, and a basic QA checklist.",
+    launchAction:
+      "Publish the site, test it from a clean browser, share it with a small audience, collect feedback, and schedule the first content update before adding new features.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-start-an-affiliate-website-2026",
+    title: "How to Start an Affiliate Website",
+    excerpt:
+      "A 2026 tutorial for starting an affiliate website with tool pages, comparison content, disclosure, internal links, and a realistic publishing plan.",
+    category: "Tutorials",
+    tags: ["Affiliate", "SEO", "Content", "Monetization"],
+    recommendedToolSlugs: ["semrush", "namecheap", "shopify"],
+    audience: "beginners who want to build an affiliate content site around AI tools, hosting, domains, ecommerce, SaaS, or builder workflows",
+    decision:
+      "choosing a niche, building the first content map, creating tool pages, adding disclosure, and publishing articles that help real readers decide",
+    setup:
+      "Start by choosing one audience and one buying journey. Build a tools index, individual tool pages, an affiliate disclosure page, and five tutorials before chasing every program.",
+    workflow:
+      "Write reviews, comparisons, and tutorials as connected clusters. Each article should answer a real question and point readers toward a relevant next step.",
+    toolNotes:
+      "Affiliate websites need trust before aggressive monetization. Good recommendations explain fit, pricing caveats, alternatives, and who should avoid the tool.",
+    mistakes:
+      "The biggest affiliate mistake is publishing thin reviews that repeat vendor copy. Another mistake is hiding disclosures or choosing tools only because commissions are high.",
+    launchAction:
+      "Launch with a small cluster, submit the sitemap, track which pages get impressions, and improve the content that shows early demand before expanding into new niches.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-build-an-ai-saas-mvp",
+    title: "How to Build an AI SaaS MVP",
+    excerpt:
+      "A practical tutorial for defining, building, deploying, and validating a small AI SaaS MVP without overengineering the first version.",
+    category: "Tutorials",
+    tags: ["AI SaaS", "MVP", "Codex", "Startup"],
+    recommendedToolSlugs: ["vultr", "namecheap", "semrush"],
+    audience: "solo founders who want to turn an AI workflow into a small SaaS product that can be tested with real users",
+    decision:
+      "defining one paid workflow, building the smallest useful interface, deploying it reliably, and measuring whether users get value",
+    setup:
+      "Start with the job to be done, the input, the generated output, and the follow-up action. Do not begin with billing, teams, admin dashboards, or integrations.",
+    workflow:
+      "Use AI coding tools to build one slice at a time: landing page, core form, result state, persistence, error handling, and deployment checklist.",
+    toolNotes:
+      "An AI SaaS MVP needs clarity more than infrastructure. Add VPS workers, SEO tools, and domain polish only when they support validation or distribution.",
+    mistakes:
+      "The biggest AI SaaS mistake is building impressive screens around a weak workflow. Another mistake is letting AI generate features that look complete but do not actually work.",
+    launchAction:
+      "Ship the smallest real workflow, invite ten targeted users, watch them use it, and improve the part that blocks value before adding another feature.",
+  }),
+];
+
+export const posts: Post[] = [...initialPosts, ...contentExpansionPosts];
 
 export function getPostBySlug(slug: string) {
   return posts.find((post) => post.slug === slug);
