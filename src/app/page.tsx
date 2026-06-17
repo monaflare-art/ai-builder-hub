@@ -6,6 +6,39 @@ import { tools } from "@/data/tools";
 
 const steps = ["AI idea", "Codex build", "Domain", "Deploy", "SEO"];
 
+const recommendedStack = [
+  {
+    stage: "Domain",
+    name: "Namecheap",
+    href: "/tools/namecheap",
+    copy: "Buy a memorable domain and manage DNS before launch.",
+  },
+  {
+    stage: "Fast site",
+    name: "Hostinger",
+    href: "/tools/hostinger",
+    copy: "Launch a WordPress, portfolio, or small business site with less setup.",
+  },
+  {
+    stage: "Developer VPS",
+    name: "Vultr",
+    href: "/tools/vultr",
+    copy: "Run Docker, APIs, background workers, and self-hosted experiments.",
+  },
+  {
+    stage: "Commerce",
+    name: "Shopify",
+    href: "/tools/shopify",
+    copy: "Validate products, digital downloads, and simple ecommerce workflows.",
+  },
+  {
+    stage: "Growth",
+    name: "Semrush",
+    href: "/tools/semrush",
+    copy: "Research keywords, compare competitors, and plan SEO content.",
+  },
+];
+
 export default function Home() {
   return (
     <>
@@ -59,6 +92,45 @@ export default function Home() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-slate-200 bg-white">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="text-3xl font-semibold tracking-tight text-slate-950">
+                Start with recommended stack
+              </h2>
+              <p className="mt-3 max-w-2xl text-slate-600">
+                Pick the minimum set of tools for your current stage, then add more only when
+                the project has real traffic, users, or revenue signals.
+              </p>
+            </div>
+            <Link
+              href="/affiliate-disclosure"
+              className="text-sm font-semibold text-sky-700 hover:text-sky-900"
+            >
+              Affiliate disclosure
+            </Link>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+            {recommendedStack.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-0.5 hover:border-sky-200 hover:bg-white hover:shadow-md hover:shadow-slate-200/70"
+              >
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">
+                  {item.stage}
+                </p>
+                <h3 className="mt-3 text-lg font-semibold text-slate-950 group-hover:text-sky-700">
+                  {item.name}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{item.copy}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

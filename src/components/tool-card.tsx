@@ -1,6 +1,12 @@
 import Link from "next/link";
 import type { Tool } from "@/data/tools";
 
+const affiliateStatusLabel: Record<Tool["affiliateStatus"], string> = {
+  active: "Affiliate link active",
+  pending: "Affiliate-ready: pending",
+  unavailable: "Affiliate unavailable",
+};
+
 export function ToolCard({ tool }: { tool: Tool }) {
   return (
     <Link
@@ -22,6 +28,9 @@ export function ToolCard({ tool }: { tool: Tool }) {
       <div className="mt-5 space-y-2 text-sm">
         <p className="font-medium text-slate-950">Best for: {tool.bestFor}</p>
         <p className="text-slate-500">{tool.pricing}</p>
+        <span className="inline-flex rounded-full border border-sky-100 bg-sky-50 px-2.5 py-1 text-xs font-medium text-sky-700">
+          {affiliateStatusLabel[tool.affiliateStatus]}
+        </span>
       </div>
     </Link>
   );

@@ -239,7 +239,9 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             Recommended Tools
           </h2>
           <p className="mt-3 text-sm leading-6 text-slate-600">
-            根据这篇文章的主题，下面这些工具更适合作为下一步参考。
+            Start with the tools that match this guide before adding more software to your
+            stack. These recommendations link to internal tool pages first, so you can compare
+            pricing, use cases, and current affiliate status before visiting any official site.
           </p>
           <div className="mt-6 grid gap-4">
             {recommendedTools.map((tool) => (
@@ -254,12 +256,13 @@ export default async function BlogPostPage({ params }: PostPageProps) {
                     </p>
                     <h3 className="mt-2 text-lg font-semibold text-slate-950">{tool.name}</h3>
                     <p className="mt-2 text-sm leading-6 text-slate-600">{tool.bestFor}</p>
+                    <p className="mt-2 text-sm text-slate-500">{tool.pricing}</p>
                   </div>
                   <Link
                     href={`/tools/${tool.slug}`}
                     className="inline-flex h-10 shrink-0 items-center justify-center rounded-xl bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-slate-800"
                   >
-                    View tool
+                    View tool details
                   </Link>
                 </div>
               </div>
@@ -290,6 +293,31 @@ export default async function BlogPostPage({ params }: PostPageProps) {
                 <p className="mt-2 text-sm leading-6 text-slate-600">{relatedPost.excerpt}</p>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section className="mt-8 rounded-3xl border border-sky-100 bg-sky-50 p-6 sm:p-8">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
+            Ready to choose your next tool?
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-slate-600">
+            Compare the recommended stack, read the disclosure, and pick only the tools that fit
+            your project stage. Some links may become affiliate links when approved, but the guide
+            remains focused on practical fit.
+          </p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/tools"
+              className="inline-flex h-11 items-center justify-center rounded-xl bg-slate-950 px-5 text-sm font-semibold text-white transition hover:bg-slate-800"
+            >
+              Explore recommended tools
+            </Link>
+            <Link
+              href="/affiliate-disclosure"
+              className="inline-flex h-11 items-center justify-center rounded-xl border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-950 transition hover:border-slate-300 hover:bg-slate-50"
+            >
+              Read affiliate disclosure
+            </Link>
           </div>
         </section>
       </div>

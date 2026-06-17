@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PostCard } from "@/components/post-card";
 import { posts } from "@/data/posts";
 
@@ -10,8 +11,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
+type BlogPageProps = {
+  searchParams?: Promise<{ category?: string }>;
+};
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
   const categories = Array.from(new Set(posts.map((post) => post.category)));
+  const params = searchParams ? await searchParams : {};
+  const selectedCategory =
+    params.category && categories.includes(params.category) ? params.category : undefined;
+  const filteredPosts = selectedCategory
+    ? posts.filter((post) => post.category === selectedCategory)
+    : posts;
 
   return (
     <section className="bg-slate-50">
@@ -24,18 +35,37 @@ export default function BlogPage() {
             面向新手的实践教程：如何选工具、如何部署、如何让 AI 辅助开发的项目真正上线。
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
+            <Link
+              href="/blog"
+              className={`rounded-full border px-3 py-1.5 text-sm font-medium transition ${
+                selectedCategory
+                  ? "border-slate-200 bg-white text-slate-600 hover:border-sky-200 hover:text-sky-700"
+                  : "border-slate-950 bg-slate-950 text-white"
+              }`}
+            >
+              All
+            </Link>
             {categories.map((category) => (
-              <span
+              <Link
                 key={category}
-                className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600"
+                href={`/blog?category=${encodeURIComponent(category)}`}
+                className={`rounded-full border px-3 py-1.5 text-sm font-medium transition ${
+                  selectedCategory === category
+                    ? "border-slate-950 bg-slate-950 text-white"
+                    : "border-slate-200 bg-white text-slate-600 hover:border-sky-200 hover:text-sky-700"
+                }`}
               >
                 {category}
-              </span>
+              </Link>
             ))}
           </div>
+          <p className="mt-4 text-sm text-slate-500">
+            Showing {filteredPosts.length} {filteredPosts.length === 1 ? "article" : "articles"}
+            {selectedCategory ? ` in ${selectedCategory}` : ""}.
+          </p>
         </div>
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {posts.map((post) => (
+          {filteredPosts.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}
         </div>
