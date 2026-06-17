@@ -51,6 +51,9 @@ export const metadata: Metadata = {
   verification: {
     google: "6hJz0SerCcUIgbLqf3lc3y_wWXaurNZVrfYblU5fKwQ",
   },
+  other: {
+    "impact-site-verification": "87c7ab99-a363-4c0b-90bb-da1318e93aa9",
+  },
 };
 
 export default function RootLayout({
