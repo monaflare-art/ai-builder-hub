@@ -493,6 +493,10 @@ type ExpansionPostInput = {
   toolNotes: string;
   mistakes: string;
   launchAction: string;
+  faq?: {
+    question: string;
+    answer: string;
+  }[];
 };
 
 function toolLink(slug: string) {
@@ -573,6 +577,32 @@ function makeExpansionPost(input: ExpansionPostInput): Post {
             },
           ]
         : []),
+      {
+        heading: "FAQ",
+        body: (
+          input.faq ?? [
+            {
+              question: `Is ${input.title} a beginner-friendly topic?`,
+              answer:
+                "Yes, if you treat it as a small decision instead of a complete business plan. Start with one project, one audience, one domain, and one measurable next step. Beginners get better results when they test a narrow workflow before buying a large stack or publishing dozens of pages.",
+            },
+            {
+              question: "Which tools should I connect first?",
+              answer: `Start with the tools that affect launch readiness: ${toolLink(firstTool)} for the primary workflow, ${toolLink(secondTool)} for the surrounding setup, and ${toolLink(thirdTool)} when you need research or growth support. Do not add paid tools until the project has a clear job for them.`,
+            },
+            {
+              question: "How should this article fit into an SEO content plan?",
+              answer:
+                "Use it as one page inside a content cluster. Link it to a relevant tutorial, a comparison article, and one or two tool pages. Then review impressions, clicks, and reader questions before expanding the cluster. Internal links should help the reader move to the next decision, not merely increase link count.",
+            },
+            {
+              question: "What is the safest next action after reading?",
+              answer:
+                "Run a small test and document the result. For a tool review, create a trial project. For a comparison, perform the same task in both options. For a tutorial, follow the steps from a clean starting point. Evidence from one real test is more useful than collecting another list of opinions.",
+            },
+          ]
+        ).map((item) => `Q: ${item.question} A: ${item.answer}`),
+      },
     ],
   };
 }
@@ -1149,6 +1179,328 @@ const contentExpansionPosts: Post[] = [
       "The biggest AI business mistake is starting with automation before understanding the buyer. Another mistake is buying tools before publishing the first useful page.",
     launchAction:
       "Build a simple website, publish three useful pieces of content, add one conversion path, share it with a focused audience, and improve based on real replies.",
+  }),
+  makeExpansionPost({
+    slug: "best-ai-website-builders",
+    title: "Best AI Website Builders",
+    excerpt:
+      "A practical guide to choosing AI website builders for landing pages, content sites, ecommerce stores, portfolios, and startup MVPs.",
+    category: "Reviews",
+    tags: ["AI Website Builders", "Website", "No Code", "Startups"],
+    recommendedToolSlugs: ["hostinger", "shopify", "namecheap"],
+    audience:
+      "beginners, solopreneurs, and AI builders who want a professional website without spending weeks on design systems, hosting setup, or custom code",
+    decision:
+      "choosing whether an AI website builder should create the whole site, help draft copy, speed up a template workflow, or simply support the first launch before a custom rebuild",
+    setup:
+      "Start by defining the site type: landing page, affiliate content site, service website, ecommerce store, or SaaS marketing page. Then choose a builder based on the publishing path, not the novelty of the AI feature.",
+    workflow:
+      "Use AI to draft structure, copy, sections, product descriptions, and launch checklists. Then manually review navigation, mobile spacing, forms, metadata, affiliate disclosure, and every important link.",
+    toolNotes:
+      "AI website builders are helpful when they reduce blank-page friction. They become risky when they hide export limits, weak SEO controls, slow templates, or unclear ownership of content and domains.",
+    mistakes:
+      "The biggest AI website builder mistake is publishing generic AI copy without positioning. Another mistake is choosing a builder before deciding whether the site needs content depth, ecommerce, or custom product behavior.",
+    launchAction:
+      "Build one test homepage, connect a temporary or real domain, publish it, inspect the source metadata, and decide whether the builder can support the next ten pages without locking you into a poor structure.",
+  }),
+  makeExpansionPost({
+    slug: "best-ai-coding-tools",
+    title: "Best AI Coding Tools",
+    excerpt:
+      "A beginner-friendly comparison framework for AI coding tools, including coding agents, chat assistants, IDE copilots, and repository-aware workflows.",
+    category: "Reviews",
+    tags: ["AI Coding", "Codex", "Cursor", "Claude"],
+    recommendedToolSlugs: ["vultr", "namecheap", "semrush"],
+    audience:
+      "new developers and solo founders choosing AI coding tools for websites, SaaS MVPs, scripts, automation, and long-term project maintenance",
+    decision:
+      "choosing the AI coding workflow that helps you understand the repository, make small scoped changes, run checks, and ship without accepting code blindly",
+    setup:
+      "Start with one real repository and one small task. Ask each tool to explain the relevant files, propose an implementation, make or describe the change, and identify tests or manual checks.",
+    workflow:
+      "Use AI coding tools in a controlled loop: brief the task, inspect the plan, edit one slice, run lint and build, review the browser, and commit only when you understand the change.",
+    toolNotes:
+      "The best AI coding tool is not always the most talkative one. Repository awareness, diff quality, command execution, debugging discipline, and respect for existing patterns matter more than a polished answer.",
+    mistakes:
+      "The biggest AI coding mistake is asking for a full rebuild when a narrow patch would work. Another mistake is skipping review because the assistant sounds confident.",
+    launchAction:
+      "Create a repeatable AI coding checklist for your next feature: objective, files touched, commands run, pages checked, risks, and rollback note. Use that checklist across tools before choosing a daily workflow.",
+  }),
+  makeExpansionPost({
+    slug: "best-vps-for-developers",
+    title: "Best VPS for Developers",
+    excerpt:
+      "A developer-focused guide to choosing VPS hosting for APIs, Docker apps, background workers, databases, bots, and AI automation.",
+    category: "Reviews",
+    tags: ["VPS", "Developers", "Docker", "Infrastructure"],
+    recommendedToolSlugs: ["vultr", "namecheap", "hostinger"],
+    audience:
+      "developers who need server control for custom applications, background jobs, APIs, self-hosted tools, or AI workflows that do not fit a static hosting platform",
+    decision:
+      "choosing a VPS provider based on region, instance size, operating responsibility, backups, networking, documentation, and how easily a small app can be deployed and recovered",
+    setup:
+      "Define the workload first: API, queue worker, database, bot, scraper, cron job, or Docker service. Then estimate memory, storage, region, uptime expectations, and backup needs.",
+    workflow:
+      "Create a small Ubuntu server, add SSH keys, configure a firewall, install Docker, deploy a sample service, attach a subdomain, read logs, snapshot the server, and test recovery.",
+    toolNotes:
+      "A VPS gives developers flexibility, but it also transfers responsibility. You own updates, security, monitoring, backups, secrets, and incident response unless you add managed services.",
+    mistakes:
+      "The biggest VPS mistake is buying a server before knowing the workload. Another mistake is treating a production server like a temporary experiment after real users depend on it.",
+    launchAction:
+      "Run a one-week VPS trial with a tiny app. Document setup time, monthly cost, restart commands, backup process, and failure recovery before moving a serious project onto the server.",
+  }),
+  makeExpansionPost({
+    slug: "best-hosting-for-startups",
+    title: "Best Hosting for Startups",
+    excerpt:
+      "A startup hosting guide for choosing between Vercel, managed hosting, VPS, ecommerce platforms, and simple website builders.",
+    category: "Reviews",
+    tags: ["Hosting", "Startups", "Vercel", "VPS"],
+    recommendedToolSlugs: ["hostinger", "vultr", "namecheap"],
+    audience:
+      "startup founders who need to launch a marketing site, MVP, ecommerce store, or custom app without turning hosting into the main project",
+    decision:
+      "choosing hosting by product stage: static marketing page, content site, ecommerce store, custom SaaS MVP, background-worker app, or self-hosted internal tool",
+    setup:
+      "Map the product to hosting needs before comparing prices. List required routes, content editing needs, databases, workers, image storage, checkout, authentication, and deployment frequency.",
+    workflow:
+      "Start with the simplest host that supports the next milestone. Use managed deployment for frontend pages, ecommerce hosting for stores, and VPS only when custom processes or server control are truly required.",
+    toolNotes:
+      "Startup hosting should reduce launch risk. The best host is the one your team can deploy, monitor, explain, and recover without stopping customer discovery.",
+    mistakes:
+      "The biggest hosting mistake is choosing infrastructure to look serious instead of choosing it to serve users. Another mistake is spreading a small MVP across too many services.",
+    launchAction:
+      "Pick one hosting path, deploy the smallest public version, connect the domain, submit the sitemap, and postpone infrastructure upgrades until users create a real constraint.",
+  }),
+  makeExpansionPost({
+    slug: "cursor-vs-codex",
+    title: "Cursor vs Codex",
+    excerpt:
+      "A practical comparison of Cursor and Codex for repository-aware coding, debugging, refactoring, content sites, and SaaS MVP development.",
+    category: "Comparisons",
+    tags: ["Cursor", "Codex", "AI Coding", "Developer Tools"],
+    recommendedToolSlugs: ["vultr", "namecheap", "semrush"],
+    audience:
+      "builders deciding whether their AI coding workflow should live mainly inside an IDE or inside an agentic coding environment that can inspect, edit, run commands, and summarize work",
+    decision:
+      "choosing between an IDE-centered assistant for continuous coding flow and a task-oriented coding agent for scoped implementation, verification, and commits",
+    setup:
+      "Compare both tools on the same repository. Ask each to add metadata, fix a broken page, write a small component, explain a file, and run or recommend verification steps.",
+    workflow:
+      "Use Cursor when you want fast in-editor suggestions and local flow. Use Codex when you want a contained task loop: inspect, edit, run checks, explain the diff, and prepare a commit.",
+    toolNotes:
+      "Cursor and Codex can complement each other. The important question is not which one is universally better, but which one produces changes you can review and maintain.",
+    mistakes:
+      "The biggest comparison mistake is judging by demo speed instead of production reliability. Another mistake is letting either tool rewrite architecture without reading the diff.",
+    launchAction:
+      "Run a two-task bakeoff: one content change and one code change. Keep the tool that produces the clearer diff, the better verification habit, and the least cleanup work.",
+  }),
+  makeExpansionPost({
+    slug: "claude-vs-chatgpt-for-coding",
+    title: "Claude vs ChatGPT for Coding",
+    excerpt:
+      "A beginner-friendly comparison of Claude and ChatGPT for coding help, debugging, architecture discussion, documentation, and launch workflows.",
+    category: "Comparisons",
+    tags: ["Claude", "ChatGPT", "AI Coding", "Debugging"],
+    recommendedToolSlugs: ["vultr", "namecheap", "semrush"],
+    audience:
+      "new developers and solo founders comparing AI chat assistants for code explanation, debugging support, architecture review, content drafting, and product planning",
+    decision:
+      "choosing the assistant that fits your coding stage: understanding a problem, planning a change, reviewing code, writing docs, or turning a feature into a tested implementation",
+    setup:
+      "Prepare the same prompt for both tools with project context, file snippets, desired behavior, constraints, and the exact output format you want. Compare reasoning and usefulness, not personality.",
+    workflow:
+      "Use chat assistants for framing, explanation, alternatives, test planning, and review. Use repository-aware tools when the task requires direct edits, command output, or multi-file implementation.",
+    toolNotes:
+      "Claude and ChatGPT are strongest when you give them precise context. They are weaker when asked to guess hidden repository details, current dependency behavior, or production logs.",
+    mistakes:
+      "The biggest mistake is copying code from chat without adapting it to the project. Another mistake is asking broad architecture questions when the real problem is one broken route or type error.",
+    launchAction:
+      "Create a comparison worksheet with five tasks: explain, debug, refactor, document, and plan. Score each assistant on clarity, correctness, and how much manual verification remains.",
+  }),
+  makeExpansionPost({
+    slug: "hostinger-vs-namecheap",
+    title: "Hostinger vs Namecheap",
+    excerpt:
+      "A practical comparison of Hostinger and Namecheap for domains, DNS, hosting, WordPress, email, and beginner website launches.",
+    category: "Comparisons",
+    tags: ["Hostinger", "Namecheap", "Hosting", "Domains"],
+    recommendedToolSlugs: ["hostinger", "namecheap", "semrush"],
+    audience:
+      "beginners choosing where to buy a domain, manage DNS, host a small website, launch WordPress, or keep a simple business site online",
+    decision:
+      "deciding whether you need a registrar-first workflow, a hosting-first workflow, or a split setup where the domain stays with one provider and hosting lives elsewhere",
+    setup:
+      "List what you need today: domain registration, DNS control, email, WordPress hosting, website builder, SSL, backups, and support. Then avoid buying bundles you do not understand.",
+    workflow:
+      "Use Namecheap primarily when domain clarity and DNS control matter. Use Hostinger when beginner-friendly hosting and WordPress launch support matter more than raw infrastructure flexibility.",
+    toolNotes:
+      "Both tools can support a beginner website, but they solve different jobs. Separating domain registration from hosting can make future migration easier if you document DNS records.",
+    mistakes:
+      "The biggest mistake is treating registrar and hosting as the same decision. Another mistake is changing nameservers without understanding which platform should control DNS.",
+    launchAction:
+      "Choose one canonical domain, connect it to the chosen host, verify HTTPS, inspect robots and sitemap, and record renewal dates for both the domain and hosting plan.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-launch-a-saas-mvp",
+    title: "How to Launch a SaaS MVP",
+    excerpt:
+      "A step-by-step SaaS MVP launch guide for defining one workflow, building a small product, deploying it, and getting first users.",
+    category: "Tutorials",
+    tags: ["SaaS MVP", "Startup", "AI", "Launch"],
+    recommendedToolSlugs: ["vultr", "namecheap", "semrush"],
+    audience:
+      "solo founders who want to launch a SaaS MVP quickly without building a large platform, complex billing system, or unnecessary admin dashboard first",
+    decision:
+      "launching one paid or testable workflow with clear input, useful output, deployment reliability, a landing page, and a feedback path for early users",
+    setup:
+      "Define the user, painful task, before state, after state, and smallest result worth testing. Then write the landing page before building the app so the promise stays clear.",
+    workflow:
+      "Build the landing page, core workflow, empty state, error state, basic persistence, deployment checklist, and feedback channel. Invite a small group before adding more features.",
+    toolNotes:
+      "A SaaS MVP needs fewer features and more evidence. Hosting, domains, and SEO matter, but only after the workflow creates value for a specific user.",
+    mistakes:
+      "The biggest SaaS MVP mistake is building settings, teams, billing, and dashboards before proving the core workflow. Another mistake is launching without watching users try it.",
+    launchAction:
+      "Ship the smallest version, give it to ten specific users, record where they hesitate, and improve the workflow before writing another feature spec.",
+  }),
+  makeExpansionPost({
+    slug: "ai-tools-for-solopreneurs",
+    title: "AI Tools for Solopreneurs",
+    excerpt:
+      "A practical AI tool stack for solopreneurs who need to plan, build, publish, automate, market, and improve an online business.",
+    category: "Reviews",
+    tags: ["AI Tools", "Solopreneurs", "Automation", "Online Business"],
+    recommendedToolSlugs: ["semrush", "shopify", "namecheap"],
+    audience:
+      "solo founders and creators who need AI leverage across research, writing, coding, website building, customer support, ecommerce, SEO, and operations",
+    decision:
+      "choosing a small AI tool stack around one business model instead of collecting every new product that promises productivity",
+    setup:
+      "Start with the business workflow: idea research, offer creation, website launch, content publishing, customer replies, analytics review, and weekly improvements.",
+    workflow:
+      "Use AI for first drafts, outlines, code help, product descriptions, SOPs, and analysis. Keep final decisions human, especially pricing, positioning, claims, and recommendations.",
+    toolNotes:
+      "AI tools are most useful when attached to a repeated workflow. They are least useful when they create more assets than a solopreneur can review, publish, or maintain.",
+    mistakes:
+      "The biggest solopreneur mistake is using AI to produce volume before finding a clear audience. Another mistake is automating tasks that have not been validated manually.",
+    launchAction:
+      "Choose three AI-supported workflows for the next week: publish one page, improve one offer, and answer one customer question better. Ignore the rest until those become routine.",
+  }),
+  makeExpansionPost({
+    slug: "best-domain-registrars",
+    title: "Best Domain Registrars",
+    excerpt:
+      "A beginner guide to choosing domain registrars for startup names, AI projects, affiliate websites, ecommerce stores, and SaaS MVPs.",
+    category: "Reviews",
+    tags: ["Domains", "Registrars", "DNS", "Namecheap"],
+    recommendedToolSlugs: ["namecheap", "hostinger", "semrush"],
+    audience:
+      "beginners and builders buying a domain for the first time and trying to compare pricing, DNS controls, privacy, support, renewal costs, and future migration options",
+    decision:
+      "choosing a registrar that makes domain search, checkout, renewal management, DNS editing, account security, and transfer options easy to understand",
+    setup:
+      "Write a shortlist of domain names, check renewal pricing, confirm privacy options, avoid trademark conflicts, and decide whether the registrar should also host the website.",
+    workflow:
+      "Buy one clear domain, enable account security, document the registrar and renewal date, connect DNS only when the hosting target is known, and verify the final canonical URL.",
+    toolNotes:
+      "A domain registrar is a long-term control point. Clean DNS, clear billing, and easy transfer settings matter more than a small first-year discount.",
+    mistakes:
+      "The biggest registrar mistake is buying a domain because it is cheap today without checking renewal pricing. Another mistake is scattering related domains across accounts.",
+    launchAction:
+      "Pick one registrar, buy one domain, connect it to a test deployment, verify root and www behavior, and write the DNS records into a private launch note.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-get-first-website-visitors",
+    title: "How to Get First Website Visitors",
+    excerpt:
+      "A practical beginner guide to getting the first visitors through SEO basics, useful content, communities, internal links, and small distribution loops.",
+    category: "Tutorials",
+    tags: ["Traffic", "SEO", "Distribution", "Content"],
+    recommendedToolSlugs: ["semrush", "namecheap", "shopify"],
+    audience:
+      "new website owners who have launched a site and need real visitors without relying on paid ads, viral posts, or vague growth advice",
+    decision:
+      "building a first-traffic plan around search intent, helpful pages, internal links, community answers, and one weekly content improvement habit",
+    setup:
+      "Check that the site is indexable, has a correct sitemap, uses the final canonical domain, explains its purpose clearly, and has at least three pages worth sharing.",
+    workflow:
+      "Publish one focused guide, link it to related tool and tutorial pages, answer real questions in one community, and update the page based on what people ask next.",
+    toolNotes:
+      "Traffic tools help after the site has useful pages. Before that, the best growth work is clearer titles, better introductions, internal links, and specific answers.",
+    mistakes:
+      "The biggest first-traffic mistake is trying every channel for two days. Another mistake is publishing generic AI content that does not solve a narrow problem.",
+    launchAction:
+      "Choose one content cluster, publish three related pages, share one guide with a relevant audience, and improve the page that gets the first impressions.",
+  }),
+  makeExpansionPost({
+    slug: "ai-workflow-automation-guide",
+    title: "AI Workflow Automation Guide",
+    excerpt:
+      "A practical guide to automating AI workflows for content, customer support, data cleanup, lead routing, internal operations, and small online businesses.",
+    category: "Tutorials",
+    tags: ["AI Automation", "Workflow", "Operations", "Solopreneurs"],
+    recommendedToolSlugs: ["vultr", "semrush", "namecheap"],
+    audience:
+      "builders who want to automate repeated tasks with AI but need a safe process for deciding what to automate, what to keep manual, and how to monitor outputs",
+    decision:
+      "choosing one repeated workflow, defining inputs and outputs, adding human review where risk exists, and deploying automation only after the manual process is understood",
+    setup:
+      "Write the manual workflow first. Identify the trigger, input data, AI task, output format, approval point, storage location, and failure recovery path.",
+    workflow:
+      "Start with a semi-automated checklist, then move stable steps into scripts, no-code automations, scheduled jobs, or server workers. Monitor the result before scaling volume.",
+    toolNotes:
+      "AI automation is useful when it saves repeated judgment or formatting work. It is risky when it sends unreviewed messages, changes production data, or hides errors.",
+    mistakes:
+      "The biggest automation mistake is automating an unclear process. Another mistake is treating AI output as truth instead of a draft that needs validation.",
+    launchAction:
+      "Automate one low-risk workflow this week, log every output, review failures, and write the operating rule before connecting the automation to customers or revenue.",
+  }),
+  makeExpansionPost({
+    slug: "how-to-build-a-startup-with-ai",
+    title: "How to Build a Startup with AI",
+    excerpt:
+      "A practical startup guide for using AI to research markets, build MVPs, publish content, automate workflows, and validate customer demand.",
+    category: "Tutorials",
+    tags: ["AI Startup", "MVP", "Solopreneur", "Launch"],
+    recommendedToolSlugs: ["semrush", "vultr", "namecheap"],
+    audience:
+      "founders who want to use AI as leverage for research, product building, content, operations, and customer learning without mistaking speed for validation",
+    decision:
+      "building a startup around a real customer problem, a small MVP, a public website, a learning loop, and a tool stack that supports traction instead of distracting from it",
+    setup:
+      "Start with the customer problem, not the AI model. Write who has the problem, how they solve it today, why the current workflow is painful, and what result would justify switching.",
+    workflow:
+      "Use AI to summarize research, draft interviews, prototype pages, generate code, write support docs, and analyze feedback. Keep customer conversations and final product decisions grounded in reality.",
+    toolNotes:
+      "AI can compress research and production time, but it cannot replace distribution, trust, pricing, or a clear reason to buy. Tools should support the startup loop.",
+    mistakes:
+      "The biggest AI startup mistake is building a product because AI makes it possible. Another mistake is publishing AI-generated messaging that does not sound like the customer.",
+    launchAction:
+      "Interview five users, build one workflow, publish one landing page, collect one conversion signal, and use AI to speed up iteration after evidence appears.",
+  }),
+  makeExpansionPost({
+    slug: "ai-business-ideas-for-beginners",
+    title: "AI Business Ideas for Beginners",
+    excerpt:
+      "A beginner-friendly guide to AI business ideas that can start small, validate demand, publish quickly, and grow into services, content sites, tools, or SaaS products.",
+    category: "Tutorials",
+    tags: ["AI Business Ideas", "Beginners", "Online Business", "Affiliate"],
+    recommendedToolSlugs: ["shopify", "semrush", "namecheap"],
+    audience:
+      "beginners who want AI business ideas but need a practical filter for choosing ideas that can be launched, tested, and improved without a large team",
+    decision:
+      "choosing an AI business idea based on audience pain, launch difficulty, distribution path, trust requirements, and the smallest paid or useful version",
+    setup:
+      "Make a list of ideas across services, templates, content sites, ecommerce, internal tools, and SaaS. Score each idea by buyer urgency, proof required, and how fast you can publish a first version.",
+    workflow:
+      "Use AI to research questions, draft offers, generate landing pages, outline tutorials, create product descriptions, and build simple prototypes. Validate with humans before scaling.",
+    toolNotes:
+      "The best beginner AI business ideas are not the flashiest. They solve a repeated problem, have a clear buyer, and can be explained with a simple website.",
+    mistakes:
+      "The biggest idea mistake is choosing something broad like AI for everyone. Another mistake is buying tools and domains before talking to the audience.",
+    launchAction:
+      "Pick one idea, create a one-page offer, publish it on a real domain, share it with twenty relevant people, and improve or abandon it based on responses.",
   }),
 ];
 
