@@ -2,7 +2,7 @@
 
 AI Builder Hub 是一个 Next.js + Tailwind 导航与教程站，面向想用 AI 工具、Codex、VPS、域名和建站平台做线上项目的新手。
 
-当前 canonical 域名：`https://ai-builder-hub-theta.vercel.app`
+当前 canonical 域名：`https://theaibuilderhub.com`
 
 ## 功能
 

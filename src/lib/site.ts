@@ -1,4 +1,4 @@
-export const siteUrl = "https://ai-builder-hub-theta.vercel.app";
+export const siteUrl = "https://theaibuilderhub.com";
 
 export const siteConfig = {
   name: "AI Builder Hub",
