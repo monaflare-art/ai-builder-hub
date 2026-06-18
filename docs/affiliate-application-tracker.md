@@ -36,7 +36,7 @@ Current execution priority:
 | Hostinger | Hostinger Affiliate Program | Direct | https://www.hostinger.com/affiliates | Pending | Owner input required |  |  |  | Yes | Yes |
 | SiteGround | SiteGround Affiliate Program | Direct | https://world.siteground.com/affiliate/signup.htm | Pending | 2026-06-18 |  | Application submitted; SiteGround says review response should arrive within two business days |  | No | Yes |
 | Bluehost | Bluehost Affiliate Program | Impact | https://www.bluehost.com/affiliates | Deferred |  |  | Impact account repeatedly redirects to rejected Namecheap application state; retry later with stronger account or new publisher account | TBD | No | Yes |
-| DreamHost | DreamHost Affiliate Program | TUNE | https://www.dreamhost.com/affiliates/ | Not applied |  |  |  |  | No | No |
+| DreamHost | DreamHost Affiliate Program | TUNE | https://partners.dreamhost.com/ | Pending | 2026-06-18 |  | Application submitted; DreamHost says account manager will contact owner after review |  | No | No |
 | A2 Hosting | Hosting.com / A2 Hosting Affiliate Program | Post Affiliate Pro | https://affiliates.hosting.com/ | Not applied |  |  |  |  | No | No |
 | Namecheap | Namecheap Affiliate Program | Impact / CJ | https://www.namecheap.com/affiliates/ | Rejected | Owner input required |  | Owner reported rejection on 2026-06-17 | TBD | Yes | Yes |
 | Porkbun | Porkbun Affiliate Program | Discontinued | https://porkbun.com/affiliate | Unavailable |  |  | Program discontinued |  | No | Yes |
