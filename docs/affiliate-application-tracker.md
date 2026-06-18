@@ -24,7 +24,7 @@ Current execution priority:
 | Tool | Affiliate Program | Network | Application URL | Status | Date Applied | Date Approved | Rejection Notes | Reapply Date | Money Page Exists | Comparison Page Exists |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Vultr | Vultr Referral / Partner Program | Direct | https://discover.vultr.com/partner | Blocked |  |  | Gmail rejected as business email; requires domain/business email | After domain email is created | Yes | Yes |
-| DigitalOcean | DigitalOcean Affiliate Program | Awin | https://ui.awin.com/merchant-profile/123996 | Ready to apply |  |  | Old CJ path appears outdated/inactive; official DigitalOcean affiliate page now links to Awin |  | No | Yes |
+| DigitalOcean | DigitalOcean Affiliate Program | Awin | https://ui.awin.com/merchant-profile/123996 | Pending | 2026-06-18 |  | Application received in Awin; old CJ path appears outdated/inactive; official DigitalOcean affiliate page now links to Awin |  | No | Yes |
 | Linode / Akamai Cloud | Akamai Cloud Referral Program | Direct account credit | https://www.akamai.com/cloud/referral-program | Not applied |  |  |  |  | No | No |
 | LightNode | Unknown | Unknown | Unknown | Unknown |  |  |  |  | No | No |
 | DMIT | Unknown | Unknown | Unknown | Unknown |  |  |  |  | No | No |
@@ -34,7 +34,7 @@ Current execution priority:
 | HostDare | Unknown | Unknown | Unknown | Unknown |  |  |  |  | No | No |
 | DogYun | Unknown | Unknown | Unknown | Unknown |  |  |  |  | No | No |
 | Hostinger | Hostinger Affiliate Program | Direct | https://www.hostinger.com/affiliates | Pending | Owner input required |  |  |  | Yes | Yes |
-| SiteGround | SiteGround Affiliate Program | Direct | https://world.siteground.com/affiliate/signup.htm | Ready to apply |  |  | Direct signup confirmed; requires owner-entered address, password, tax, and PayPal fields |  | No | Yes |
+| SiteGround | SiteGround Affiliate Program | Direct | https://world.siteground.com/affiliate/signup.htm | Pending | 2026-06-18 |  | Application submitted; SiteGround says review response should arrive within two business days |  | No | Yes |
 | Bluehost | Bluehost Affiliate Program | Impact | https://www.bluehost.com/affiliates | Deferred |  |  | Impact account repeatedly redirects to rejected Namecheap application state; retry later with stronger account or new publisher account | TBD | No | Yes |
 | DreamHost | DreamHost Affiliate Program | TUNE | https://www.dreamhost.com/affiliates/ | Not applied |  |  |  |  | No | No |
 | A2 Hosting | Hosting.com / A2 Hosting Affiliate Program | Post Affiliate Pro | https://affiliates.hosting.com/ | Not applied |  |  |  |  | No | No |
