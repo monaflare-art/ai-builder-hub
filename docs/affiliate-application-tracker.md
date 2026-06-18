@@ -29,7 +29,7 @@ Status values:
 | Bluehost | Bluehost Affiliate Program | Direct / Impact tracking | https://www.bluehost.com/affiliates | Ready to apply |  |  |  |  | No | Yes |
 | DreamHost | DreamHost Affiliate Program | TUNE | https://www.dreamhost.com/affiliates/ | Not applied |  |  |  |  | No | No |
 | A2 Hosting | Hosting.com / A2 Hosting Affiliate Program | Post Affiliate Pro | https://affiliates.hosting.com/ | Not applied |  |  |  |  | No | No |
-| Namecheap | Namecheap Affiliate Program | Impact / CJ | https://www.namecheap.com/affiliates/ | Pending | Owner input required |  |  |  | Yes | Yes |
+| Namecheap | Namecheap Affiliate Program | Impact / CJ | https://www.namecheap.com/affiliates/ | Rejected | Owner input required |  | Owner reported rejection on 2026-06-17 | TBD | Yes | Yes |
 | Porkbun | Porkbun Affiliate Program | Discontinued | https://porkbun.com/affiliate | Unavailable |  |  | Program discontinued |  | No | Yes |
 | Dynadot | Dynadot Affiliate Programs | Direct / CJ | https://www.dynadot.com/affiliate | Not applied |  |  |  |  | No | No |
 | Spaceship | Spaceship Affiliate Program | Direct | https://www.spaceship.com/affiliate-program/ | Not applied |  |  |  |  | No | No |
