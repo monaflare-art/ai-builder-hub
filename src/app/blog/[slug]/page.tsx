@@ -210,7 +210,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
     },
     author: {
       "@type": "Organization",
-      name: siteConfig.name,
+      name: "AI Builder Hub Editorial",
       url: siteConfig.url,
     },
     publisher: {
@@ -274,9 +274,13 @@ export default async function BlogPostPage({ params }: PostPageProps) {
           <div className="flex flex-wrap items-center gap-2 text-sm font-medium text-slate-500">
             <span>{post.category}</span>
             <span aria-hidden="true">/</span>
-            <time dateTime={post.date}>{post.date}</time>
+            <span>Author: AI Builder Hub Editorial</span>
             <span aria-hidden="true">/</span>
             <span>{post.readingTime}</span>
+            <span aria-hidden="true">/</span>
+            <span>
+              Last updated: <time dateTime={post.date}>{post.date}</time>
+            </span>
           </div>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
             {post.title}

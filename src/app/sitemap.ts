@@ -5,7 +5,17 @@ import { siteConfig } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const routes = ["", "/tools", "/blog", "/affiliate-disclosure"].map((route) => ({
+  const routes = [
+    "",
+    "/tools",
+    "/blog",
+    "/about",
+    "/contact",
+    "/privacy-policy",
+    "/terms",
+    "/affiliate-disclosure",
+    "/editorial-policy",
+  ].map((route) => ({
     url: `${siteConfig.url}${route}`,
     lastModified: now,
   }));
