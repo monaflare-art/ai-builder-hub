@@ -11,11 +11,20 @@ Status values:
 - `Rejected`
 - `Unavailable`
 - `Unknown`
+- `Blocked`
+- `Deferred`
+
+Current execution priority:
+
+1. SiteGround: direct independent application. Continue first; owner must manually enter address, password, tax, and payout fields.
+2. DigitalOcean: official affiliate program now points to Awin. Re-confirmed and moved away from the old CJ signup link.
+3. Other independent/direct programs: DreamHost, hosting.com/A2 Hosting, Hostinger, RackNerd, Dynadot, Spaceship, LowFruits.
+4. Impact programs are deferred until traffic grows, content expands further, or a fresh publisher account is created.
 
 | Tool | Affiliate Program | Network | Application URL | Status | Date Applied | Date Approved | Rejection Notes | Reapply Date | Money Page Exists | Comparison Page Exists |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Vultr | Vultr Referral / Partner Program | Direct | https://discover.vultr.com/partner | Pending | Owner input required |  |  |  | Yes | Yes |
-| DigitalOcean | DigitalOcean Affiliate Program | CJ | https://signup.cj.com/member/signup/publisher/?cid=7226122 | Ready to apply |  |  |  |  | No | Yes |
+| Vultr | Vultr Referral / Partner Program | Direct | https://discover.vultr.com/partner | Blocked |  |  | Gmail rejected as business email; requires domain/business email | After domain email is created | Yes | Yes |
+| DigitalOcean | DigitalOcean Affiliate Program | Awin | https://ui.awin.com/merchant-profile/123996 | Ready to apply |  |  | Old CJ path appears outdated/inactive; official DigitalOcean affiliate page now links to Awin |  | No | Yes |
 | Linode / Akamai Cloud | Akamai Cloud Referral Program | Direct account credit | https://www.akamai.com/cloud/referral-program | Not applied |  |  |  |  | No | No |
 | LightNode | Unknown | Unknown | Unknown | Unknown |  |  |  |  | No | No |
 | DMIT | Unknown | Unknown | Unknown | Unknown |  |  |  |  | No | No |
@@ -25,8 +34,8 @@ Status values:
 | HostDare | Unknown | Unknown | Unknown | Unknown |  |  |  |  | No | No |
 | DogYun | Unknown | Unknown | Unknown | Unknown |  |  |  |  | No | No |
 | Hostinger | Hostinger Affiliate Program | Direct | https://www.hostinger.com/affiliates | Pending | Owner input required |  |  |  | Yes | Yes |
-| SiteGround | SiteGround Affiliate Program | Direct | https://www.siteground.com/affiliates | Ready to apply |  |  |  |  | No | Yes |
-| Bluehost | Bluehost Affiliate Program | Direct / Impact tracking | https://www.bluehost.com/affiliates | Ready to apply |  |  |  |  | No | Yes |
+| SiteGround | SiteGround Affiliate Program | Direct | https://world.siteground.com/affiliate/signup.htm | Ready to apply |  |  | Direct signup confirmed; requires owner-entered address, password, tax, and PayPal fields |  | No | Yes |
+| Bluehost | Bluehost Affiliate Program | Impact | https://www.bluehost.com/affiliates | Deferred |  |  | Impact account repeatedly redirects to rejected Namecheap application state; retry later with stronger account or new publisher account | TBD | No | Yes |
 | DreamHost | DreamHost Affiliate Program | TUNE | https://www.dreamhost.com/affiliates/ | Not applied |  |  |  |  | No | No |
 | A2 Hosting | Hosting.com / A2 Hosting Affiliate Program | Post Affiliate Pro | https://affiliates.hosting.com/ | Not applied |  |  |  |  | No | No |
 | Namecheap | Namecheap Affiliate Program | Impact / CJ | https://www.namecheap.com/affiliates/ | Rejected | Owner input required |  | Owner reported rejection on 2026-06-17 | TBD | Yes | Yes |
@@ -39,9 +48,9 @@ Status values:
 | Claude | Claude Partner Network | Partner portal | https://partnerportal.anthropic.com/s/partner-registration | Not applied |  |  | Not a normal affiliate program |  | No | No |
 | Windsurf | Windsurf Referral / Partner | Direct | https://devin.ai/solutions/partners | Not applied |  |  | Cash affiliate unknown |  | No | No |
 | Ahrefs | No current public affiliate confirmed | N/A | Unknown | Unavailable |  |  | Old program reportedly discontinued |  | No | Yes |
-| Semrush | Semrush Affiliate Program | Impact | https://www.semrush.com/lp/affiliate-program/en/ | Pending | Owner input required |  |  |  | Yes | Yes |
+| Semrush | Semrush Affiliate Program | Impact | https://www.semrush.com/lp/affiliate-program/en/ | Deferred |  |  | Impact account state currently blocks clean application flow; retry later | TBD | Yes | Yes |
 | LowFruits | LowFruits Affiliate Program | Direct | https://lowfruits.io/affiliate/ | Not applied |  |  |  |  | No | No |
-| Shopify | Shopify Affiliate Program | Direct | https://www.shopify.com/affiliates | Pending | Owner input required |  |  |  | Yes | Yes |
+| Shopify | Shopify Affiliate Program | Impact / Shopify Affiliate Program | https://www.shopify.com/affiliates | Deferred |  |  | Uses Impact application flow; retry later after traffic/content growth or fresh publisher account | TBD | Yes | Yes |
 | 腾讯云 | 腾讯云 CPS 推广 | Direct | https://cloud.tencent.com/act/partner/cps | Not applied |  |  |  |  | No | No |
 | 阿里云 | 云大使推广计划 | Direct | https://dashi.aliyun.com/ | Not applied |  |  |  |  | No | No |
 | 华为云 | 奖励推广计划 | Paused | https://activity.huaweicloud.com/cps/index.html | Unavailable |  |  | Program paused for new domestic accounts |  | No | No |
