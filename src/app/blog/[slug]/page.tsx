@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { EvidenceSection } from "@/components/evidence-section";
 import { getPostBySlug, posts } from "@/data/posts";
 import { tools } from "@/data/tools";
 import { siteConfig } from "@/lib/site";
@@ -305,6 +306,8 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             );
           })}
         </div>
+
+        <EvidenceSection evidence={post.evidence} />
 
         <section className="mt-14 rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
           <h2 className="text-2xl font-semibold tracking-tight text-slate-950">

@@ -5,6 +5,47 @@ export type BlogImage = {
   afterSection?: number;
 };
 
+export type EvidenceStatus = "pending" | "partial" | "verified" | "needs-refresh";
+
+export type EvidencePriority = "P0" | "P1" | "P2";
+
+export type EvidenceScreenshotType =
+  | "dashboard"
+  | "pricing"
+  | "billing"
+  | "deployment"
+  | "setup"
+  | "analytics";
+
+export type EvidenceScreenshot = {
+  type: EvidenceScreenshotType;
+  label: string;
+  alt: string;
+  caption: string;
+  priority: EvidencePriority;
+  status: EvidenceStatus;
+  src?: string;
+  verificationDate?: string;
+};
+
+export type VerificationMetadata = {
+  evidenceStatus: EvidenceStatus;
+  lastReviewed?: string;
+  lastVerified?: string;
+  pricingChecked?: string;
+  screenshotUpdated?: string;
+};
+
+export type PostEvidence = {
+  builderExperience: string[];
+  performanceNotes: string[];
+  deploymentNotes: string[];
+  pricingNotes: string[];
+  verificationMetadata: VerificationMetadata;
+  screenshots: EvidenceScreenshot[];
+  affiliateDisclosure: string;
+};
+
 type PostContent = {
   slug: string;
   title: string;
@@ -18,6 +59,7 @@ type PostContent = {
     heading: string;
     body: string[];
   }[];
+  evidence?: PostEvidence;
 };
 
 export type Post = PostContent & {
@@ -1699,6 +1741,24 @@ type MoneyPageConfig = {
 type MoneyPageRewrite = {
   recommendedToolSlugs: string[];
   sections: PostContent["sections"];
+  evidence?: PostEvidence;
+};
+
+type EvidenceProvider = "hostinger" | "namecheap" | "vultr" | "semrush";
+
+type EvidenceConfig = {
+  provider: EvidenceProvider;
+  lastReviewed: string;
+  builderExperience: string[];
+  performanceNotes: string[];
+  deploymentNotes: string[];
+  pricingNotes: string[];
+  screenshots: {
+    type: EvidenceScreenshotType;
+    label: string;
+    caption: string;
+    priority: EvidencePriority;
+  }[];
 };
 
 function linkedTool(name: string, slug: string) {
@@ -1708,6 +1768,32 @@ function linkedTool(name: string, slug: string) {
 function linkedArticle(title: string, slug: string) {
   return `[${title}](/blog/${slug})`;
 }
+
+function evidenceScreenshot(config: EvidenceConfig["screenshots"][number]): EvidenceScreenshot {
+  return {
+    ...config,
+    alt: `${config.label} evidence screenshot pending`,
+    status: "pending",
+  };
+}
+
+function createPostEvidence(config: EvidenceConfig): PostEvidence {
+  return {
+    builderExperience: config.builderExperience,
+    performanceNotes: config.performanceNotes,
+    deploymentNotes: config.deploymentNotes,
+    pricingNotes: config.pricingNotes,
+    affiliateDisclosure: evidenceDisclosure,
+    verificationMetadata: {
+      evidenceStatus: "pending",
+      lastReviewed: config.lastReviewed,
+    },
+    screenshots: config.screenshots.map(evidenceScreenshot),
+  };
+}
+
+const evidenceDisclosure =
+  "Some links may be affiliate links. We may earn a commission at no extra cost to you. Evidence notes are separated from recommendations so future screenshots, pricing checks, and hands-on observations can be updated without changing the article thesis.";
 
 function moneyPageSections(config: MoneyPageConfig): PostContent["sections"] {
   const alternatives = config.alternatives
@@ -1893,6 +1979,65 @@ const moneyPageRewrites: Record<string, MoneyPageRewrite> = {
       ctaNote:
         "Readers who match the managed-hosting profile should review Hostinger details, then compare alternatives before buying a long-term plan.",
     }),
+    evidence: createPostEvidence({
+      provider: "hostinger",
+      lastReviewed: "2026-06-18",
+      builderExperience: [
+        "Account setup experience pending real Hostinger onboarding test.",
+        "Dashboard usability pending current Hostinger control-panel screenshot review.",
+        "WordPress or starter-site setup workflow pending hands-on capture.",
+      ],
+      performanceNotes: [
+        "Page load observations pending a representative test site.",
+        "Uptime or monitoring observations pending a real hosted project.",
+      ],
+      deploymentNotes: [
+        "Domain connection, SSL activation, and WordPress installation notes pending.",
+        "Backup and restore workflow notes pending dashboard verification.",
+      ],
+      pricingNotes: [
+        "Current public pricing pending dated screenshot.",
+        "Renewal pricing, add-ons, and backup limits pending evidence capture.",
+      ],
+      screenshots: [
+        {
+          type: "dashboard",
+          label: "Hostinger dashboard",
+          caption: "Pending screenshot for Hostinger dashboard and site management workflow.",
+          priority: "P0",
+        },
+        {
+          type: "pricing",
+          label: "Hostinger pricing",
+          caption: "Pending screenshot for current Hostinger pricing and renewal caveats.",
+          priority: "P0",
+        },
+        {
+          type: "billing",
+          label: "Hostinger billing",
+          caption: "Pending screenshot for checkout, billing, or renewal details with private data removed.",
+          priority: "P1",
+        },
+        {
+          type: "deployment",
+          label: "Hostinger deployment",
+          caption: "Pending screenshot for site launch, WordPress installation, domain, or SSL workflow.",
+          priority: "P0",
+        },
+        {
+          type: "setup",
+          label: "Hostinger setup",
+          caption: "Pending screenshot for onboarding or first-site setup flow.",
+          priority: "P0",
+        },
+        {
+          type: "analytics",
+          label: "Hostinger analytics",
+          caption: "Pending screenshot for site stats or hosting dashboard analytics if relevant.",
+          priority: "P2",
+        },
+      ],
+    }),
   },
   "namecheap-review-2026": {
     recommendedToolSlugs: ["namecheap", "porkbun", "dynadot", "cloudflare-registrar"],
@@ -1972,6 +2117,65 @@ const moneyPageRewrites: Record<string, MoneyPageRewrite> = {
         "Namecheap should be framed as a practical registrar option for early builder projects, with the strongest recommendation reserved until renewal and DNS screenshots are added.",
       ctaNote:
         "Readers ready to buy a domain should review the Namecheap tool page, then compare registrar alternatives and document renewal details before checkout.",
+    }),
+    evidence: createPostEvidence({
+      provider: "namecheap",
+      lastReviewed: "2026-06-18",
+      builderExperience: [
+        "Domain search and checkout experience pending real Namecheap workflow capture.",
+        "DNS dashboard usability pending current control-panel review.",
+        "Renewal and privacy setting experience pending evidence capture.",
+      ],
+      performanceNotes: [
+        "DNS propagation observations pending a real domain connection test.",
+        "Registrar uptime is not evaluated in this pass; only workflow evidence is planned.",
+      ],
+      deploymentNotes: [
+        "DNS record setup for Vercel, hosting, or VPS pending.",
+        "Nameserver update and domain transfer notes pending.",
+      ],
+      pricingNotes: [
+        "Current first-year and renewal pricing pending dated screenshot.",
+        "Checkout add-ons and WHOIS/privacy details pending evidence capture.",
+      ],
+      screenshots: [
+        {
+          type: "dashboard",
+          label: "Namecheap dashboard",
+          caption: "Pending screenshot for Namecheap domain dashboard and management workflow.",
+          priority: "P1",
+        },
+        {
+          type: "pricing",
+          label: "Namecheap pricing",
+          caption: "Pending screenshot for domain search, TLD pricing, and renewal visibility.",
+          priority: "P0",
+        },
+        {
+          type: "billing",
+          label: "Namecheap billing",
+          caption: "Pending screenshot for checkout, add-ons, billing, or renewal settings with private data removed.",
+          priority: "P1",
+        },
+        {
+          type: "deployment",
+          label: "Namecheap DNS deployment",
+          caption: "Pending screenshot for DNS record setup, nameservers, or Vercel connection.",
+          priority: "P0",
+        },
+        {
+          type: "setup",
+          label: "Namecheap setup",
+          caption: "Pending screenshot for domain search, registration, or first setup workflow.",
+          priority: "P0",
+        },
+        {
+          type: "analytics",
+          label: "Namecheap analytics",
+          caption: "Pending screenshot for any relevant domain analytics screen if available.",
+          priority: "P2",
+        },
+      ],
     }),
   },
   "vultr-review-2026": {
@@ -2053,6 +2257,65 @@ const moneyPageRewrites: Record<string, MoneyPageRewrite> = {
       ctaNote:
         "Readers who need VPS control should review the Vultr tool page, compare DigitalOcean and Linode, then run a small deployment test before moving production workloads.",
     }),
+    evidence: createPostEvidence({
+      provider: "vultr",
+      lastReviewed: "2026-06-18",
+      builderExperience: [
+        "Account setup and instance creation experience pending hands-on Vultr test.",
+        "Dashboard usability pending current cloud control-panel screenshot review.",
+        "SSH, firewall, snapshot, and restore workflow notes pending.",
+      ],
+      performanceNotes: [
+        "Deployment speed pending a representative VPS test workload.",
+        "Monitoring, uptime, and resource usage observations pending real instance evidence.",
+      ],
+      deploymentNotes: [
+        "Server creation, SSH key, firewall, Docker, app deployment, and domain connection notes pending.",
+        "Backup, snapshot, and restore workflow notes pending.",
+      ],
+      pricingNotes: [
+        "Current instance pricing pending dated screenshot.",
+        "Bandwidth, snapshot, backup, region, and add-on cost notes pending evidence capture.",
+      ],
+      screenshots: [
+        {
+          type: "dashboard",
+          label: "Vultr dashboard",
+          caption: "Pending screenshot for Vultr dashboard, instance list, and server management workflow.",
+          priority: "P0",
+        },
+        {
+          type: "pricing",
+          label: "Vultr pricing",
+          caption: "Pending screenshot for current Vultr compute pricing and plan differences.",
+          priority: "P0",
+        },
+        {
+          type: "billing",
+          label: "Vultr billing",
+          caption: "Pending screenshot for usage, billing, or account credit details with private data removed.",
+          priority: "P1",
+        },
+        {
+          type: "deployment",
+          label: "Vultr deployment",
+          caption: "Pending screenshot for SSH, Docker, app deployment, domain, or SSL workflow.",
+          priority: "P0",
+        },
+        {
+          type: "setup",
+          label: "Vultr setup",
+          caption: "Pending screenshot for instance creation, region selection, image selection, and SSH setup.",
+          priority: "P0",
+        },
+        {
+          type: "analytics",
+          label: "Vultr analytics",
+          caption: "Pending screenshot for monitoring, metrics, logs, or resource usage.",
+          priority: "P1",
+        },
+      ],
+    }),
   },
   "semrush-review-2026": {
     recommendedToolSlugs: ["semrush", "ahrefs", "lowfruits", "namecheap"],
@@ -2128,6 +2391,65 @@ const moneyPageRewrites: Record<string, MoneyPageRewrite> = {
         "Semrush should be positioned as a serious SEO workflow tool for sites that can act on the data, not as a magic traffic button for empty projects.",
       ctaNote:
         "Readers with an active content plan should review the Semrush tool page and compare Ahrefs or LowFruits before starting a paid SEO workflow.",
+    }),
+    evidence: createPostEvidence({
+      provider: "semrush",
+      lastReviewed: "2026-06-18",
+      builderExperience: [
+        "Project setup and onboarding experience pending real Semrush workflow capture.",
+        "Dashboard usability pending keyword, audit, and competitor-report screenshot review.",
+        "Editorial decision impact pending a documented example workflow.",
+      ],
+      performanceNotes: [
+        "Report generation and audit workflow observations pending real project test.",
+        "SEO outcome claims remain out of scope until supported by long-term site data.",
+      ],
+      deploymentNotes: [
+        "Project setup, domain/site audit setup, keyword research, and export workflow notes pending.",
+        "Deployment-style evidence should be treated as Semrush project setup evidence.",
+      ],
+      pricingNotes: [
+        "Current Semrush pricing pending dated screenshot.",
+        "Trial, subscription, usage limits, and cancellation caveats pending evidence capture.",
+      ],
+      screenshots: [
+        {
+          type: "dashboard",
+          label: "Semrush dashboard",
+          caption: "Pending screenshot for Semrush dashboard and project navigation.",
+          priority: "P0",
+        },
+        {
+          type: "pricing",
+          label: "Semrush pricing",
+          caption: "Pending screenshot for current Semrush pricing and plan limits.",
+          priority: "P0",
+        },
+        {
+          type: "billing",
+          label: "Semrush billing",
+          caption: "Pending screenshot for trial, checkout, billing, or subscription details with private data removed.",
+          priority: "P1",
+        },
+        {
+          type: "deployment",
+          label: "Semrush project setup",
+          caption: "Pending screenshot for project setup or site audit setup workflow.",
+          priority: "P1",
+        },
+        {
+          type: "setup",
+          label: "Semrush setup",
+          caption: "Pending screenshot for onboarding, project creation, or first audit flow.",
+          priority: "P1",
+        },
+        {
+          type: "analytics",
+          label: "Semrush analytics",
+          caption: "Pending screenshot for keyword overview, competitor report, site audit, or analytics workflow.",
+          priority: "P0",
+        },
+      ],
     }),
   },
   "best-hosting-for-startups": {
@@ -2210,6 +2532,65 @@ const moneyPageRewrites: Record<string, MoneyPageRewrite> = {
       ctaNote:
         "Readers should start with the hosting option that matches their project stage, then open the relevant tool detail page before visiting the official website.",
     }),
+    evidence: createPostEvidence({
+      provider: "hostinger",
+      lastReviewed: "2026-06-18",
+      builderExperience: [
+        "Provider-by-provider onboarding observations pending for Hostinger, SiteGround, Bluehost, DreamHost, and A2 Hosting.",
+        "Startup workload fit notes pending real dashboard and setup evidence.",
+        "Migration, support, and backup workflow notes pending evidence capture.",
+      ],
+      performanceNotes: [
+        "Provider performance observations pending representative test sites.",
+        "Support, uptime, and dashboard monitoring observations pending real evidence.",
+      ],
+      deploymentNotes: [
+        "WordPress setup, domain connection, SSL, backup, and migration notes pending for top providers.",
+        "Comparison-table evidence pending provider screenshots.",
+      ],
+      pricingNotes: [
+        "Current pricing and renewal notes pending for Hostinger, SiteGround, Bluehost, DreamHost, and A2 Hosting.",
+        "Plan limits, add-ons, backup policies, and included domain/email details pending evidence capture.",
+      ],
+      screenshots: [
+        {
+          type: "dashboard",
+          label: "Hosting dashboards",
+          caption: "Pending screenshots for top hosting dashboards and management workflows.",
+          priority: "P0",
+        },
+        {
+          type: "pricing",
+          label: "Hosting pricing comparison",
+          caption: "Pending screenshots for current pricing and renewal caveats across recommended hosts.",
+          priority: "P0",
+        },
+        {
+          type: "billing",
+          label: "Hosting billing comparison",
+          caption: "Pending screenshots for checkout, add-ons, and renewal messaging with private data removed.",
+          priority: "P1",
+        },
+        {
+          type: "deployment",
+          label: "Hosting deployment comparison",
+          caption: "Pending screenshots for WordPress, domain, SSL, and site launch workflows.",
+          priority: "P0",
+        },
+        {
+          type: "setup",
+          label: "Hosting setup comparison",
+          caption: "Pending screenshots for onboarding and first-site setup across recommended hosts.",
+          priority: "P0",
+        },
+        {
+          type: "analytics",
+          label: "Hosting analytics comparison",
+          caption: "Pending screenshots for site stats, resource usage, or dashboard analytics where relevant.",
+          priority: "P2",
+        },
+      ],
+    }),
   },
 };
 
@@ -2224,6 +2605,7 @@ function applyMoneyPageRewrite(post: PostContent): PostContent {
     ...post,
     recommendedToolSlugs: rewrite.recommendedToolSlugs,
     sections: rewrite.sections,
+    evidence: rewrite.evidence,
   };
 }
 
