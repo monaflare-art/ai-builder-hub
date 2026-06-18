@@ -73,16 +73,23 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2">
+          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 md:col-span-2">
+            <h2 className="text-xl font-semibold text-slate-950">Quick Verdict</h2>
+            <p className="mt-4 leading-7 text-slate-600">
+              {tool.name} is best for {tool.bestFor.toLowerCase()}. Avoid it if{" "}
+              {tool.notBestFor.toLowerCase()}
+            </p>
+          </section>
           <section className="rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-xl font-semibold text-slate-950">Best for</h2>
+            <h2 className="text-xl font-semibold text-slate-950">Best For</h2>
             <p className="mt-4 leading-7 text-slate-600">{tool.bestFor}</p>
           </section>
           <section className="rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-xl font-semibold text-slate-950">Not best for</h2>
+            <h2 className="text-xl font-semibold text-slate-950">Avoid If</h2>
             <p className="mt-4 leading-7 text-slate-600">{tool.notBestFor}</p>
           </section>
           <section className="rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-xl font-semibold text-slate-950">Pricing</h2>
+            <h2 className="text-xl font-semibold text-slate-950">Pricing Summary</h2>
             <p className="mt-4 leading-7 text-slate-600">{tool.pricingSummary}</p>
           </section>
           <section className="rounded-2xl border border-slate-200 p-6">
@@ -97,7 +104,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             </a>
           </section>
           <section id="review" className="rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-xl font-semibold text-slate-950">优点</h2>
+            <h2 className="text-xl font-semibold text-slate-950">Pros</h2>
             <ul className="mt-4 space-y-3 text-slate-600">
               {tool.pros.map((item) => (
                 <li key={item} className="flex gap-3">
@@ -108,7 +115,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             </ul>
           </section>
           <section className="rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-xl font-semibold text-slate-950">缺点</h2>
+            <h2 className="text-xl font-semibold text-slate-950">Cons</h2>
             <ul className="mt-4 space-y-3 text-slate-600">
               {tool.cons.map((item) => (
                 <li key={item} className="flex gap-3">
@@ -152,7 +159,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             </div>
           </section>
           <section className="rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-xl font-semibold text-slate-950">Evidence needed</h2>
+            <h2 className="text-xl font-semibold text-slate-950">Evidence Placeholder</h2>
             <ul className="mt-4 space-y-3 text-slate-600">
               {tool.evidenceNeeded.map((item) => (
                 <li key={item} className="flex gap-3">
@@ -163,7 +170,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             </ul>
           </section>
           <section className="rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-xl font-semibold text-slate-950">Screenshot needed</h2>
+            <h2 className="text-xl font-semibold text-slate-950">Screenshot Placeholder</h2>
             <ul className="mt-4 space-y-3 text-slate-600">
               {tool.screenshotNeeded.map((item) => (
                 <li key={item} className="flex gap-3">
