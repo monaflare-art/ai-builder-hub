@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
 
   return {
     title: tool.name,
-    description: tool.summary,
+    description: tool.shortDescription,
     alternates: {
       canonical: `/tools/${tool.slug}`,
     },
@@ -36,7 +36,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
     notFound();
   }
 
-  const outboundUrl = tool.affiliateUrl ?? tool.officialUrl;
+  const outboundUrl = tool.affiliateUrl ?? tool.officialWebsite;
 
   return (
     <article className="bg-white">
@@ -49,7 +49,8 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
           <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
             {tool.name}
           </h1>
-          <p className="mt-5 text-lg leading-8 text-slate-600">{tool.summary}</p>
+          <p className="mt-5 text-lg leading-8 text-slate-600">{tool.shortDescription}</p>
+          <p className="mt-5 leading-7 text-slate-600">{tool.longDescription}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               href={outboundUrl}
@@ -73,26 +74,26 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
 
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           <section className="rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-xl font-semibold text-slate-950">适合人群</h2>
-            <p className="mt-4 leading-7 text-slate-600">{tool.audience}</p>
-          </section>
-          <section className="rounded-2xl border border-slate-200 p-6">
             <h2 className="text-xl font-semibold text-slate-950">Best for</h2>
             <p className="mt-4 leading-7 text-slate-600">{tool.bestFor}</p>
           </section>
           <section className="rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-xl font-semibold text-slate-950">Pricing</h2>
-            <p className="mt-4 leading-7 text-slate-600">{tool.pricing}</p>
+            <h2 className="text-xl font-semibold text-slate-950">Not best for</h2>
+            <p className="mt-4 leading-7 text-slate-600">{tool.notBestFor}</p>
           </section>
           <section className="rounded-2xl border border-slate-200 p-6">
-            <h2 className="text-xl font-semibold text-slate-950">官网链接</h2>
+            <h2 className="text-xl font-semibold text-slate-950">Pricing</h2>
+            <p className="mt-4 leading-7 text-slate-600">{tool.pricingSummary}</p>
+          </section>
+          <section className="rounded-2xl border border-slate-200 p-6">
+            <h2 className="text-xl font-semibold text-slate-950">Official website</h2>
             <a
-              href={tool.officialUrl}
+              href={tool.officialWebsite}
               target="_blank"
               rel="noreferrer"
               className="mt-4 block break-all leading-7 text-sky-700 hover:text-sky-900"
             >
-              {tool.officialUrl}
+              {tool.officialWebsite}
             </a>
           </section>
           <section id="review" className="rounded-2xl border border-slate-200 p-6">
@@ -121,9 +122,56 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
             <h2 className="text-xl font-semibold text-slate-950">Affiliate status</h2>
             <p className="mt-4 leading-7 text-slate-600">
               Current status: <span className="font-semibold text-slate-950">{tool.affiliateStatus}</span>.
-              When an affiliate link is configured, the primary CTA will use it automatically. Until then,
-              it links to the official website.
+              When an approved affiliate link is configured, the primary CTA can use it automatically. Until
+              then, it links to the official website only.
             </p>
+          </section>
+          <section className="rounded-2xl border border-slate-200 p-6 md:col-span-2">
+            <h2 className="text-xl font-semibold text-slate-950">Alternatives</h2>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {tool.alternatives.map((alternative) => {
+                const alternativeTool = tools.find((item) => item.slug === alternative);
+
+                return alternativeTool ? (
+                  <Link
+                    key={alternative}
+                    href={`/tools/${alternativeTool.slug}`}
+                    className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-medium text-slate-600 hover:border-sky-200 hover:text-sky-700"
+                  >
+                    {alternativeTool.name}
+                  </Link>
+                ) : (
+                  <span
+                    key={alternative}
+                    className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-medium text-slate-600"
+                  >
+                    {alternative}
+                  </span>
+                );
+              })}
+            </div>
+          </section>
+          <section className="rounded-2xl border border-slate-200 p-6">
+            <h2 className="text-xl font-semibold text-slate-950">Evidence needed</h2>
+            <ul className="mt-4 space-y-3 text-slate-600">
+              {tool.evidenceNeeded.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 size-1.5 rounded-full bg-amber-500" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section className="rounded-2xl border border-slate-200 p-6">
+            <h2 className="text-xl font-semibold text-slate-950">Screenshot needed</h2>
+            <ul className="mt-4 space-y-3 text-slate-600">
+              {tool.screenshotNeeded.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 size-1.5 rounded-full bg-violet-500" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </section>
         </div>
       </div>

@@ -2,8 +2,9 @@ import Link from "next/link";
 import type { Tool } from "@/data/tools";
 
 const affiliateStatusLabel: Record<Tool["affiliateStatus"], string> = {
-  active: "Affiliate link active",
+  available: "Affiliate available",
   pending: "Affiliate-ready: pending",
+  "not-applied": "Affiliate not applied",
   unavailable: "Affiliate unavailable",
 };
 
@@ -24,10 +25,10 @@ export function ToolCard({ tool }: { tool: Tool }) {
           View
         </span>
       </div>
-      <p className="mt-4 flex-1 text-sm leading-6 text-slate-600">{tool.summary}</p>
+      <p className="mt-4 flex-1 text-sm leading-6 text-slate-600">{tool.shortDescription}</p>
       <div className="mt-5 space-y-2 text-sm">
         <p className="font-medium text-slate-950">Best for: {tool.bestFor}</p>
-        <p className="text-slate-500">{tool.pricing}</p>
+        <p className="text-slate-500">{tool.pricingSummary}</p>
         <span className="inline-flex rounded-full border border-sky-100 bg-sky-50 px-2.5 py-1 text-xs font-medium text-sky-700">
           {affiliateStatusLabel[tool.affiliateStatus]}
         </span>

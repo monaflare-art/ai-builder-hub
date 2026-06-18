@@ -328,7 +328,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
                     </p>
                     <h3 className="mt-2 text-lg font-semibold text-slate-950">{tool.name}</h3>
                     <p className="mt-2 text-sm leading-6 text-slate-600">{tool.bestFor}</p>
-                    <p className="mt-2 text-sm text-slate-500">{tool.pricing}</p>
+                    <p className="mt-2 text-sm text-slate-500">{tool.pricingSummary}</p>
                   </div>
                   <Link
                     href={`/tools/${tool.slug}`}
