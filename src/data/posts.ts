@@ -33,7 +33,8 @@ export type VerificationMetadata = {
   lastReviewed?: string;
   lastVerified?: string;
   pricingChecked?: string;
-  screenshotUpdated?: string;
+  screenshotsUpdated?: string;
+  reviewer?: string;
 };
 
 export type PostEvidence = {

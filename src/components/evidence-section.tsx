@@ -112,7 +112,11 @@ export function EvidenceSection({ evidence }: { evidence?: PostEvidence }) {
         </div>
         <div className="rounded-2xl border border-slate-200 bg-white p-4">
           <dt className="font-semibold text-slate-950">Screenshot updated</dt>
-          <dd className="mt-1 text-slate-600">{metadata.screenshotUpdated ?? "Pending"}</dd>
+          <dd className="mt-1 text-slate-600">{metadata.screenshotsUpdated ?? "Pending"}</dd>
+        </div>
+        <div className="rounded-2xl border border-slate-200 bg-white p-4">
+          <dt className="font-semibold text-slate-950">Reviewer</dt>
+          <dd className="mt-1 text-slate-600">{metadata.reviewer ?? "Pending"}</dd>
         </div>
       </dl>
 
