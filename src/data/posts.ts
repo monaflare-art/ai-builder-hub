@@ -2595,6 +2595,604 @@ const moneyPageRewrites: Record<string, MoneyPageRewrite> = {
   },
 };
 
+type ComparisonPage = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  tags: string[];
+  recommendedToolSlugs: string[];
+  leftName: string;
+  leftSlug: string;
+  rightName: string;
+  rightSlug: string;
+  quickWinner: {
+    bestOverall: string;
+    bestForBeginners: string;
+    bestValue: string;
+    bestPerformance: string;
+  };
+  glanceRows: {
+    factor: string;
+    left: string;
+    right: string;
+    winner: string;
+  }[];
+  pricingSummary: string[];
+  featureRows: {
+    feature: string;
+    left: string;
+    right: string;
+  }[];
+  easeOfUse: string[];
+  performance: string[];
+  support: string[];
+  leftPros: string[];
+  leftCons: string[];
+  rightPros: string[];
+  rightCons: string[];
+  alternatives: {
+    name: string;
+    slug: string;
+    reason: string;
+  }[];
+  internalLinks: {
+    label: string;
+    slug: string;
+  }[];
+  finalVerdict: string[];
+  ctaNote: string;
+};
+
+type ComparisonPageRewrite = {
+  recommendedToolSlugs: string[];
+  sections: PostContent["sections"];
+  evidence: PostEvidence;
+};
+
+function table(headers: string[], rows: string[][]) {
+  return [
+    `| ${headers.join(" | ")} |`,
+    `| ${headers.map(() => "---").join(" | ")} |`,
+    ...rows.map((row) => `| ${row.join(" | ")} |`),
+  ].join("\n");
+}
+
+function comparisonEvidence(page: ComparisonPage): PostEvidence {
+  return createPostEvidence({
+    provider: "vultr",
+    lastReviewed: "2026-06-18",
+    builderExperience: [
+      `${page.leftName} onboarding notes pending verification.`,
+      `${page.rightName} onboarding notes pending verification.`,
+      "Same-task comparison test pending: create account, inspect dashboard, check pricing, and complete one representative setup workflow.",
+    ],
+    performanceNotes: [
+      "Direct performance testing is pending verification.",
+      "No benchmark, uptime, support-speed, or workload performance claim should be treated as verified yet.",
+    ],
+    deploymentNotes: [
+      `${page.leftName} setup workflow pending screenshot evidence.`,
+      `${page.rightName} setup workflow pending screenshot evidence.`,
+      "Comparison workflow should document the same task on both products before changing evidence status.",
+    ],
+    pricingNotes: [
+      `${page.leftName} pricing pending dated screenshot.`,
+      `${page.rightName} pricing pending dated screenshot.`,
+      "Historical pricing and discount claims are intentionally excluded until verified.",
+    ],
+    screenshots: [
+      {
+        type: "dashboard",
+        label: `${page.leftName} and ${page.rightName} dashboards`,
+        caption: "Pending dashboard screenshots for both products.",
+        priority: "P0",
+      },
+      {
+        type: "pricing",
+        label: `${page.leftName} and ${page.rightName} pricing`,
+        caption: "Pending dated pricing screenshots for both products.",
+        priority: "P0",
+      },
+      {
+        type: "billing",
+        label: `${page.leftName} and ${page.rightName} billing`,
+        caption: "Pending billing or checkout screenshots with private data removed.",
+        priority: "P1",
+      },
+      {
+        type: "deployment",
+        label: `${page.leftName} and ${page.rightName} setup workflow`,
+        caption: "Pending same-task workflow screenshots for the comparison.",
+        priority: "P0",
+      },
+      {
+        type: "setup",
+        label: `${page.leftName} and ${page.rightName} onboarding`,
+        caption: "Pending account setup and onboarding screenshots for both products.",
+        priority: "P1",
+      },
+      {
+        type: "analytics",
+        label: `${page.leftName} and ${page.rightName} reporting`,
+        caption: "Pending monitoring, analytics, or operational screenshots when relevant.",
+        priority: "P2",
+      },
+    ],
+  });
+}
+
+function comparisonSections(page: ComparisonPage): PostContent["sections"] {
+  const glanceTable = table(
+    ["Factor", page.leftName, page.rightName, "Practical winner"],
+    page.glanceRows.map((row) => [row.factor, row.left, row.right, row.winner]),
+  );
+  const featureTable = table(
+    ["Feature", page.leftName, page.rightName],
+    page.featureRows.map((row) => [row.feature, row.left, row.right]),
+  );
+  const alternatives = page.alternatives
+    .map((tool) => `${linkedTool(tool.name, tool.slug)}: ${tool.reason}`)
+    .join(" ");
+  const internalLinks = page.internalLinks
+    .map((article) => linkedArticle(article.label, article.slug))
+    .join(", ");
+
+  return [
+    {
+      heading: "Quick Winner",
+      body: [
+        table(
+          ["Decision", "Winner", "Why"],
+          [
+            ["Best overall", page.quickWinner.bestOverall, "Best fit for the broadest buyer profile in this comparison."],
+            ["Best for beginners", page.quickWinner.bestForBeginners, "Lower setup friction and clearer first steps matter most here."],
+            ["Best value", page.quickWinner.bestValue, "Value depends on real plan limits, renewal behavior, and operational effort."],
+            ["Best performance", page.quickWinner.bestPerformance, "Pending Verification unless direct same-task testing exists."],
+          ],
+        ),
+        `Short version: compare ${linkedTool(page.leftName, page.leftSlug)} and ${linkedTool(page.rightName, page.rightSlug)} by the job you need done, not by brand familiarity. This page uses affiliate-ready CTAs, but evidence that is not tested is clearly marked Pending Verification.`,
+      ],
+    },
+    {
+      heading: "At a Glance Comparison Table",
+      body: [glanceTable],
+    },
+    {
+      heading: "Overview",
+      body: [
+        `${page.leftName} and ${page.rightName} can both be reasonable choices, but they are rarely identical decisions. The practical question is which product reduces friction for your next project milestone while keeping cost, migration, support, and evidence gaps visible.`,
+        `Use this comparison alongside ${internalLinks}. Those internal pages help connect the comparison to reviews, best-tools hubs, and supporting launch workflows instead of leaving the reader at a generic product list.`,
+      ],
+    },
+    {
+      heading: "Pricing Comparison",
+      body: [
+        ...page.pricingSummary,
+        "Pricing source note: pricing must be checked from current public pricing pages or logged-in checkout screens before exact numbers are published. Pricing screenshots are Pending Verification.",
+        "Historical pricing note: no historical pricing changes are claimed in this article.",
+      ],
+    },
+    {
+      heading: "Feature Comparison",
+      body: [featureTable],
+    },
+    {
+      heading: "Ease of Use",
+      body: [
+        ...page.easeOfUse,
+        "Evidence status: onboarding screenshots and same-task setup notes are Pending Verification. Until then, ease-of-use language should stay neutral and based on workflow fit.",
+      ],
+    },
+    {
+      heading: "Performance",
+      body: [
+        ...page.performance,
+        "Pending Verification: no direct benchmark, uptime, region latency, WordPress speed, SEO data freshness, or support-response test has been completed for this comparison yet.",
+      ],
+    },
+    {
+      heading: "Support Comparison",
+      body: [
+        ...page.support,
+        "Support evidence needed: documentation screenshots, ticket or chat availability notes, community resources, and real response observations if support quality becomes part of the recommendation.",
+      ],
+    },
+    {
+      heading: `${page.leftName} Pros and Cons`,
+      body: [
+        `Pros: ${page.leftPros.join(" ")}`,
+        `Cons: ${page.leftCons.join(" ")}`,
+      ],
+    },
+    {
+      heading: `${page.rightName} Pros and Cons`,
+      body: [
+        `Pros: ${page.rightPros.join(" ")}`,
+        `Cons: ${page.rightCons.join(" ")}`,
+      ],
+    },
+    {
+      heading: "Alternatives",
+      body: [
+        alternatives,
+        "Choose an alternative when neither product fits the workload, budget, support expectation, or evidence requirement for your project.",
+      ],
+    },
+    {
+      heading: "Final Verdict",
+      body: page.finalVerdict,
+    },
+    {
+      heading: "Affiliate CTA Block",
+      body: [
+        `${page.ctaNote} Start with the internal tool pages for ${linkedTool(page.leftName, page.leftSlug)} and ${linkedTool(page.rightName, page.rightSlug)} before visiting official websites.`,
+        "Disclosure: Some links may be affiliate links. We may earn a commission at no extra cost to the reader. Recommendations should stay based on use case, tradeoffs, and verified evidence rather than commission status.",
+      ],
+    },
+  ];
+}
+
+const comparisonPages: Record<string, ComparisonPage> = {
+  "vultr-vs-digitalocean-for-developers": {
+    slug: "vultr-vs-digitalocean-for-developers",
+    title: "Vultr vs DigitalOcean for Developers",
+    excerpt:
+      "A high-intent VPS comparison for developers choosing between Vultr and DigitalOcean for apps, APIs, workers, and AI builder infrastructure.",
+    tags: ["Vultr", "DigitalOcean", "VPS", "Cloud", "Comparison"],
+    recommendedToolSlugs: ["vultr", "digitalocean", "linode", "racknerd"],
+    leftName: "Vultr",
+    leftSlug: "vultr",
+    rightName: "DigitalOcean",
+    rightSlug: "digitalocean",
+    quickWinner: {
+      bestOverall: "DigitalOcean for documentation-led beginners; Vultr for direct VPS experiments",
+      bestForBeginners: "DigitalOcean",
+      bestValue: "Pending Verification",
+      bestPerformance: "Pending Verification",
+    },
+    glanceRows: [
+      { factor: "Pricing", left: "VPS pricing requires current plan screenshot", right: "Droplet pricing requires current plan screenshot", winner: "Pending Verification" },
+      { factor: "Ease of Use", left: "Direct VPS launch flow", right: "Strong tutorials and beginner docs", winner: "DigitalOcean for guided learning" },
+      { factor: "Features", left: "Cloud compute, regions, snapshots, networking", right: "Droplets plus broader managed-service ecosystem", winner: "Depends on roadmap" },
+      { factor: "Support", left: "Docs and tickets need verification", right: "Docs, tutorials, and support channels need verification", winner: "Pending Verification" },
+      { factor: "Performance", left: "Needs same-region test", right: "Needs same-region test", winner: "Pending Verification" },
+      { factor: "Best For", left: "Developers who want straightforward VPS control", right: "Developers who value tutorials and adjacent services", winner: "Use-case split" },
+    ],
+    pricingSummary: [
+      "Vultr and DigitalOcean both publish cloud pricing, but exact comparisons should use the same CPU, RAM, storage, bandwidth, backup, and region assumptions.",
+      "For affiliate conversion, the pricing section should eventually include dated screenshots of the smallest practical server, backup add-ons, snapshot behavior, and any managed-service costs that change the buyer decision.",
+    ],
+    featureRows: [
+      { feature: "Basic VPS", left: "Core fit", right: "Core fit through Droplets" },
+      { feature: "Developer docs", left: "Needs article-level verification", right: "Known strength, still needs current evidence" },
+      { feature: "Managed services", left: "Available options should be verified", right: "Broader ecosystem for databases and storage" },
+      { feature: "Backups and snapshots", left: "Important operational check", right: "Important operational check" },
+      { feature: "AI builder fit", left: "Good for workers, APIs, Docker, self-hosting", right: "Good for the same workloads plus learning path" },
+    ],
+    easeOfUse: [
+      "DigitalOcean tends to be easier to recommend to developers who want tutorials, examples, and a guided mental model before launching production infrastructure.",
+      "Vultr can be easier for builders who already know what server they need and want to create a small instance without a lot of surrounding product complexity.",
+    ],
+    performance: [
+      "Do not choose either provider based on untested performance assumptions. The correct evidence pass is a same-region, same-size, same-workload deployment with setup time and basic monitoring notes.",
+    ],
+    support: [
+      "Compare documentation, ticket access, live help availability, community tutorials, and how easy it is to find answers for SSH, firewall, backups, billing, and snapshots.",
+    ],
+    leftPros: ["Straightforward VPS positioning.", "Good fit for Docker, APIs, and self-hosted experiments.", "Useful anchor for AI builder infrastructure articles."],
+    leftCons: ["Requires operations discipline.", "Performance and support claims need evidence.", "Beginners can underestimate backups and security."],
+    rightPros: ["Strong developer learning ecosystem.", "Broad product path beyond basic droplets.", "Good fit for developers who want docs around routine tasks."],
+    rightCons: ["Managed add-ons can complicate pricing.", "Still requires server operations knowledge.", "Exact value needs dated pricing screenshots."],
+    alternatives: [
+      { name: "Linode", slug: "linode", reason: "another mature VPS provider for developers." },
+      { name: "RackNerd", slug: "racknerd", reason: "budget VPS candidate for lower-risk tests." },
+      { name: "Hostinger", slug: "hostinger", reason: "better when managed website hosting matters more than server control." },
+    ],
+    internalLinks: [
+      { label: "Vultr Review 2026", slug: "vultr-review-2026" },
+      { label: "Best VPS for Developers", slug: "best-vps-for-developers" },
+      { label: "Best VPS for AI Builders", slug: "best-vps-for-ai-builders" },
+    ],
+    finalVerdict: [
+      "Choose Vultr when you want a straightforward VPS and are comfortable owning server setup, monitoring, security, and recovery.",
+      "Choose DigitalOcean when documentation, tutorials, and a broader developer ecosystem matter more than a stripped-down VPS decision.",
+      "Choose neither if the project is only a static website, a WordPress content site, or a frontend that belongs on managed hosting or Vercel.",
+    ],
+    ctaNote: "The conversion path should send VPS-ready readers to compare the two tool pages, then start with the provider that best matches their operating style.",
+  },
+  "namecheap-vs-porkbun": {
+    slug: "namecheap-vs-porkbun",
+    title: "Namecheap vs Porkbun",
+    excerpt:
+      "A domain registrar comparison for builders choosing between Namecheap and Porkbun for domains, DNS, renewals, and launch workflows.",
+    tags: ["Namecheap", "Porkbun", "Domains", "DNS", "Comparison"],
+    recommendedToolSlugs: ["namecheap", "porkbun", "dynadot", "cloudflare-registrar"],
+    leftName: "Namecheap",
+    leftSlug: "namecheap",
+    rightName: "Porkbun",
+    rightSlug: "porkbun",
+    quickWinner: {
+      bestOverall: "Pending Verification",
+      bestForBeginners: "Namecheap if you want a familiar mainstream workflow; Porkbun if pricing clarity tests better",
+      bestValue: "Pending Verification",
+      bestPerformance: "Not applicable; DNS workflow evidence pending",
+    },
+    glanceRows: [
+      { factor: "Pricing", left: "First-year and renewal screenshots needed", right: "First-year and renewal screenshots needed", winner: "Pending Verification" },
+      { factor: "Ease of Use", left: "Familiar registrar workflow", right: "Potentially simpler registrar-first workflow", winner: "Pending Verification" },
+      { factor: "Features", left: "Domains, DNS, privacy, marketplace options", right: "Domains, DNS, privacy, registrar basics", winner: "Depends on domain workflow" },
+      { factor: "Support", left: "Docs and support flow need verification", right: "Docs and support flow need verification", winner: "Pending Verification" },
+      { factor: "Performance", left: "DNS workflow evidence needed", right: "DNS workflow evidence needed", winner: "Pending Verification" },
+      { factor: "Best For", left: "Beginners who want a widely known registrar", right: "Builders comparing registrar cost and simplicity", winner: "Use-case split" },
+    ],
+    pricingSummary: [
+      "Registrar pricing must compare first-year cost, renewal cost, transfer cost, privacy behavior, and checkout add-ons for the same TLD.",
+      "This page should not claim Porkbun or Namecheap is cheaper until dated screenshots show the exact TLD and renewal behavior being compared.",
+    ],
+    featureRows: [
+      { feature: "Domain search", left: "Needs current search screenshot", right: "Needs current search screenshot" },
+      { feature: "DNS management", left: "Important for Vercel, hosting, Shopify, and VPS connections", right: "Important for the same workflows" },
+      { feature: "Privacy and renewals", left: "Must be verified during checkout", right: "Must be verified during checkout" },
+      { feature: "Beginner workflow", left: "Familiar but can include add-on decisions", right: "Needs direct flow evidence" },
+    ],
+    easeOfUse: [
+      "Namecheap has a familiar registrar flow for many builders, but familiarity is not evidence. The next pass should capture domain search, checkout, DNS, and renewal settings.",
+      "Porkbun should be evaluated on how quickly a beginner can find renewal pricing, privacy behavior, DNS records, and transfer settings.",
+    ],
+    performance: [
+      "Registrar performance is mostly about DNS reliability, management clarity, and propagation workflow for this article. Direct DNS testing is Pending Verification.",
+    ],
+    support: [
+      "Compare docs, ticket access, live chat availability, transfer instructions, and how easy it is to solve a DNS mistake during a launch.",
+    ],
+    leftPros: ["Mainstream registrar recognition.", "Useful existing review cluster on AI Builder Hub.", "Clear fit for domain tutorials."],
+    leftCons: ["Checkout and add-on flow need evidence.", "Renewal pricing must be verified.", "Not automatically best for every TLD."],
+    rightPros: ["Strong candidate for registrar comparison pages.", "Useful alternative for domain buyers.", "May fit price-conscious builders after evidence."],
+    rightCons: ["Needs a dedicated evidence pass.", "No review page exists yet.", "Support and DNS workflow need verification."],
+    alternatives: [
+      { name: "Dynadot", slug: "dynadot", reason: "registrar alternative for domain buyers and transfers." },
+      { name: "Cloudflare Registrar", slug: "cloudflare-registrar", reason: "strong fit when Cloudflare DNS is already the source of truth." },
+      { name: "Spaceship", slug: "spaceship", reason: "newer registrar option to test before recommending heavily." },
+    ],
+    internalLinks: [
+      { label: "Namecheap Review 2026", slug: "namecheap-review-2026" },
+      { label: "Best Domain Registrars", slug: "best-domain-registrars" },
+      { label: "How to Register a Domain Name", slug: "how-to-register-a-domain-name" },
+    ],
+    finalVerdict: [
+      "Choose Namecheap if you want a familiar registrar path and the current checkout, privacy, DNS, and renewal evidence matches your domain needs.",
+      "Choose Porkbun if the evidence pass confirms better value or a simpler domain workflow for your target TLD.",
+      "For now, treat this as an evidence-backed framework with Pending Verification where screenshots and pricing checks are still missing.",
+    ],
+    ctaNote: "The conversion path should help domain-ready readers compare registrar tool pages and buy only after renewal behavior is clear.",
+  },
+  "hostinger-vs-siteground": {
+    slug: "hostinger-vs-siteground",
+    title: "Hostinger vs SiteGround",
+    excerpt:
+      "A hosting comparison for startups and affiliate site builders choosing between Hostinger and SiteGround for WordPress and managed websites.",
+    tags: ["Hostinger", "SiteGround", "Hosting", "WordPress", "Comparison"],
+    recommendedToolSlugs: ["hostinger", "siteground", "bluehost", "dreamhost"],
+    leftName: "Hostinger",
+    leftSlug: "hostinger",
+    rightName: "SiteGround",
+    rightSlug: "siteground",
+    quickWinner: {
+      bestOverall: "Pending Verification",
+      bestForBeginners: "Hostinger for budget-sensitive beginners; SiteGround if support/workflow evidence proves stronger",
+      bestValue: "Pending Verification",
+      bestPerformance: "Pending Verification",
+    },
+    glanceRows: [
+      { factor: "Pricing", left: "Entry and renewal screenshots needed", right: "Entry and renewal screenshots needed", winner: "Pending Verification" },
+      { factor: "Ease of Use", left: "Beginner-friendly managed hosting angle", right: "WordPress-focused managed hosting angle", winner: "Pending Verification" },
+      { factor: "Features", left: "Site setup, SSL, backups, WordPress tools", right: "WordPress tools, support, backups, performance stack", winner: "Depends on plan" },
+      { factor: "Support", left: "Support evidence needed", right: "Support evidence needed", winner: "Pending Verification" },
+      { factor: "Performance", left: "Needs same-site test", right: "Needs same-site test", winner: "Pending Verification" },
+      { factor: "Best For", left: "New builders launching a first site", right: "WordPress users who may value support and managed workflow", winner: "Use-case split" },
+    ],
+    pricingSummary: [
+      "Hosting pricing should compare first-term price, renewal price, backup rules, storage, traffic expectations, included domain/email, and plan restrictions.",
+      "Do not state exact winners until both pricing pages and checkout screens are captured with dates.",
+    ],
+    featureRows: [
+      { feature: "WordPress setup", left: "Needs current setup screenshots", right: "Needs current setup screenshots" },
+      { feature: "Backups", left: "Plan rules need verification", right: "Plan rules need verification" },
+      { feature: "SSL/domain flow", left: "Important for beginner launch", right: "Important for beginner launch" },
+      { feature: "Migration", left: "Needs documentation/support check", right: "Needs documentation/support check" },
+    ],
+    easeOfUse: [
+      "Hostinger should be judged by how quickly a beginner can create a site, connect a domain, enable SSL, and understand renewal or backup settings.",
+      "SiteGround should be judged by the same workflow, not by reputation alone.",
+    ],
+    performance: [
+      "A fair test requires the same WordPress theme, same region assumptions where possible, same page content, and basic loading observations. That evidence is Pending Verification.",
+    ],
+    support: [
+      "Compare support documentation, live chat or ticket access, WordPress migration help, and how easy it is to find renewal, backup, SSL, and domain guidance.",
+    ],
+    leftPros: ["Strong fit for beginner hosting cluster.", "Budget-oriented managed hosting angle.", "Existing Hostinger review and evidence workflow."],
+    leftCons: ["Renewal and backup details need verification.", "Performance claims require same-site testing.", "May not fit support-heavy WordPress buyers."],
+    rightPros: ["High-value WordPress hosting comparison candidate.", "Potentially strong support/workflow angle.", "Good fit for startup hosting pages."],
+    rightCons: ["Needs first-party evidence before strong recommendation.", "Pricing and renewal behavior must be checked.", "No dedicated review page exists yet."],
+    alternatives: [
+      { name: "Bluehost", slug: "bluehost", reason: "mainstream WordPress hosting benchmark." },
+      { name: "DreamHost", slug: "dreamhost", reason: "another managed hosting alternative." },
+      { name: "Vultr", slug: "vultr", reason: "choose when server control matters more than managed hosting." },
+    ],
+    internalLinks: [
+      { label: "Hostinger Review 2026", slug: "hostinger-review-2026" },
+      { label: "Best Hosting for Startups", slug: "best-hosting-for-startups" },
+      { label: "How to Choose the Right Hosting Provider", slug: "how-to-choose-the-right-hosting-provider" },
+    ],
+    finalVerdict: [
+      "Choose Hostinger when the evidence supports a simpler, budget-conscious first-site workflow.",
+      "Choose SiteGround when evidence shows the support, WordPress workflow, and plan terms justify the cost for your project.",
+      "For now, both recommendations should remain evidence-aware with pricing, dashboard, and setup screenshots marked Pending Verification.",
+    ],
+    ctaNote: "The conversion path should route hosting buyers to the provider that matches their site stage, budget, and support expectations.",
+  },
+  "semrush-vs-ahrefs": {
+    slug: "semrush-vs-ahrefs",
+    title: "Semrush vs Ahrefs",
+    excerpt:
+      "A commercial SEO tool comparison for affiliate site builders choosing between Semrush and Ahrefs for keyword, competitor, and content strategy.",
+    tags: ["Semrush", "Ahrefs", "SEO", "Affiliate Marketing", "Comparison"],
+    recommendedToolSlugs: ["semrush", "ahrefs", "lowfruits", "namecheap"],
+    leftName: "Semrush",
+    leftSlug: "semrush",
+    rightName: "Ahrefs",
+    rightSlug: "ahrefs",
+    quickWinner: {
+      bestOverall: "Pending Verification",
+      bestForBeginners: "Pending Verification",
+      bestValue: "Pending Verification",
+      bestPerformance: "Not applicable; data/workflow verification pending",
+    },
+    glanceRows: [
+      { factor: "Pricing", left: "Plan screenshot needed", right: "Plan screenshot needed", winner: "Pending Verification" },
+      { factor: "Ease of Use", left: "Workflow screenshots needed", right: "Workflow screenshots needed", winner: "Pending Verification" },
+      { factor: "Features", left: "Keyword, competitor, audit, content workflows", right: "Keyword, backlink, competitor, content workflows", winner: "Depends on SEO job" },
+      { factor: "Support", left: "Docs/support need verification", right: "Docs/support need verification", winner: "Pending Verification" },
+      { factor: "Performance", left: "Report/data workflow evidence needed", right: "Report/data workflow evidence needed", winner: "Pending Verification" },
+      { factor: "Best For", left: "Sites needing broad SEO suite workflows", right: "Sites needing deep SEO/backlink research workflows", winner: "Use-case split" },
+    ],
+    pricingSummary: [
+      "SEO SaaS pricing must compare plan limits, seat rules, project limits, export limits, data access, and whether the site is mature enough to use the data.",
+      "Do not claim either tool is cheaper or better value until current plan screenshots and workflow limits are verified.",
+    ],
+    featureRows: [
+      { feature: "Keyword research", left: "Needs real keyword workflow screenshot", right: "Needs real keyword workflow screenshot" },
+      { feature: "Competitor research", left: "Needs competitor report evidence", right: "Needs competitor report evidence" },
+      { feature: "Site audit", left: "Important Semrush workflow to verify", right: "Audit workflow should be checked" },
+      { feature: "Backlink research", left: "Needs comparison evidence", right: "Known Ahrefs angle, still needs current evidence" },
+      { feature: "Affiliate site fit", left: "Good if data changes editorial decisions", right: "Good if data changes editorial decisions" },
+    ],
+    easeOfUse: [
+      "Semrush should be evaluated on how quickly a beginner can set up a project, find realistic keywords, audit a site, and turn reports into article updates.",
+      "Ahrefs should be evaluated on the same tasks, especially keyword discovery, backlink research, competitor content analysis, and export workflow.",
+    ],
+    performance: [
+      "For SEO tools, performance means data usefulness, report workflow, export clarity, and how quickly a user can make a content decision. That evidence is Pending Verification.",
+    ],
+    support: [
+      "Compare product documentation, training resources, ticket or chat availability, and how clearly each tool explains limits to new site owners.",
+    ],
+    leftPros: ["Existing Semrush review cluster.", "Broad SEO workflow fit.", "Strong affiliate-site content planning angle."],
+    leftCons: ["Can be expensive too early.", "Needs real report screenshots.", "Workflow value must be tied to actual editorial decisions."],
+    rightPros: ["Major SEO suite alternative.", "Strong comparison value for commercial SEO searches.", "Important backlink and competitor research candidate."],
+    rightCons: ["No dedicated review page exists yet.", "Pricing and plan limits need evidence.", "Beginner fit needs workflow testing."],
+    alternatives: [
+      { name: "LowFruits", slug: "lowfruits", reason: "lighter keyword research alternative for small affiliate sites." },
+      { name: "Namecheap", slug: "namecheap", reason: "domain and canonical setup still matter before SEO tooling." },
+      { name: "Cloudflare Registrar", slug: "cloudflare-registrar", reason: "domain/DNS alternative when technical SEO setup matters." },
+    ],
+    internalLinks: [
+      { label: "Semrush Review 2026", slug: "semrush-review-2026" },
+      { label: "How to Get First Website Visitors", slug: "how-to-get-first-website-visitors" },
+      { label: "How to Get Traffic to a New Website", slug: "how-to-get-traffic-to-a-new-website" },
+    ],
+    finalVerdict: [
+      "Choose Semrush if the evidence shows its broad SEO workflow helps you update pages, choose topics, and improve internal links.",
+      "Choose Ahrefs if the evidence shows its keyword, backlink, and competitor workflows better match your content strategy.",
+      "Choose neither if the site has no niche, no published pages, or no process for turning SEO data into better content.",
+    ],
+    ctaNote: "The conversion path should help SEO-ready readers compare both tool pages while warning early sites not to buy a suite before they can use the data.",
+  },
+  "bluehost-vs-siteground": {
+    slug: "bluehost-vs-siteground",
+    title: "Bluehost vs SiteGround",
+    excerpt:
+      "A WordPress hosting comparison for beginners choosing between Bluehost and SiteGround for startup, affiliate, and small business websites.",
+    tags: ["Bluehost", "SiteGround", "Hosting", "WordPress", "Comparison"],
+    recommendedToolSlugs: ["bluehost", "siteground", "hostinger", "dreamhost"],
+    leftName: "Bluehost",
+    leftSlug: "bluehost",
+    rightName: "SiteGround",
+    rightSlug: "siteground",
+    quickWinner: {
+      bestOverall: "Pending Verification",
+      bestForBeginners: "Pending Verification",
+      bestValue: "Pending Verification",
+      bestPerformance: "Pending Verification",
+    },
+    glanceRows: [
+      { factor: "Pricing", left: "Entry and renewal screenshots needed", right: "Entry and renewal screenshots needed", winner: "Pending Verification" },
+      { factor: "Ease of Use", left: "Beginner WordPress flow needs testing", right: "Managed WordPress flow needs testing", winner: "Pending Verification" },
+      { factor: "Features", left: "WordPress, domain, SSL, backups depending on plan", right: "WordPress, support, backups, performance features depending on plan", winner: "Depends on plan" },
+      { factor: "Support", left: "Docs/chat/ticket evidence needed", right: "Docs/chat/ticket evidence needed", winner: "Pending Verification" },
+      { factor: "Performance", left: "Needs same-site test", right: "Needs same-site test", winner: "Pending Verification" },
+      { factor: "Best For", left: "Mainstream WordPress hosting benchmark", right: "WordPress hosting alternative to verify for support/workflow", winner: "Use-case split" },
+    ],
+    pricingSummary: [
+      "Bluehost and SiteGround should be compared using the same site type, renewal horizon, backup requirement, storage needs, and support expectation.",
+      "Exact pricing winners are Pending Verification until pricing and checkout screenshots are captured.",
+    ],
+    featureRows: [
+      { feature: "WordPress setup", left: "Needs setup screenshot", right: "Needs setup screenshot" },
+      { feature: "Domain and SSL", left: "Needs launch workflow evidence", right: "Needs launch workflow evidence" },
+      { feature: "Backups", left: "Plan rules need verification", right: "Plan rules need verification" },
+      { feature: "Migration", left: "Documentation/support check needed", right: "Documentation/support check needed" },
+    ],
+    easeOfUse: [
+      "Bluehost should be tested by creating a basic WordPress site, checking domain/SSL steps, and finding renewal and backup settings.",
+      "SiteGround should be tested with the same workflow so the comparison does not rely on reputation or generic hosting claims.",
+    ],
+    performance: [
+      "Performance is Pending Verification. A fair test needs the same WordPress theme, content, plugins, cache assumptions, and measurement method.",
+    ],
+    support: [
+      "Compare documentation, live chat or ticket access, migration help, WordPress troubleshooting content, and billing guidance.",
+    ],
+    leftPros: ["Mainstream WordPress hosting comparison point.", "Useful for beginner hosting searches.", "Good candidate for affiliate conversion after evidence."],
+    leftCons: ["Needs current pricing and renewal screenshots.", "Setup and support claims need evidence.", "No dedicated review page exists yet."],
+    rightPros: ["High-value WordPress hosting alternative.", "Useful support/workflow comparison candidate.", "Fits startup hosting cluster."],
+    rightCons: ["Needs current screenshots.", "Pricing and performance claims are pending.", "No dedicated review page exists yet."],
+    alternatives: [
+      { name: "Hostinger", slug: "hostinger", reason: "budget-conscious managed hosting alternative with existing review." },
+      { name: "DreamHost", slug: "dreamhost", reason: "another mainstream hosting provider to evaluate." },
+      { name: "Vultr", slug: "vultr", reason: "VPS alternative when managed WordPress hosting is not enough." },
+    ],
+    internalLinks: [
+      { label: "Best Hosting for Startups", slug: "best-hosting-for-startups" },
+      { label: "Hostinger Review 2026", slug: "hostinger-review-2026" },
+      { label: "How to Choose the Right Hosting Provider", slug: "how-to-choose-the-right-hosting-provider" },
+    ],
+    finalVerdict: [
+      "Choose Bluehost only if its current plan, renewal pricing, WordPress workflow, and support evidence fit the beginner site you are launching.",
+      "Choose SiteGround only if its verified support, setup, and performance workflow justify the total cost for your project.",
+      "If both feel too uncertain, compare Hostinger, DreamHost, and managed deployment alternatives before committing to annual hosting.",
+    ],
+    ctaNote: "The conversion path should help WordPress-ready readers compare hosting tool pages and choose based on current plan evidence, not generic rankings.",
+  },
+};
+
+const comparisonPageRewrites: Record<string, ComparisonPageRewrite> = Object.fromEntries(
+  Object.values(comparisonPages).map((page) => [
+    page.slug,
+    {
+      recommendedToolSlugs: page.recommendedToolSlugs,
+      sections: comparisonSections(page),
+      evidence: comparisonEvidence(page),
+    },
+  ]),
+) as Record<string, ComparisonPageRewrite>;
+
+const comparisonExpansionPosts: PostContent[] = Object.values(comparisonPages)
+  .filter((page) => page.slug !== "vultr-vs-digitalocean-for-developers")
+  .map((page) => ({
+    slug: page.slug,
+    title: page.title,
+    excerpt: page.excerpt,
+    date: "2026-06-18",
+    readingTime: "12 min read",
+    category: "Comparisons",
+    tags: page.tags,
+    recommendedToolSlugs: page.recommendedToolSlugs,
+    sections: comparisonSections(page),
+    evidence: comparisonEvidence(page),
+  }));
+
 function applyMoneyPageRewrite(post: PostContent): PostContent {
   const rewrite = moneyPageRewrites[post.slug];
 
@@ -2610,8 +3208,31 @@ function applyMoneyPageRewrite(post: PostContent): PostContent {
   };
 }
 
-export const posts: Post[] = [...initialPosts, ...contentExpansionPosts]
+function applyComparisonPageRewrite(post: PostContent): PostContent {
+  const rewrite = comparisonPageRewrites[post.slug];
+  const page = comparisonPages[post.slug];
+
+  if (!rewrite || !page) {
+    return post;
+  }
+
+  return {
+    ...post,
+    title: page.title,
+    excerpt: page.excerpt,
+    date: "2026-06-18",
+    readingTime: "12 min read",
+    category: "Comparisons",
+    tags: page.tags,
+    recommendedToolSlugs: rewrite.recommendedToolSlugs,
+    sections: rewrite.sections,
+    evidence: rewrite.evidence,
+  };
+}
+
+export const posts: Post[] = [...initialPosts, ...contentExpansionPosts, ...comparisonExpansionPosts]
   .map(applyMoneyPageRewrite)
+  .map(applyComparisonPageRewrite)
   .map(withDefaultImages);
 
 export function getPostBySlug(slug: string) {

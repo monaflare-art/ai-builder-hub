@@ -86,6 +86,62 @@ function renderParagraphWithLinks(text: string) {
   return parts;
 }
 
+function renderTable(text: string) {
+  const rows = text
+    .trim()
+    .split("\n")
+    .map((row) =>
+      row
+        .split("|")
+        .slice(1, -1)
+        .map((cell) => cell.trim()),
+    );
+  const [header, separator, ...bodyRows] = rows;
+
+  if (!header || !separator || bodyRows.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="overflow-x-auto rounded-2xl border border-slate-200">
+      <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+        <thead className="bg-slate-50 text-slate-950">
+          <tr>
+            {header.map((cell) => (
+              <th key={cell} scope="col" className="px-4 py-3 font-semibold">
+                {renderParagraphWithLinks(cell)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-slate-200 bg-white text-slate-600">
+          {bodyRows.map((row) => (
+            <tr key={row.join("-")}>
+              {row.map((cell, index) => (
+                <td key={`${row.join("-")}-${index}`} className="px-4 py-3 align-top leading-6">
+                  {renderParagraphWithLinks(cell)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function renderBodyBlock(paragraph: string) {
+  if (paragraph.trim().startsWith("|")) {
+    const table = renderTable(paragraph);
+
+    if (table) {
+      return table;
+    }
+  }
+
+  return <p>{renderParagraphWithLinks(paragraph)}</p>;
+}
+
 export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
@@ -280,7 +336,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
                 </h2>
                 <div className="mt-4 space-y-4 text-base leading-8 text-slate-600">
                   {section.body.map((paragraph) => (
-                    <p key={paragraph}>{renderParagraphWithLinks(paragraph)}</p>
+                    <div key={paragraph}>{renderBodyBlock(paragraph)}</div>
                   ))}
                 </div>
                 {inlineImage ? (
