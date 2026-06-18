@@ -14,8 +14,8 @@ Status values:
 
 | Tool | Affiliate Program | Network | Application URL | Status | Date Applied | Date Approved | Rejection Notes | Reapply Date | Money Page Exists | Comparison Page Exists |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Vultr | Vultr Referral / Partner Program | Direct | https://www.vultr.com/company/referral-program/ | Pending | Owner input required |  |  |  | Yes | Yes |
-| DigitalOcean | DigitalOcean Affiliate Program | CJ | https://public.cj.com/signup/publisher?pageId=eeec4979-edad-4cab-850c-8ab9b1498d68 | Ready to apply |  |  |  |  | No | Yes |
+| Vultr | Vultr Referral / Partner Program | Direct | https://discover.vultr.com/partner | Pending | Owner input required |  |  |  | Yes | Yes |
+| DigitalOcean | DigitalOcean Affiliate Program | CJ | https://signup.cj.com/member/signup/publisher/?cid=7226122 | Ready to apply |  |  |  |  | No | Yes |
 | Linode / Akamai Cloud | Akamai Cloud Referral Program | Direct account credit | https://www.akamai.com/cloud/referral-program | Not applied |  |  |  |  | No | No |
 | LightNode | Unknown | Unknown | Unknown | Unknown |  |  |  |  | No | No |
 | DMIT | Unknown | Unknown | Unknown | Unknown |  |  |  |  | No | No |
