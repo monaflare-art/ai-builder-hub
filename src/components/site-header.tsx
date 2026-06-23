@@ -15,7 +15,7 @@ export function SiteHeader() {
           </span>
           <span className="text-sm font-semibold text-slate-950">AI Builder Hub</span>
         </Link>
-        <nav className="flex items-center gap-1" aria-label="Main navigation">
+        <nav className="hidden items-center gap-1 sm:flex" aria-label="Main navigation">
           {navItems.map((item) => (
             <Link
               key={item.href}
