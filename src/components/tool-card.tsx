@@ -12,16 +12,16 @@ export function ToolCard({ tool }: { tool: Tool }) {
   return (
     <Link
       href={`/tools/${tool.slug}`}
-      className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/50 transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
+      className="group flex h-full flex-col rounded-[1.4rem] border border-slate-200/70 bg-white p-5 shadow-sm shadow-slate-200/50 transition hover:-translate-y-1 hover:border-amber-200 hover:shadow-xl hover:shadow-slate-200/70"
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">
             {tool.category}
           </p>
           <h3 className="mt-3 text-xl font-semibold text-slate-950">{tool.name}</h3>
         </div>
-        <span className="rounded-full border border-slate-200 px-2.5 py-1 text-xs font-medium text-slate-500 transition group-hover:border-sky-200 group-hover:text-sky-700">
+        <span className="rounded-full border border-slate-200 bg-[#fbfcf8] px-2.5 py-1 text-xs font-semibold text-slate-500 transition group-hover:border-amber-300 group-hover:text-slate-950">
           View
         </span>
       </div>
@@ -29,7 +29,7 @@ export function ToolCard({ tool }: { tool: Tool }) {
       <div className="mt-5 space-y-2 text-sm">
         <p className="font-medium text-slate-950">Best for: {tool.bestFor}</p>
         <p className="text-slate-500">{tool.pricingSummary}</p>
-        <span className="inline-flex rounded-full border border-sky-100 bg-sky-50 px-2.5 py-1 text-xs font-medium text-sky-700">
+        <span className="inline-flex rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-800">
           {affiliateStatusLabel[tool.affiliateStatus]}
         </span>
       </div>

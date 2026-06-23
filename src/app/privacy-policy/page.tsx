@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InfoPage } from "@/components/info-page";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -11,15 +12,11 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:px-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-700">
-          Privacy Policy
-        </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-          Privacy Policy
-        </h1>
-        <div className="mt-8 space-y-8 text-base leading-8 text-slate-600">
+    <InfoPage
+      label="Privacy Policy"
+      title="Privacy Policy"
+      description="Plain-language privacy notes for readers browsing AI Builder Hub."
+    >
           <p>
             AI Builder Hub is a small independent content website. This policy explains the basic
             privacy considerations for visitors who read articles, browse tool pages, or click
@@ -68,8 +65,6 @@ export default function PrivacyPolicyPage() {
               owner through the active site administration workflow.
             </p>
           </section>
-        </div>
-      </div>
-    </section>
+    </InfoPage>
   );
 }

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EvidenceSection } from "@/components/evidence-section";
+import { WarmPage } from "@/components/warm-page";
 import { getPostBySlug, posts } from "@/data/posts";
 import { tools } from "@/data/tools";
 import { siteConfig } from "@/lib/site";
@@ -249,20 +250,21 @@ export default async function BlogPostPage({ params }: PostPageProps) {
   };
 
   return (
-    <article className="bg-white">
+    <WarmPage>
+    <article>
       <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
       <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       <div className="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:px-8">
-        <nav aria-label="Breadcrumb" className="text-sm font-medium text-slate-500">
+        <nav aria-label="Breadcrumb" className="text-sm font-semibold text-slate-500">
           <ol className="flex flex-wrap items-center gap-2">
             <li>
-              <Link href="/" className="hover:text-sky-700">
+              <Link href="/" className="hover:text-amber-700">
                 Home
               </Link>
             </li>
             <li aria-hidden="true">/</li>
             <li>
-              <Link href="/blog" className="hover:text-sky-700">
+              <Link href="/blog" className="hover:text-amber-700">
                 Blog
               </Link>
             </li>
@@ -270,9 +272,11 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             <li className="text-slate-950">{post.title}</li>
           </ol>
         </nav>
-        <header className="mt-8 border-b border-slate-200 pb-10">
+        <header className="mt-8 rounded-[1.8rem] border border-slate-200/70 bg-white/85 p-6 shadow-sm shadow-slate-200/60 sm:p-8">
           <div className="flex flex-wrap items-center gap-2 text-sm font-medium text-slate-500">
-            <span>{post.category}</span>
+            <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">
+              {post.category}
+            </span>
             <span aria-hidden="true">/</span>
             <span>Author: AI Builder Hub Editorial</span>
             <span aria-hidden="true">/</span>
@@ -290,7 +294,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-medium text-slate-500"
+                className="rounded-full border border-amber-200 bg-[#fbfcf8] px-3 py-1.5 text-sm font-medium text-slate-500"
               >
                 {tag}
               </span>
@@ -298,12 +302,13 @@ export default async function BlogPostPage({ params }: PostPageProps) {
           </div>
         </header>
         <figure className="mt-8">
-          <div className="relative aspect-[16/9] overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 shadow-sm shadow-slate-200/60">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-[1.8rem] border border-slate-200/70 bg-slate-50 shadow-sm shadow-slate-200/60">
             <Image
               src={post.coverImage.src}
               alt={post.coverImage.alt}
               fill
-              priority
+              preload
+              loading="eager"
               sizes="(min-width: 1024px) 768px, 100vw"
               className="object-cover"
               unoptimized
@@ -315,14 +320,14 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             </figcaption>
           ) : null}
         </figure>
-        <aside className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+        <aside className="mt-8 rounded-[1.4rem] border border-amber-200 bg-amber-50/70 p-5">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-700">
             Table of contents
           </h2>
           <ol className="mt-4 space-y-2 text-sm font-medium text-slate-700">
             {post.sections.map((section) => (
               <li key={section.heading}>
-                <a href={`#${getHeadingId(section.heading)}`} className="hover:text-sky-700">
+                <a href={`#${getHeadingId(section.heading)}`} className="hover:text-amber-700">
                   {section.heading}
                 </a>
               </li>
@@ -345,7 +350,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
                 </div>
                 {inlineImage ? (
                   <figure className="mt-8">
-                    <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+                    <div className="relative aspect-[16/9] overflow-hidden rounded-[1.4rem] border border-slate-200 bg-slate-50">
                       <Image
                         src={inlineImage.src}
                         alt={inlineImage.alt}
@@ -369,7 +374,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
 
         <EvidenceSection evidence={post.evidence} />
 
-        <section className="mt-14 rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+        <section className="mt-14 rounded-[1.8rem] border border-slate-200/70 bg-white/85 p-6 shadow-sm shadow-slate-200/60 sm:p-8">
           <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
             Recommended Tools
           </h2>
@@ -382,7 +387,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             {recommendedTools.map((tool) => (
               <div
                 key={tool.slug}
-                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/60"
+                className="rounded-[1.4rem] border border-slate-200/70 bg-[#fbfcf8] p-5 shadow-sm shadow-slate-200/60"
               >
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div>
@@ -395,7 +400,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
                   </div>
                   <Link
                     href={`/tools/${tool.slug}`}
-                    className="inline-flex h-10 shrink-0 items-center justify-center rounded-xl bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-slate-800"
+                    className="inline-flex h-10 shrink-0 items-center justify-center rounded-2xl bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-slate-800"
                   >
                     View tool details
                   </Link>
@@ -405,7 +410,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
           </div>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
+        <section className="mt-8 rounded-[1.8rem] border border-slate-200/70 bg-white/85 p-6 shadow-sm shadow-slate-200/60 sm:p-8">
           <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
             Related Articles
           </h2>
@@ -414,14 +419,14 @@ export default async function BlogPostPage({ params }: PostPageProps) {
           </p>
           <div className="mt-6 grid gap-4">
             {relatedPosts.map((relatedPost) => (
-              <article key={relatedPost.slug} className="rounded-2xl border border-slate-200 p-5">
+              <article key={relatedPost.slug} className="rounded-[1.4rem] border border-slate-200/70 bg-[#fbfcf8] p-5">
                 <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500">
                   <span>{relatedPost.category}</span>
                   <span aria-hidden="true">/</span>
                   <span>{relatedPost.readingTime}</span>
                 </div>
                 <h3 className="mt-3 text-lg font-semibold text-slate-950">
-                  <Link href={`/blog/${relatedPost.slug}`} className="hover:text-sky-700">
+                  <Link href={`/blog/${relatedPost.slug}`} className="hover:text-amber-700">
                     {relatedPost.title}
                   </Link>
                 </h3>
@@ -431,7 +436,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
           </div>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-sky-100 bg-sky-50 p-6 sm:p-8">
+        <section className="mt-8 rounded-[1.8rem] border border-amber-200 bg-[linear-gradient(135deg,#fff7df_0%,#ffffff_52%,#e8f7ff_100%)] p-6 shadow-sm shadow-slate-200/60 sm:p-8">
           <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
             Ready to choose your next tool?
           </h2>
@@ -443,13 +448,13 @@ export default async function BlogPostPage({ params }: PostPageProps) {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/tools"
-              className="inline-flex h-11 items-center justify-center rounded-xl bg-slate-950 px-5 text-sm font-semibold text-white transition hover:bg-slate-800"
+              className="inline-flex h-11 items-center justify-center rounded-2xl bg-slate-950 px-5 text-sm font-semibold text-white transition hover:bg-slate-800"
             >
               Explore recommended tools
             </Link>
             <Link
               href="/affiliate-disclosure"
-              className="inline-flex h-11 items-center justify-center rounded-xl border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-950 transition hover:border-slate-300 hover:bg-slate-50"
+              className="inline-flex h-11 items-center justify-center rounded-2xl border border-amber-200 bg-white px-5 text-sm font-semibold text-slate-950 transition hover:bg-amber-50"
             >
               Read affiliate disclosure
             </Link>
@@ -457,5 +462,6 @@ export default async function BlogPostPage({ params }: PostPageProps) {
         </section>
       </div>
     </article>
+    </WarmPage>
   );
 }

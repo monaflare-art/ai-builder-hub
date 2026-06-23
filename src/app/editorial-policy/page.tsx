@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InfoPage } from "@/components/info-page";
 
 export const metadata: Metadata = {
   title: "Editorial Policy",
@@ -44,15 +45,11 @@ const policySections = [
 
 export default function EditorialPolicyPage() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:px-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-700">
-          Editorial Policy
-        </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-          How AI Builder Hub writes and updates content.
-        </h1>
-        <div className="mt-8 space-y-8 text-base leading-8 text-slate-600">
+    <InfoPage
+      label="Editorial Policy"
+      title="How AI Builder Hub writes and updates content."
+      description="How reviews, comparisons, pricing notes, screenshots, and affiliate relationships are handled."
+    >
           {policySections.map((section) => (
             <section key={section.title}>
               <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
@@ -61,8 +58,6 @@ export default function EditorialPolicyPage() {
               <p className="mt-3">{section.body}</p>
             </section>
           ))}
-        </div>
-      </div>
-    </section>
+    </InfoPage>
   );
 }

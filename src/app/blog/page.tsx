@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PostCard } from "@/components/post-card";
+import { WarmContainer, WarmHero, WarmPage, WarmPanel } from "@/components/warm-page";
 import { posts } from "@/data/posts";
 
 export const metadata: Metadata = {
@@ -23,23 +24,54 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const filteredPosts = selectedCategory
     ? posts.filter((post) => post.category === selectedCategory)
     : posts;
+  const priorityPosts = [
+    "hostinger-review-2026",
+    "vultr-vs-digitalocean-for-developers",
+    "best-vps-for-developers",
+  ]
+    .map((slug) => posts.find((post) => post.slug === slug))
+    .filter((post) => post !== undefined);
 
   return (
-    <section className="bg-slate-50">
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">
+    <WarmPage>
+      <WarmHero
+        label="Guides & playbooks"
+        title="Read when you are choosing what to build next."
+        description="Reviews, comparisons, deployment guides, and practical builder workflows. Less feed, more field notes for shipping."
+      >
+        <WarmPanel className="p-5">
+          <p className="text-sm font-semibold text-slate-950">Start with high-intent guides</p>
+          <div className="mt-4 space-y-3">
+            {priorityPosts.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="block rounded-2xl bg-[#fbfcf8] p-4 transition hover:bg-amber-50"
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-600">
+                  {post.category}
+                </p>
+                <p className="mt-2 text-sm font-semibold text-slate-950">{post.title}</p>
+              </Link>
+            ))}
+          </div>
+        </WarmPanel>
+      </WarmHero>
+
+      <WarmContainer className="py-14 lg:py-16">
         <div className="max-w-3xl">
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-            Builder tutorials
-          </h1>
-          <p className="mt-5 text-lg leading-8 text-slate-600">
-            面向新手的实践教程：如何选工具、如何部署、如何让 AI 辅助开发的项目真正上线。
+          <h2 className="text-3xl font-semibold tracking-tight text-slate-950">
+            Browse builder resources
+          </h2>
+          <p className="mt-3 text-base leading-7 text-slate-600">
+            Filter by topic, then pick the guide closest to the decision in front of you.
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
             <Link
               href="/blog"
-              className={`rounded-full border px-3 py-1.5 text-sm font-medium transition ${
+              className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${
                 selectedCategory
-                  ? "border-slate-200 bg-white text-slate-600 hover:border-sky-200 hover:text-sky-700"
+                  ? "border-amber-200 bg-white text-slate-600 hover:bg-amber-50 hover:text-slate-950"
                   : "border-slate-950 bg-slate-950 text-white"
               }`}
             >
@@ -49,10 +81,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               <Link
                 key={category}
                 href={`/blog?category=${encodeURIComponent(category)}`}
-                className={`rounded-full border px-3 py-1.5 text-sm font-medium transition ${
+                className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${
                   selectedCategory === category
                     ? "border-slate-950 bg-slate-950 text-white"
-                    : "border-slate-200 bg-white text-slate-600 hover:border-sky-200 hover:text-sky-700"
+                    : "border-amber-200 bg-white text-slate-600 hover:bg-amber-50 hover:text-slate-950"
                 }`}
               >
                 {category}
@@ -65,11 +97,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </p>
         </div>
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {filteredPosts.map((post) => (
-            <PostCard key={post.slug} post={post} />
+          {filteredPosts.map((post, index) => (
+            <PostCard key={post.slug} post={post} eager={index < 3} />
           ))}
         </div>
-      </div>
-    </section>
+      </WarmContainer>
+    </WarmPage>
   );
 }

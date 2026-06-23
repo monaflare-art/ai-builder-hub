@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { InfoPage } from "@/components/info-page";
 
 export const metadata: Metadata = {
   title: "About",
@@ -12,15 +13,11 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:px-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-700">
-          About AI Builder Hub
-        </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-          Independent guidance for builders choosing web tools.
-        </h1>
-        <div className="mt-8 space-y-6 text-base leading-8 text-slate-600">
+    <InfoPage
+      label="About AI Builder Hub"
+      title="Independent guidance for builders choosing web tools."
+      description="A small publishing project for people turning AI ideas into real websites, apps, and online businesses."
+    >
           <p>
             AI Builder Hub is an independent content website for developers, AI builders, startup
             founders, hosting users, VPS users, domain buyers, and website owners who want to turn
@@ -53,8 +50,6 @@ export default function AboutPage() {
             </Link>
             .
           </p>
-        </div>
-      </div>
-    </section>
+    </InfoPage>
   );
 }

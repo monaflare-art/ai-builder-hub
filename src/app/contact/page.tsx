@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InfoPage } from "@/components/info-page";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -18,20 +19,16 @@ const contactCategories = [
 
 export default function ContactPage() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:px-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-700">
-          Contact
-        </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-          Contact AI Builder Hub
-        </h1>
-        <div className="mt-8 space-y-6 text-base leading-8 text-slate-600">
+    <InfoPage
+      label="Contact"
+      title="Contact AI Builder Hub"
+      description="Send partnership, correction, editorial, or general questions related to builder tools and infrastructure."
+    >
           <p>
             AI Builder Hub welcomes relevant partnership, correction, and editorial messages related
             to hosting, VPS, domains, SEO tools, AI coding tools, and website infrastructure.
           </p>
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <div className="rounded-[1.4rem] border border-amber-200 bg-amber-50/60 p-5">
             <dl className="space-y-4">
               <div>
                 <dt className="font-semibold text-slate-950">Website name</dt>
@@ -68,8 +65,6 @@ export default function ContactPage() {
               ))}
             </ul>
           </div>
-        </div>
-      </div>
-    </section>
+    </InfoPage>
   );
 }

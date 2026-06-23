@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InfoPage } from "@/components/info-page";
 
 export const metadata: Metadata = {
   title: "Affiliate Disclosure",
@@ -11,12 +12,11 @@ export const metadata: Metadata = {
 
 export default function AffiliateDisclosurePage() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-          Affiliate Disclosure
-        </h1>
-        <div className="mt-8 space-y-6 text-base leading-8 text-slate-600">
+    <InfoPage
+      label="Affiliate Disclosure"
+      title="Affiliate Disclosure"
+      description="How affiliate links may support the site without changing editorial independence."
+    >
           <p>
             AI Builder Hub may use affiliate links on tool pages, review pages, tutorials, or
             resource lists. If you click one of these links and make a purchase, we may earn a
@@ -37,8 +37,6 @@ export default function AffiliateDisclosurePage() {
             should still review each product&apos;s pricing, terms, refund policy, and feature limits
             before subscribing or purchasing.
           </p>
-        </div>
-      </div>
-    </section>
+    </InfoPage>
   );
 }

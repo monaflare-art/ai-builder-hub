@@ -110,10 +110,10 @@ const guideSlugs = [
 ];
 
 const trustIndicators = [
-  { value: `${tools.length} tools`, label: "Curated for builders" },
-  { value: "50+ guides", label: "Reviews and playbooks" },
-  { value: "No fluff", label: "Practical over generic" },
-  { value: "Updated regularly", label: "Built as the stack changes" },
+  { value: `${tools.length} tools`, label: "Mapped and reviewed" },
+  { value: "50+ guides", label: "Step-by-step" },
+  { value: "No fluff", label: "Only what helps" },
+  { value: "Updated regularly", label: "Kept current" },
 ];
 
 function findTool(slug: string | null): Tool | undefined {
@@ -210,152 +210,197 @@ export default function Home() {
 
   return (
     <div className="overflow-x-hidden bg-[#fbfcf8]">
-      <section className="overflow-hidden border-b border-slate-200/70 bg-[radial-gradient(circle_at_12%_8%,rgba(251,191,36,0.22),transparent_28%),radial-gradient(circle_at_84%_12%,rgba(56,189,248,0.16),transparent_28%),linear-gradient(180deg,#fffaf0_0%,#fbfcf8_82%)]">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 pb-12 pt-12 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:pb-16 lg:pt-18">
-          <div className="relative z-10 flex flex-col justify-center">
-            <div className="mb-7 inline-flex w-fit items-center gap-2 rounded-full border border-amber-200/80 bg-white/75 px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm shadow-amber-100/60">
+      <section className="relative overflow-hidden border-b border-amber-100/80 bg-[#fff7eb]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(250,204,21,0.34),transparent_26%),radial-gradient(circle_at_82%_22%,rgba(125,211,252,0.22),transparent_24%),linear-gradient(180deg,#fff9ed_0%,#fbfcf8_88%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#fbfcf8] to-transparent" />
+        <div className="relative mx-auto grid min-h-[680px] max-w-7xl gap-10 px-5 pb-10 pt-10 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:pb-12 lg:pt-10">
+          <div className="relative z-10 flex flex-col justify-center py-8">
+            <p className="inline-flex w-fit rotate-[-2deg] items-center gap-2 rounded-full border border-amber-300 bg-white/78 px-5 py-3 text-base font-bold text-slate-900 shadow-sm shadow-amber-100/70">
               <span className="text-amber-500">
                 <Icon name="spark" />
               </span>
               Built for indie AI builders
-            </div>
-            <h1 className="max-w-3xl text-5xl font-semibold leading-[0.95] tracking-tight text-slate-950 sm:text-6xl lg:text-6xl">
-              Plan.
-              <br />
-              Build.
-              <br />
-              Deploy.
-              <br />
-              Grow.
-              <span className="mt-5 block text-balance text-4xl text-slate-800 sm:text-5xl lg:text-5xl">
-                Everything AI Builders Need.
+            </p>
+            <h1 className="mt-8 max-w-3xl text-[3.35rem] font-black leading-[0.88] tracking-tight text-slate-950 sm:text-[5.7rem] lg:text-[5.85rem]">
+              <span className="block text-4xl font-black leading-none text-slate-950 sm:text-5xl lg:text-4xl">
+                Plan. Build.
+                <br />
+                Deploy. Grow.
+              </span>
+              <span className="relative mt-5 inline-block">
+                Everything AI
+                <br />
+                Builders Need.
+                <span className="absolute -bottom-2 left-0 h-3 w-full rotate-[-1deg] rounded-full bg-amber-300/90" />
               </span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+            <p className="mt-8 max-w-xl text-xl leading-9 text-slate-700">
               Curated tools, practical guides, honest reviews, and real-world workflows for AI
               builders, founders, developers, and indie makers.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <p className="mt-3 rotate-[-2deg] text-lg font-semibold text-slate-900">
+              Let&apos;s build something useful.
+            </p>
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <Link
                 href="/tools"
-                className="inline-flex h-12 items-center justify-center rounded-2xl bg-slate-950 px-6 text-sm font-semibold text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-slate-800"
+                className="inline-flex h-14 items-center justify-center rounded-2xl bg-amber-400 px-7 text-base font-black text-slate-950 shadow-[0_10px_0_rgba(15,23,42,0.12)] ring-1 ring-amber-500/40 transition hover:-translate-y-1 hover:bg-amber-300"
               >
                 Explore Tools
+                <span className="ml-2">→</span>
               </Link>
               <Link
                 href="/blog"
-                className="inline-flex h-12 items-center justify-center rounded-2xl border border-slate-200 bg-white/85 px-6 text-sm font-semibold text-slate-950 shadow-sm transition hover:-translate-y-0.5 hover:border-amber-200 hover:bg-white"
+                className="inline-flex h-14 items-center justify-center rounded-2xl border border-slate-200 bg-white/90 px-7 text-base font-bold text-slate-950 shadow-sm transition hover:-translate-y-1 hover:border-amber-300 hover:bg-white"
               >
                 Read Guides
               </Link>
             </div>
             <div className="mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
               {trustIndicators.map((item) => (
-                <div key={item.value} className="rounded-2xl border border-white/80 bg-white/70 p-4 shadow-sm shadow-slate-200/60 backdrop-blur">
-                  <p className="text-sm font-semibold text-slate-950">{item.value}</p>
-                  <p className="mt-1 text-xs leading-5 text-slate-500">{item.label}</p>
+                <div key={item.value} className="flex items-start gap-2 rounded-2xl border border-white/80 bg-white/68 p-3 shadow-sm shadow-slate-200/60 backdrop-blur">
+                  <span className="mt-0.5 text-amber-500">✦</span>
+                  <div>
+                    <p className="text-sm font-black text-slate-950">{item.value}</p>
+                    <p className="mt-1 text-xs leading-5 text-slate-600">{item.label}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="relative min-h-[400px] lg:min-h-[470px]">
-            <div className="absolute left-10 top-8 hidden h-24 w-24 rounded-full border border-amber-200 bg-white/35 lg:block" />
-            <div className="absolute right-2 top-2 hidden h-36 w-36 rounded-full bg-emerald-100/50 blur-2xl lg:block" />
-            <div className="relative mx-auto max-w-[520px] rounded-[2rem] border border-white/90 bg-white/80 p-4 shadow-2xl shadow-slate-300/40 backdrop-blur">
-              <div className="rounded-[1.5rem] border border-slate-200/75 bg-white p-4">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-                  <div>
-                    <p className="text-sm font-semibold text-slate-950">Builder OS</p>
-                    <p className="mt-1 text-xs text-slate-500">From idea to launch</p>
+          <div className="relative min-h-[520px] lg:min-h-[620px]">
+            <div className="absolute right-1 top-3 hidden h-44 w-44 rounded-full border-[10px] border-emerald-500/15 lg:block" />
+            <div className="absolute right-2 top-24 hidden h-52 w-32 rounded-t-full bg-gradient-to-br from-emerald-400 to-emerald-700 shadow-xl shadow-emerald-900/10 lg:block" />
+            <div className="absolute right-0 top-64 hidden h-28 w-44 rounded-[2rem] border border-slate-200 bg-white shadow-lg lg:block" />
+
+            <div className="absolute bottom-4 left-6 right-1 top-14 rounded-[3rem] bg-[linear-gradient(150deg,#f3d1a6_0%,#f1bd75_42%,#c48848_100%)] shadow-2xl shadow-amber-900/18 lg:bottom-0 lg:left-0 lg:top-24" />
+            <div className="absolute bottom-14 left-4 right-6 h-28 rotate-[-4deg] rounded-[2rem] bg-white/70 shadow-xl shadow-amber-900/10 lg:left-0 lg:right-16" />
+
+            <div className="absolute left-8 top-12 w-[78%] max-w-[600px] rotate-[2deg] rounded-[2rem] border border-slate-300 bg-slate-950 p-3 shadow-2xl shadow-slate-900/20 lg:left-12 lg:top-20">
+              <div className="rounded-[1.35rem] bg-[#fbfcf8] p-5">
+                <div className="flex items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="flex size-7 items-center justify-center rounded-lg bg-amber-300 text-slate-950">✦</span>
+                    <p className="text-sm font-black text-slate-950">AI Builder Hub</p>
                   </div>
-                  <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-                    Live stack
+                  <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-bold text-slate-500">
+                    Stack finder
                   </span>
                 </div>
-                <div className="grid gap-3 py-5 sm:grid-cols-2">
-                  {[
-                    ["Plan", "Choose the buyer and workflow"],
-                    ["Build", "Use AI coding with guardrails"],
-                    ["Deploy", "Ship on Vercel, hosting, or VPS"],
-                    ["Grow", "Turn content into first traffic"],
-                  ].map(([title, copy]) => (
-                    <div key={title} className="rounded-2xl bg-slate-50 p-4">
-                      <p className="text-sm font-semibold text-slate-950">{title}</p>
-                      <p className="mt-2 text-sm leading-6 text-slate-600">{copy}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="rounded-2xl bg-slate-950 p-5 text-white">
-                  <p className="text-sm font-semibold">Today&apos;s playbook</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
-                    Pick one problem, choose one stack, launch one useful page, then improve it
-                    with real feedback.
+                <div className="mt-5">
+                  <p className="text-2xl font-black leading-tight text-slate-950">
+                    Find the best tools
+                    <br />
+                    for your next project.
                   </p>
+                  <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-3 text-sm font-semibold text-slate-400">
+                    Search tools, guides, workflows...
+                  </div>
+                  <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                    {["AI Tools", "Hosting", "VPS", "Domains"].map((label) => (
+                      <div key={label} className="rounded-2xl border border-slate-200 bg-white p-3 text-center text-xs font-black text-slate-700 shadow-sm">
+                        {label}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                    {["Review", "Compare", "Launch"].map((label, index) => (
+                      <div key={label} className="rounded-2xl bg-slate-50 p-3">
+                        <div className={`h-14 rounded-xl ${index === 0 ? "bg-amber-100" : index === 1 ? "bg-sky-100" : "bg-emerald-100"}`} />
+                        <p className="mt-2 text-xs font-black text-slate-800">{label}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="absolute bottom-3 left-0 hidden max-w-[260px] rotate-[-4deg] rounded-3xl border border-amber-200 bg-amber-50 p-5 shadow-lg shadow-amber-200/40 lg:block">
-              <p className="text-sm font-semibold text-slate-950">Builder note</p>
-              <p className="mt-2 text-sm leading-6 text-slate-700">
-                Start small. Publish sooner. Replace guesses with evidence.
+
+            <div className="absolute bottom-20 left-4 hidden w-56 rotate-[-5deg] rounded-[1.4rem] border border-amber-200 bg-amber-100 p-5 shadow-xl shadow-amber-900/10 lg:block">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-amber-700">sticky note</p>
+              <p className="mt-3 text-xl font-black leading-tight text-slate-950">
+                Pick one stack.
+                <br />
+                Ship this week.
               </p>
+              <span className="absolute -right-4 top-8 text-4xl text-amber-500">↗</span>
             </div>
-            <div className="absolute bottom-10 right-0 hidden max-w-[220px] rotate-3 rounded-3xl border border-sky-100 bg-white p-5 shadow-lg shadow-sky-100/70 lg:block">
-              <p className="text-sm font-semibold text-slate-950">Next step</p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Compare tools only when they unblock the next build.</p>
+
+            <div className="absolute bottom-10 right-10 hidden w-72 rotate-[5deg] rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-xl shadow-slate-900/10 lg:block">
+              <div className="flex items-center gap-3">
+                <span className="flex size-10 items-center justify-center rounded-full bg-slate-950 text-white">✓</span>
+                <div>
+                  <p className="text-sm font-black text-slate-950">Launch checklist</p>
+                  <p className="text-xs font-semibold text-slate-500">Domain · Deploy · Grow</p>
+                </div>
+              </div>
+              <div className="mt-4 space-y-2">
+                {["Choose domain", "Deploy homepage", "Submit sitemap"].map((item) => (
+                  <p key={item} className="rounded-full bg-slate-50 px-3 py-2 text-xs font-bold text-slate-600">
+                    {item}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
-              What Do You Want To Do?
-            </h2>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
-              Start with the job in front of you, then follow the tools and guides that match it.
-            </p>
+      <section className="mx-auto -mt-8 max-w-7xl px-5 pb-16 sm:px-6 lg:px-8 lg:pb-20">
+        <div className="rounded-[2.4rem] border border-slate-200/70 bg-white/88 p-5 shadow-2xl shadow-slate-200/70 backdrop-blur sm:p-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="relative inline-block text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
+                What Do You Want To Do?
+                <span className="absolute -bottom-1 left-0 h-2 w-full rounded-full bg-amber-300/80" />
+              </h2>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600">
+                Start with the job in front of you, then follow the tools and guides that match it.
+              </p>
+            </div>
+            <Link href="/blog" className="text-sm font-black text-blue-600 hover:text-blue-800">
+              Browse all guides →
+            </Link>
           </div>
-          <Link href="/blog" className="text-sm font-semibold text-slate-700 hover:text-slate-950">
-            Browse all guides
-          </Link>
-        </div>
-        <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
           {journeyCards.map((card) => (
             <Link
               key={card.title}
               href={card.href}
-              className="group rounded-[1.4rem] border border-slate-200/70 bg-white p-6 shadow-sm shadow-slate-200/50 transition hover:-translate-y-1 hover:border-amber-200 hover:shadow-xl hover:shadow-slate-200/70"
+              className="group min-h-44 rounded-[1.35rem] border border-slate-200/70 bg-[linear-gradient(145deg,#ffffff_0%,#fff8e7_100%)] p-4 shadow-sm shadow-slate-200/70 transition hover:-translate-y-1 hover:rotate-[-1deg] hover:border-amber-200 hover:shadow-xl hover:shadow-slate-200/70"
             >
-              <span className="flex size-12 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition group-hover:bg-amber-400 group-hover:text-slate-950">
+              <span className="flex size-14 items-center justify-center rounded-2xl border border-amber-200 bg-white text-amber-600 shadow-sm transition group-hover:bg-amber-400 group-hover:text-slate-950">
                 <Icon name={card.icon} />
               </span>
-              <h3 className="mt-5 text-xl font-semibold tracking-tight text-slate-950">{card.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-600">{card.copy}</p>
+              <h3 className="mt-5 text-lg font-black tracking-tight text-slate-950">{card.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{card.copy}</p>
             </Link>
           ))}
         </div>
+        </div>
       </section>
 
-      <section className="border-y border-slate-200/70 bg-white">
-        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <section className="bg-[#fbfcf8]">
+        <div className="mx-auto max-w-7xl px-5 pb-16 sm:px-6 lg:px-8 lg:pb-20">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+              <div className="flex flex-wrap items-end gap-3">
+              <h2 className="relative inline-block text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
                 Handpicked Tools
+                <span className="absolute -bottom-1 left-0 h-2 w-full rounded-full bg-amber-300/80" />
               </h2>
-              <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
-                Personally selected and reviewed.
-              </p>
+                <p className="pb-1 text-sm font-semibold text-slate-500">Personally selected and reviewed.</p>
+              </div>
             </div>
-            <Link href="/tools" className="text-sm font-semibold text-sky-700 hover:text-sky-900">
-              View all tools
+            <Link href="/tools" className="text-sm font-black text-blue-600 hover:text-blue-800">
+              View all tools →
             </Link>
           </div>
-          <div className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="relative mt-9">
+            <p className="absolute -left-2 -top-5 hidden rotate-[-8deg] text-sm font-black text-red-500 lg:block">
+              my favorite!
+            </p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
             {handpickedTools.map((item) => {
               const tool = findTool(item.slug);
               const href = tool ? `/tools/${tool.slug}` : item.fallbackHref;
@@ -364,32 +409,30 @@ export default function Home() {
                 <Link
                   key={item.name}
                   href={href}
-                  className="group flex min-h-56 flex-col rounded-[1.4rem] border border-slate-200/70 bg-[#fbfcf8] p-5 shadow-sm shadow-slate-200/50 transition hover:-translate-y-1 hover:border-slate-300 hover:bg-white hover:shadow-xl hover:shadow-slate-200/70"
+                  className="group flex min-h-64 flex-col rounded-[1.35rem] border border-slate-200/70 bg-white p-4 text-center shadow-sm shadow-slate-200/60 transition hover:-translate-y-1 hover:rotate-[1deg] hover:border-amber-200 hover:shadow-xl hover:shadow-slate-200/70"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <span className={`flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br ${item.accent} text-lg font-bold text-white shadow-sm`}>
+                  <div className="flex items-start justify-between gap-3">
+                    <span className={`mx-auto flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br ${item.accent} text-xl font-black text-white shadow-sm`}>
                       {item.name.slice(0, 1)}
                     </span>
-                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-500">
-                      {tool ? "Tool page" : "Profile pending"}
+                    <span className="rounded-full border border-amber-200 bg-white px-2 py-1 text-[10px] font-black uppercase tracking-wide text-amber-700">
+                      Pick
                     </span>
                   </div>
-                  <div className="mt-6 flex-1">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                      {item.category}
-                    </p>
-                    <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">
+                  <div className="mt-5 flex-1">
+                    <h3 className="text-xl font-black tracking-tight text-slate-950">
                       {item.name}
                     </h3>
-                    <p className="mt-3 text-sm leading-6 text-slate-600">{tool?.shortDescription ?? item.note}</p>
+                    <p className="mt-3 text-xs leading-5 text-slate-600">{tool?.shortDescription ?? item.note}</p>
                   </div>
-                  <span className="mt-6 inline-flex items-center text-sm font-semibold text-slate-950">
+                  <span className="mx-auto mt-5 inline-flex items-center rounded-full border border-slate-200 bg-[#fbfcf8] px-4 py-2 text-sm font-black text-slate-950">
                     Visit
                     <span className="ml-2 transition group-hover:translate-x-1">→</span>
                   </span>
                 </Link>
               );
             })}
+          </div>
           </div>
         </div>
       </section>

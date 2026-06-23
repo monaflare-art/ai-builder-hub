@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InfoPage } from "@/components/info-page";
 
 export const metadata: Metadata = {
   title: "Terms",
@@ -11,13 +12,11 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-3xl px-5 py-16 sm:px-6 lg:px-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-700">Terms</p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-          Terms of Use
-        </h1>
-        <div className="mt-8 space-y-8 text-base leading-8 text-slate-600">
+    <InfoPage
+      label="Terms"
+      title="Terms of Use"
+      description="The practical ground rules for using this independent builder resource."
+    >
           <p>
             AI Builder Hub publishes educational content about AI tools, hosting, VPS providers,
             domains, SEO tools, website infrastructure, and online project workflows. By using this
@@ -62,8 +61,6 @@ export default function TermsPage() {
               website before making a decision.
             </p>
           </section>
-        </div>
-      </div>
-    </section>
+    </InfoPage>
   );
 }
