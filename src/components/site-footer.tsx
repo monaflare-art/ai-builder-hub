@@ -6,8 +6,8 @@ const footerGroups = [
     links: [
       { href: "/tools", label: "Tools" },
       { href: "/blog", label: "Blog" },
-      { href: "/about", label: "About" },
-      { href: "/contact", label: "Contact" },
+      { href: "/blog?category=Comparisons", label: "Comparisons" },
+      { href: "/blog?category=Tutorials", label: "Guides" },
     ],
   },
   {
@@ -20,17 +20,10 @@ const footerGroups = [
     ],
   },
   {
-    title: "Popular Guides",
-    links: [
-      { href: "/blog/hostinger-review-2026", label: "Hostinger Review" },
-      { href: "/blog/vultr-vs-digitalocean-for-developers", label: "Vultr vs DigitalOcean" },
-      { href: "/blog/semrush-vs-ahrefs", label: "Semrush vs Ahrefs" },
-      { href: "/blog/how-to-deploy-nextjs-on-vps", label: "Deploy Next.js on VPS" },
-    ],
-  },
-  {
     title: "Trust",
     links: [
+      { href: "/about", label: "About" },
+      { href: "/contact", label: "Contact" },
       { href: "/privacy-policy", label: "Privacy Policy" },
       { href: "/terms", label: "Terms" },
       { href: "/editorial-policy", label: "Editorial Policy" },
@@ -41,14 +34,14 @@ const footerGroups = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-slate-200 bg-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-6 lg:grid-cols-[1.1fr_2fr] lg:px-8">
+    <footer className="border-t border-amber-100 bg-[#fff7e8]">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-6 lg:grid-cols-[1.1fr_2fr] lg:px-8">
         <div>
           <Link href="/" className="inline-flex items-center gap-3" aria-label="AI Builder Hub home">
-            <span className="flex size-9 items-center justify-center rounded-xl bg-slate-950 text-sm font-semibold text-white">
-              AI
+            <span className="flex size-10 items-center justify-center rounded-2xl bg-amber-300 text-base font-black text-slate-950 shadow-sm shadow-amber-200">
+              ✦
             </span>
-            <span className="text-sm font-semibold text-slate-950">AI Builder Hub</span>
+            <span className="text-sm font-black text-slate-950">AI Builder Hub</span>
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-6 text-slate-600">
             Practical tools, guides, reviews, and workflows for indie AI builders.
@@ -57,7 +50,7 @@ export function SiteFooter() {
             © {new Date().getFullYear()} AI Builder Hub.
           </p>
         </div>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-3">
           {footerGroups.map((group) => (
             <div key={group.title}>
               <p className="text-sm font-semibold text-slate-950">{group.title}</p>
