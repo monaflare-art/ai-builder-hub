@@ -5,18 +5,25 @@ const footerGroups = [
     title: "Explore",
     links: [
       { href: "/tools", label: "Tools" },
-      { href: "/blog", label: "Blog" },
+      { href: "/blog", label: "Playbooks" },
       { href: "/blog?category=Comparisons", label: "Comparisons" },
-      { href: "/blog?category=Tutorials", label: "Guides" },
+      { href: "/blog?category=Reviews", label: "Reviews" },
     ],
   },
   {
-    title: "Categories",
+    title: "Popular Reviews",
     links: [
-      { href: "/blog/best-vps-for-developers", label: "VPS & Cloud" },
-      { href: "/blog/best-domain-registrars", label: "Domains" },
-      { href: "/blog/best-ai-coding-tools", label: "AI Coding" },
-      { href: "/blog/how-to-get-first-website-visitors", label: "Growth" },
+      { href: "/blog/hostinger-review-2026", label: "Hostinger Review" },
+      { href: "/blog/vultr-review-2026", label: "Vultr Review" },
+      { href: "/blog/semrush-review-2026", label: "Semrush Review" },
+    ],
+  },
+  {
+    title: "Popular Comparisons",
+    links: [
+      { href: "/blog/vultr-vs-digitalocean-for-developers", label: "Vultr vs DigitalOcean" },
+      { href: "/blog/semrush-vs-ahrefs", label: "Semrush vs Ahrefs" },
+      { href: "/blog/hostinger-vs-siteground", label: "Hostinger vs SiteGround" },
     ],
   },
   {
@@ -35,7 +42,7 @@ const footerGroups = [
 export function SiteFooter() {
   return (
     <footer className="border-t border-amber-100 bg-[#fff7e8]">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-6 lg:grid-cols-[1.1fr_2fr] lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-6 lg:grid-cols-[1fr_2.3fr] lg:px-8">
         <div>
           <Link href="/" className="inline-flex items-center gap-3" aria-label="AI Builder Hub home">
             <span className="flex size-10 items-center justify-center rounded-2xl bg-amber-300 text-base font-black text-slate-950 shadow-sm shadow-amber-200">
@@ -50,7 +57,7 @@ export function SiteFooter() {
             © {new Date().getFullYear()} AI Builder Hub.
           </p>
         </div>
-        <div className="grid gap-8 sm:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {footerGroups.map((group) => (
             <div key={group.title}>
               <p className="text-sm font-semibold text-slate-950">{group.title}</p>

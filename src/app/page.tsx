@@ -69,24 +69,6 @@ const handpickedTools = [
     accent: "from-zinc-950 to-zinc-700",
   },
   {
-    name: "Supabase",
-    slug: null,
-    fallbackHref: "https://supabase.com/",
-    category: "Backend",
-    note: "Open-source backend stack for auth, database, and APIs.",
-    why: "Gives small teams a practical backend without starting from zero.",
-    accent: "from-emerald-500 to-teal-500",
-  },
-  {
-    name: "Namecheap",
-    slug: "namecheap",
-    fallbackHref: "https://www.namecheap.com/",
-    category: "Domains",
-    note: "Register domains and manage DNS before launch.",
-    why: "Useful when you need a domain, DNS, and SSL basics in one place.",
-    accent: "from-orange-500 to-amber-500",
-  },
-  {
     name: "DigitalOcean",
     slug: "digitalocean",
     fallbackHref: "https://www.digitalocean.com/",
@@ -221,8 +203,8 @@ export default function Home() {
       <section className="relative overflow-hidden border-b border-amber-100/80 bg-[#fff4df]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_18%,rgba(250,204,21,0.32),transparent_25%),radial-gradient(circle_at_82%_22%,rgba(125,211,252,0.18),transparent_22%),linear-gradient(180deg,#fff6e6_0%,#f8f0df_92%)]" />
         <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#f8f0df] to-transparent" />
-        <div className="relative mx-auto grid min-h-[540px] max-w-7xl gap-8 px-5 pb-6 pt-7 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:pb-8 lg:pt-7">
-          <div className="relative z-10 flex flex-col justify-center py-3">
+        <div className="relative mx-auto grid min-h-[455px] max-w-7xl gap-7 px-5 pb-5 pt-6 sm:px-6 lg:grid-cols-[0.88fr_1.12fr] lg:px-8 lg:pb-6 lg:pt-6">
+          <div className="relative z-10 flex flex-col justify-center py-1">
             <p className="inline-flex w-fit rotate-[-2deg] items-center gap-2 rounded-full border border-amber-300 bg-white/78 px-4 py-2 text-sm font-bold text-slate-900 shadow-sm shadow-amber-100/70">
               <span className="text-amber-500">
                 <Icon name="spark" />
@@ -231,9 +213,9 @@ export default function Home() {
             </p>
             <h1
               aria-label="Plan. Build. Deploy. Grow. Everything AI Builders Need."
-              className="mt-5 max-w-3xl text-[3rem] font-black leading-[0.88] tracking-tight text-slate-950 sm:text-[4.9rem] lg:text-[5rem]"
+              className="mt-4 max-w-3xl text-[2.75rem] font-black leading-[0.88] tracking-tight text-slate-950 sm:text-[4.45rem] lg:text-[4.55rem]"
             >
-              <span className="block text-3xl font-black leading-none text-slate-950 sm:text-4xl lg:text-[2.6rem]">
+              <span className="block text-3xl font-black leading-none text-slate-950 sm:text-4xl lg:text-[2.35rem]">
                 Plan. Build.
                 <br />
                 Deploy. Grow.
@@ -245,14 +227,14 @@ export default function Home() {
                 <span className="absolute -bottom-3 left-0 h-2.5 w-full rotate-[-1deg] rounded-full bg-amber-300/90" />
               </span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-slate-700">
+            <p className="mt-5 max-w-xl text-base leading-7 text-slate-700">
               Curated tools, practical guides, honest reviews, and real-world workflows for AI
               builders, founders, developers, and indie makers.
             </p>
             <p className="mt-2 rotate-[-2deg] text-base font-semibold text-slate-900">
               Let&apos;s build something useful.
             </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/tools"
                 className="inline-flex h-12 items-center justify-center rounded-2xl bg-orange-400 px-6 text-sm font-black text-slate-950 shadow-[0_8px_0_rgba(15,23,42,0.12)] ring-1 ring-orange-500/40 transition hover:-translate-y-1 hover:bg-amber-300"
@@ -267,7 +249,7 @@ export default function Home() {
                 Read Guides
               </Link>
             </div>
-            <div className="mt-7 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="mt-5 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
               {trustIndicators.map((item) => (
                 <div key={item.value} className="flex items-start gap-2 rounded-2xl border border-white/80 bg-white/68 p-3 shadow-sm shadow-slate-200/60 backdrop-blur">
                   <span className="mt-0.5 text-amber-500">✦</span>
@@ -280,17 +262,17 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative hidden min-h-[470px] lg:block">
-            <div className="absolute bottom-4 left-4 right-2 h-[320px] rounded-[2.5rem] bg-[linear-gradient(150deg,#f4d29d_0%,#e9ad61_48%,#c98744_100%)] shadow-2xl shadow-amber-900/18" />
-            <div className="absolute bottom-10 left-8 h-28 w-56 rotate-[-5deg] rounded-[1.5rem] border border-amber-200 bg-[#fff9df] shadow-xl shadow-amber-900/10" />
-            <div className="absolute bottom-12 left-16 h-20 w-44 rotate-[-5deg] rounded-xl border-l-4 border-amber-300 bg-[repeating-linear-gradient(180deg,#fffdfa_0,#fffdfa_20px,#e8dfc8_21px)]" />
+          <div className="relative hidden min-h-[390px] lg:block">
+            <div className="absolute bottom-3 left-4 right-2 h-[260px] rounded-[2.2rem] bg-[linear-gradient(150deg,#f4d29d_0%,#e9ad61_48%,#c98744_100%)] shadow-2xl shadow-amber-900/18" />
+            <div className="absolute bottom-8 left-8 h-24 w-52 rotate-[-5deg] rounded-[1.5rem] border border-amber-200 bg-[#fff9df] shadow-xl shadow-amber-900/10" />
+            <div className="absolute bottom-10 left-16 h-16 w-40 rotate-[-5deg] rounded-xl border-l-4 border-amber-300 bg-[repeating-linear-gradient(180deg,#fffdfa_0,#fffdfa_18px,#e8dfc8_19px)]" />
             <div className="absolute right-16 top-12 h-20 w-20 rounded-full bg-[#f3e0bf] shadow-lg shadow-amber-900/10">
               <div className="absolute inset-3 rounded-full border-[10px] border-white bg-[#7b4a2f]" />
               <div className="absolute -right-5 top-6 h-8 w-7 rounded-r-full border-4 border-white" />
             </div>
 
-            <div className="absolute left-20 top-7 w-[74%] max-w-[540px] rotate-[2deg] rounded-[1.8rem] border-[10px] border-slate-950 bg-slate-950 shadow-2xl shadow-slate-900/20">
-              <div className="rounded-[1rem] bg-[#fffdf6] p-4">
+            <div className="absolute left-20 top-6 w-[72%] max-w-[500px] rotate-[2deg] rounded-[1.7rem] border-[9px] border-slate-950 bg-slate-950 shadow-2xl shadow-slate-900/20">
+              <div className="rounded-[0.95rem] bg-[#fffdf6] p-4">
                 <div className="flex items-center justify-between gap-4 border-b border-slate-200 pb-4">
                   <div className="flex items-center gap-2">
                     <span className="flex size-7 items-center justify-center rounded-lg bg-amber-300 text-slate-950">✦</span>
@@ -316,7 +298,7 @@ export default function Home() {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                  <div className="mt-3 grid gap-3 sm:grid-cols-3">
                     {["Review", "Compare", "Launch"].map((label, index) => (
                       <div key={label} className="rounded-2xl bg-slate-50 p-3">
                         <div className={`h-11 rounded-xl ${index === 0 ? "bg-amber-100" : index === 1 ? "bg-sky-100" : "bg-emerald-100"}`} />
@@ -328,7 +310,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="absolute bottom-8 left-4 w-52 rotate-[-6deg] rounded-[1.4rem] border border-amber-200 bg-amber-100 p-4 shadow-xl shadow-amber-900/10">
+            <div className="absolute bottom-6 left-4 w-48 rotate-[-6deg] rounded-[1.4rem] border border-amber-200 bg-amber-100 p-4 shadow-xl shadow-amber-900/10">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-amber-700">sticky note</p>
               <p className="mt-3 text-lg font-black leading-tight text-slate-950">
                 Pick one stack.
@@ -338,7 +320,7 @@ export default function Home() {
               <span className="absolute -right-4 top-8 text-4xl text-amber-500">↗</span>
             </div>
 
-            <div className="absolute bottom-6 right-8 w-64 rotate-[5deg] rounded-[1.5rem] border border-slate-200 bg-white p-4 shadow-xl shadow-slate-900/10">
+            <div className="absolute bottom-4 right-8 w-60 rotate-[5deg] rounded-[1.5rem] border border-slate-200 bg-white p-4 shadow-xl shadow-slate-900/10">
               <div className="flex items-center gap-3">
                 <span className="flex size-10 items-center justify-center rounded-full bg-slate-950 text-white">✓</span>
                 <div>
@@ -407,14 +389,14 @@ export default function Home() {
               </div>
             </div>
             <Link href="/tools" className="text-sm font-black text-blue-600 hover:text-blue-800">
-              View all tools →
+              View Full Stack →
             </Link>
           </div>
           <div className="relative mt-9">
             <p className="absolute -left-2 -top-5 hidden rotate-[-8deg] text-sm font-black text-red-500 lg:block">
               my favorite!
             </p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {handpickedTools.map((item) => {
               const tool = findTool(item.slug);
               const href = tool ? `/tools/${tool.slug}` : item.fallbackHref;
@@ -541,6 +523,25 @@ export default function Home() {
         ) : null}
       </section>
 
+      <section className="mx-auto max-w-7xl px-5 pb-14 sm:px-6 lg:px-8 lg:pb-16">
+        <div className="grid gap-6 rounded-[2rem] border border-amber-100 bg-[#fffdf6] p-6 shadow-sm shadow-amber-900/5 sm:p-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
+          <div>
+            <p className="inline-flex rotate-[-2deg] rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs font-black uppercase tracking-[0.16em] text-amber-700">
+              Built by an independent builder
+            </p>
+            <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
+              Why I Built This
+            </h2>
+          </div>
+          <p className="text-base leading-8 text-slate-700">
+            AI Builder Hub is built to make tool decisions easier for indie builders,
+            developers, and founders. Instead of opening 20 tabs to compare hosting,
+            domains, VPS providers, SEO tools, and AI coding platforms, this site
+            organizes the practical choices builders actually face.
+          </p>
+        </div>
+      </section>
+
       <section className="border-y border-amber-100/80 bg-[#fff7e8]">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-14 sm:px-6 lg:grid-cols-[0.82fr_1.18fr] lg:px-8 lg:py-16">
           <div>
@@ -554,8 +555,8 @@ export default function Home() {
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             {[
-              ["For founders", "Pick a stack without losing a week to tool research."],
-              ["For developers", "Compare hosting, VPS, domains, and SEO tools before you commit."],
+              ["For founders", "Choose a stack without wasting a week on tool research."],
+              ["For developers", "Compare hosting, VPS, domains, and SEO tools before committing."],
               ["For indie makers", "Build, publish, measure, and improve with fewer detours."],
             ].map(([title, copy]) => (
               <div key={title} className="rounded-[1.4rem] border border-amber-100 bg-white/78 p-6 shadow-sm shadow-amber-900/5">

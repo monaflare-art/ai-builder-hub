@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 const navItems = [
-  { href: "/", label: "Home" },
+  { href: "/", label: "Start Here" },
   { href: "/tools", label: "Tools" },
-  { href: "/blog?category=Tutorials", label: "Guides" },
+  { href: "/blog?category=Reviews", label: "Reviews" },
   { href: "/blog?category=Comparisons", label: "Comparisons" },
-  { href: "/blog", label: "Blog" },
+  { href: "/blog", label: "Playbooks" },
   { href: "/about", label: "About" },
 ];
 
