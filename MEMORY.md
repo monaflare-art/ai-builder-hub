@@ -21,6 +21,7 @@
 - SEO surfaces include Next.js metadata, `sitemap.xml` and `robots.txt`.
 - Affiliate links are supported through tool data fields while preserving official-link fallback.
 - `geekape/geek-navigation` was evaluated on 2026-07-11 as a reference-only navigation/SEO architecture source. AI Builder Hub should reuse its crawlable IA, two-level taxonomy, detail-page, ranking, and reviewed-submission ideas, but must not fork, copy, vendor, or depend on the upstream project.
+- `liuzi6612/nav` was evaluated on 2026-07-11 as a reference-only static navigation site source. AI Builder Hub may reuse ideas around file-backed data, build-time metadata, taxonomy-driven navigation, contextual pinned items, optional PWA, and static deployment, but must not copy its GPL-3.0 code/data/themes or hidden SEO implementation.
 
 ## Known Issues
 
@@ -37,6 +38,7 @@
 
 - GitHub:
   - geek-navigation reference: https://github.com/geekape/geek-navigation (`dev` commit `f5b0bcbe1d8f3ff12e454f7e5858554999a203c7`, MIT, reference only)
+  - liuzi6612/nav reference: https://github.com/liuzi6612/nav (`main` commit `2c1e2dda24ba25ae8c7214abf109dd4b3de6d208`, GPL-3.0/commercial license note, reference only)
 - Server:
 - Deployment: Vercel
 - Credentials location only:
