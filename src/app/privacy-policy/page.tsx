@@ -27,9 +27,10 @@ export default function PrivacyPolicyPage() {
               Basic analytics
             </h2>
             <p className="mt-3">
-              The site may use basic analytics to understand aggregate page views, referral sources,
-              and content performance. Analytics data should be used to improve content and site
-              quality, not to identify individual readers.
+              The site uses Google Analytics 4 to understand page views, visitor counts, referral
+              sources, and content performance. Google may process browser and device information
+              for this purpose. We use these reports to improve the site, not to identify individual
+              readers.
             </p>
           </section>
           <section>
