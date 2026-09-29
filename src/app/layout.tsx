@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { siteConfig } from "@/lib/site";
@@ -66,17 +67,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <head>
-        <script
-          async
-          src="https://analytics.your-domain.com/script.js"
-          data-website-id="umami-aibuilderhub-prod"
-        />
-      </head>
       <body className="flex min-h-full flex-col">
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        {process.env.NODE_ENV === "production" ? (
+          <>
+            <Script src="https://www.googletagmanager.com/gtag/js?id=G-ZMDVZ2CMSV" strategy="afterInteractive" />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ZMDVZ2CMSV');`}
+            </Script>
+          </>
+        ) : null}
       </body>
     </html>
   );
